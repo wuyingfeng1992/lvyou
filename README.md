@@ -1,11 +1,6 @@
-# 仿饿了么H5-纯前端Vue版+手把手教学
+# 
 
-这是一个仿饿了么H5的纯前端练手，使用本地伪造数据。
-最新更新：修改小球抛物效果，使用css3贝塞尔曲线实现，效果更流畅。
-######预览点这里：[https://hbxywdk.github.io/eleme-vue2-static/#/](https://hbxywdk.github.io/eleme-vue2-static/#/)
-网页是有假的账户密码的部分页面需要登录 ↓ ，最好在Chrome手机模式下浏览。
-username：admin 
-password：admin
+
 ### 本地预览步骤
 
 ```
@@ -18,11 +13,10 @@ cd eleme-vue2
 # install dependencies
 npm install
 
-# 运行 npm run dev 会在浏览器打开 localhost:8080
+# 运行 npm run dev 会在浏览器打开 localhost:5050
 npm run dev
 ```
 
-如果你已经对vue很了解，那么看看预览就好不用继续阅读，如果你知道听说过vue，想学习一下，请继续看下去。
 
 > 使用到的相关库或工具：vue2 + vuex2 + vue-router2 + vue-swipe + vue-cli
 
