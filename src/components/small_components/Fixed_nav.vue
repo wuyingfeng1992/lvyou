@@ -2,7 +2,7 @@
   <!-- 列表单个商家 -->
 
   <nav class="fixed_nav">
-    <router-link to="/" class="fixed_nav_item">
+    <router-link to="/index" class="fixed_nav_item">
       <span class="one_fixed_nav">
         <svg v-if="returnPageNow == 'homepage'">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#index.18edf5a"></use>
@@ -14,24 +14,24 @@
       </span>
     </router-link>
 
-    <router-link to="/order" class="fixed_nav_item">
+    <router-link to="/recommend" class="fixed_nav_item">
       <span class="one_fixed_nav">
-        <svg v-if="returnPageNow == 'order'">
+        <svg v-if="returnPageNow == 'recommend'">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#order.070ae2a"></use>
         </svg>
-        <svg v-if="returnPageNow !== 'order'">
+        <svg v-if="returnPageNow !== 'recommend'">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#order-regular.41c17f8"></use>
         </svg>
         <span class="fixed_nav_text">推荐</span>
       </span>
     </router-link>
 
-    <router-link to="/myzone" class="fixed_nav_item">
+    <router-link to="/specialOffer" class="fixed_nav_item">
       <span class="one_fixed_nav">
-        <svg v-if="returnPageNow == 'myzone'">
+        <svg v-if="returnPageNow == 'specialOffer'">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#profile.dbc5ebf"></use>
         </svg>
-        <svg v-if="returnPageNow !== 'myzone'">
+        <svg v-if="returnPageNow !== 'specialOffer'">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#profile-regular.c151d62"></use>
         </svg>
         <span class="fixed_nav_text">特价</span>

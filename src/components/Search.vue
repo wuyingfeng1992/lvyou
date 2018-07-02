@@ -39,7 +39,7 @@ console.log('的点点滴滴多多多')
         this.$store.dispatch('setLoading', false);
         this.showMe = true;
       }, time);
-      if(this.$route.path!='/') {
+      if(this.$route.path!='/index'&&this.$route.path!='/recommend') {
         this.search_method();
       }
 
@@ -83,7 +83,7 @@ console.log('的点点滴滴多多多')
   .re_search {
     background: #03a4ea;
     line-height: 0;
-    padding: .26rem;
+    padding: .27rem;
     display: flex;
     align-items:center;
     svg {
@@ -93,7 +93,7 @@ console.log('的点点滴滴多多多')
     .search_tip{
       font-size: 0.4rem;
       color: #ffffff;
-      width: 0.9rem;
+      width: 0.82rem;
       flex: none;
       line-height: 100%;
       text-align: center;

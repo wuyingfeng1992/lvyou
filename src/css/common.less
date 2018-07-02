@@ -1,13 +1,12 @@
-html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, pre,a, acronym, address, big, 
+html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, pre,a, acronym, address, big,
 cite, code, em, img, small, strike, strong, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label,
-legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
 figure, figcaption, footer, header, hgroup, menu, nav, output, section, audio, video {
   margin: 0;
   padding: 0;
 }
 html,body{
   color: #333;
-  background: #F4F4F4;
   font-family: Helvetica Neue,Tahoma,Arial,PingFangSC-Regular,Hiragino Sans GB,Microsoft Yahei,sans-serif;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -19,6 +18,7 @@ html,body{
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
   overflow-x: hidden;
+  min-height: 100%;
 }
 li{
   list-style: none;
@@ -26,6 +26,10 @@ li{
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  .index_main{
+    height: 100%;
+  }
 }
 a{
   color: #333;

@@ -9,6 +9,7 @@ export default {
   },
   // 设置当前所在页面标记
   SET_WHICHPAGE (state, platform) {
+    //debugger
     state.whichPage = platform;
   },
   // 首页加载更多

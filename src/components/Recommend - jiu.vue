@@ -81,6 +81,8 @@ export default {
 .order_one{
   background:#fff;
   margin-bottom: .2rem;
+  border: 1px solid #bcbcbc;
+  padding: 4px;
   .order_img{
     width:1rem;
     height:1rem;
@@ -97,8 +99,16 @@ export default {
     .order_info_t{
       border-bottom: 1px solid #eee;
       .order_title{
-        font-size: 0.36rem;
-        font-weight: bold;
+        height:.6rem;
+        line-height:.6rem;
+        word-break: break-all;
+        .b_name{
+          font-size:.4rem;
+        }
+        .b_status{
+          font-size:.35rem;
+          color:#333;
+        }
       }
       .order_time{
         font-size:.3rem;
@@ -108,14 +118,10 @@ export default {
     }
     .order_info_b{
       padding: 0.2rem 0;
-      .order_brief_info{
-        font-size: 0.346667rem;
-        color: #666;
-      }
+      color: #ff4000;
       .order_price{
         text-align: right;
         font-size: 0.346667rem;
-        color: #333;
         font-weight: bold;
       }
     }

@@ -36,17 +36,17 @@ export default {
 
 <style lang="less" scoped>
 .back_box{
-  width:10rem;
-  height:1rem;
-  line-height:1rem;
+  width:100%;
+  height:1.08rem;
+  line-height:1.08rem;
   position:fixed;
-  background:#03a4ea;
+  background:#fff;
   top:0;
   left:0;
   right:0;
   z-index: 999;
   h3{
-    color:#fff;
+    color:#1c1a16;
     width:100%;
     display:block;
     font-size:.52rem;
@@ -59,6 +59,7 @@ export default {
     position:absolute;
     left:0;
     top:0;
+    cursor: pointer;
     svg{
       width:.6rem;
       height:.6rem;

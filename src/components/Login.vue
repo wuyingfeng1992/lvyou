@@ -55,10 +55,10 @@ export default {
 
 <style lang="less" scoped>
 .input_login{
-  margin-top: 1.35rem; 
+  margin-top: 1.35rem;
   input{
     height: 1rem;
-    width: 10rem;
+    width: 100%;
     padding:.6rem;
     box-sizing:border-box;
     border:none;

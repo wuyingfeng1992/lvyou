@@ -16,7 +16,7 @@
           <p class="shop_activity ell"><i class="new_user">减</i><span>{{ business_info.discount }}</span></p>
         </div>
       </div>
-      
+
     </section>
     <!-- 切换按钮 -->
     <section class="change_show_type" ref="chooseType">
@@ -24,7 +24,7 @@
         <span :class='{activity_show: changeShowType =="food"}' @click="changeShowType='food'">商品</span>
       </div>
       <div>
-        <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'">评价</span>   
+        <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'">评价</span>
       </div>
     </section>
     <!-- 商品 -->
@@ -178,7 +178,7 @@
 </template>
 <script>
 import YellowStar from './small_components/Yellow_star';
-
+debugger
 export default {
   name: 'business',
   data () {
@@ -577,13 +577,13 @@ export default {
   }
   /* 切换按钮 */
   .change_show_type{
-    height:1.2rem;
+    height:1.55rem;
     div{
       width:50%;
-      height:1.2rem;
+      height:1.55rem;
       float:left;
       text-align:center;
-      line-height:1.2rem;
+      line-height:1.55rem;
       font-size:.45rem;
       background:#fff;
       span{
@@ -597,7 +597,7 @@ export default {
   }
   /* 底部购物车 */
   .shopping_car{
-    height:1.2rem;
+    height:1.55rem;
     width:100%;
     position:absolute;
     left: 0;
@@ -607,8 +607,8 @@ export default {
     box-sizing:border-box;
     z-index:10;
     .car_icon{
-      width:1.2rem;
-      height:1.2rem;
+      width:1.55rem;
+      height:1.55rem;
       position:absolute;
       left:.2rem;
       top:-.25rem;
@@ -646,7 +646,7 @@ export default {
     }
     .cartview{
       padding:0 .5rem;
-      height:1.2rem;
+      height:1.55rem;
       background: #4cd964;
       position:absolute;
       right:0;
@@ -654,7 +654,7 @@ export default {
       color: #fff;
       font-weight:600;
       font-size:.5rem;
-      line-height:1.2rem;
+      line-height:1.55rem;
       &.cantpay{
         background:#535356;
       }
@@ -675,7 +675,7 @@ export default {
         width:2.6rem;
         padding:.2rem;
         float:left;
-        
+
         h3{
           font-size: .8rem;
           line-height: 1;
@@ -749,7 +749,7 @@ export default {
   }
   /* 商品 */
   .business_content{
-    padding-bottom:1.2rem;
+    padding-bottom:1.55rem;
     box-sizing:border-box;
     position:relative;
     ul{
@@ -937,7 +937,7 @@ export default {
 /* 购物车 */
 .sp_lists{
   position:absolute;
-  bottom:1.2rem;
+  bottom:1.55rem;
   width:100%;
   left:0;
   background:#fff;
@@ -993,7 +993,7 @@ export default {
           fill: #3190e8;
           width: .5rem;
           height: .5rem;
-          vertical-align: middle; 
+          vertical-align: middle;
         }
         span{
           vertical-align: middle;

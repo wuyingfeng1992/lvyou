@@ -5,8 +5,10 @@
       <div class="business_img">
         <img src="../../images/lvyou1.jpg" :alt="a.description" :title="a.description">
       </div>
-      <div class="business_img_name">{{ a.name}}</div>
-      <div class="business_img_subname">{{ a.subname}}</div>
+      <div class="business_img_desc">
+        <div class="business_img_name">{{ a.name}}</div>
+        <div class="business_img_subname">{{ a.subname}}</div>
+      </div>
     </section>
 
   </router-link>
@@ -52,16 +54,37 @@
   /* 单个商家 */
   .one_business {
     background: #fff;
+    margin:5px 0;
+    position: relative;
+
 
     .business_img {
-      width: 1.6rem;
-      height: 1.6rem;
-      padding: 0.4rem;
+      width: 100%;
+      height: 2.42rem;
       float: left;
       img {
         width: 100%;
         height: 100%;
       }
+    }
+    .business_img_desc{
+      color: #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: center;
+    }
+    .business_img_name{
+      font-size: 0.6rem;
+    }
+    .business_img_subname{
+      font-size: 0.5rem;
     }
     .business_info {
       float: right;
