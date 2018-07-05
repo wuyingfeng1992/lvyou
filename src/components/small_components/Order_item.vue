@@ -48,7 +48,7 @@
   .order_box_one_b {
     text-align: right;
     color: #585858;
-    font-size: 0.26rem;
+    font-size: 0.38rem;
     padding-bottom: 0.2rem;
     border-bottom: 1px solid #dcdcdc;
   }
@@ -56,9 +56,9 @@
     display: flex;
     justify-content: space-between;
     color: #585858;
-    font-size: 0.26rem;
-    height: 0.88rem;
-    line-height: 0.88rem;
+    font-size: 0.38rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
     .order_box_one_goodstext {
       color: #00a0e9;
     }
@@ -72,14 +72,14 @@
   }
   .order_box_one_d {
     text-align: right;
-    padding: 0 0 0.15rem 0;
+    padding: 0.25rem 0.25rem 0.28rem 0.25rem;
     margin-top: -0.36rem;
   }
   .order_box_one_btn,.order_box_one_btn1{
     color: #000000;
     background: #dcdcdc;
     border: 1px solid #a0a0a0;
-    font-size: 0.26rem;
+    font-size: 0.36rem;
     padding: 0.1rem 0.23rem;
     display: inline-block;
     cursor: pointer;

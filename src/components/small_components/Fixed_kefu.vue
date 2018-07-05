@@ -18,15 +18,15 @@
     right: 0.5rem;
     bottom: 1.8rem;
     a{
-      width: .6rem;
-      height: .6rem;
+      width: .9rem;
+      height: .9rem;
       display: block;
       cursor: pointer;
     }
 
     .icon {
-      width: .6rem;
-      height: .6rem;
+      width: .9rem;
+      height: .9rem;
       display: block;
       border-radius: 50%;
       margin: .2rem auto .1rem;

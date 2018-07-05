@@ -81,7 +81,7 @@
       }
     }
     .order_info_s_item {
-      font-size: 0.32rem;
+      font-size: 0.37rem;
       font-weight: normal;
       margin-left: 0.2rem;
       .start {
@@ -108,8 +108,8 @@
         .order_title {
           text-align: left;
           font-weight: bold;
-          font-size: 0.34rem;
-          line-height: 0.45rem;
+          font-size: 0.39rem;
+          line-height: 0.48rem;
           color: #585858;
           margin-bottom: 2px;
         }

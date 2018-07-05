@@ -152,7 +152,7 @@
   .three_lan {
     display: table;
     width: 100%;
-    height: 1.9rem;
+    height: 2.2rem;
     border-bottom: 1px solid #ddd;
     background-color: #fff;
     .three_lan_ {
@@ -160,7 +160,7 @@
       width: 33.3333%;
       vertical-align: middle;
       text-align: center;
-      font-size: .32rem;
+      font-size: .38rem;
       line-height: .37rem;
       font-weight: 500;
       color: #666;
@@ -168,8 +168,8 @@
 
     }
     .icon {
-      width: 0.55rem;
-      height: 0.55rem;
+      width: 0.75rem;
+      height: 0.75rem;
       display: inline-block;
 
       background-size: auto 100%;
@@ -195,14 +195,14 @@
     height: 1.1rem;
     box-sizing: border-box;
     background: #fff;
-    font-size: .4rem;
+    font-size: .42rem;
     line-height: 1.1rem;
     border-bottom: 1px solid #dedede;
     color: #000;
     display: flex;
     justify-content: space-between;
     .v-all {
-      font-size: .32rem;
+      font-size: .36rem;
       font-weight: 500;
       line-height: 0.8rem;
       vertical-align: baseline;

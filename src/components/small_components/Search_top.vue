@@ -97,9 +97,9 @@
       cursor: pointer;
     }
     .search_tip{
-      font-size: 0.4rem;
+      font-size: 0.42rem;
       color: #ffffff;
-      width: 0.82rem;
+      width: 0.88rem;
       flex: none;
       line-height: 100%;
       text-align: center;

@@ -157,9 +157,9 @@
     }
     .index_banner_text {
       text-align: center;
-      height: .9rem;
-      line-height: .9rem;
-      font-size: .4rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      font-size: .44rem;
       color: #545454;
       background: #fff;
     }
