@@ -8,19 +8,30 @@
       <img src="../images/subBanner.jpg">
     </div>
     <el-tabs class="ban_tab_sel" v-model="activeName2" type="card" @tab-click="handleClick">
-      <el-tab-pane class="ban_tab_sel_item" label="目的地" name="first">
-        <div class="tab_wrap" slot="label">
+      <el-tab-pane class="ban_tab_sel_item" label="目的地" name="first" >
+        <div class="tab_wrap" slot="label" @click="multilShow">
           <span class="icon address"></span>
           <span class="text">目的地</span>
+        </div>
+        <div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">
+          越南
+        </div>
+        <div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList"  style="width: calc((100% - 10px)/3);">
+          南宁
+        </div>
+        <div class="list" v-if="showItemListFlag">
+          <One_product colum="colum"></One_product>
         </div>
         <!--<router-link to="/products/南宁" class="el-tab-pane-con">
           <div class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
             南宁
           </div>
+        </router-link>
+        <router-link to="/products/南宁" class="el-tab-pane-con">
+          <div class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
+            越南
+          </div>
         </router-link>-->
-        <div @click="" class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
-          南宁
-        </div>
       </el-tab-pane>
       <el-tab-pane class="ban_tab_sel_item" label="特价产品">
         <div class="tab_wrap" slot="label">
@@ -28,8 +39,7 @@
           <span class="text">专区</span>
         </div>
         <div class="el-tab-pane-con ">
-          <One_product></One_product>
-
+          <One_product colum="colum"></One_product>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -55,6 +65,7 @@
         showMe: false, // 是否展示当前页面
         search_word: '', // 搜索框搜索词
         isLoadingMore: false,
+        showItemListFlag: false,
         activeName2: 'first'
       };
     },
@@ -90,6 +101,12 @@
       },
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
+      },
+      showItemList() {
+        this.showItemListFlag=!this.showItemListFlag;
+      },
+      multilShow() {
+        this.showItemListFlag=false;
       },
       // 加载更多
       loadMore() {
@@ -138,18 +155,28 @@
     div.el-tabs__header {
       border-bottom: none;
     }
+   .ban_tab_sel_item{
+      display: flex;
+     text-align: center;
+    }
 
     .el-tabs__content {
       flex: 1;
       margin-top: 1px;
       padding-left: 2px;
     }
-    .ban_tab_sel_item {
+   /* .el-tab-pane-con {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+    }*/
+    .el-tab-pane-con-item {
       display: flex;
       width: 100%;
       flex-wrap: wrap;
     }
     .el-tab-pane-con-item {
+
       font-size: 0.36rem;
       color: #585858;
       margin-bottom: 2px;
@@ -159,6 +186,8 @@
       text-align: center;
       height: 0.83rem;
       line-height: 0.83rem;
+      display: flex;
+      justify-content: center;
       &:nth-child(3n+1) {
         margin-left: 0;
       }
@@ -239,87 +268,5 @@
       }
     }
   }
-
-  .order_box {
-
-  }
-
-  .order_one {
-    background: #fff;
-    margin-bottom: .2rem;
-    width: 100%;
-    border: 1px solid #bcbcbc;
-    box-sizing: border-box;
-    padding: 4px;
-    display: flex;
-    .order_img {
-      flex: none;
-      width: 3.5rem;
-      font-size: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-    .order_info_s_item {
-      font-size: 0.20rem;
-      font-weight: normal;
-      margin-left: 0.2rem;
-      .start {
-        font-size: 0.16rem;
-        color: #fc9a00;
-      }
-      .text {
-        color: #fc9a00;
-        margin-left: -0.1rem;
-      }
-      .desc {
-        color: #585858;
-        font-weight: bold;
-      }
-    }
-    .order_info {
-      margin-left: 10px;
-      box-sizing: border-box;
-      word-break: break-all;
-      padding: 3px 0;
-      .order_info_t {
-        .order_title {
-          font-weight: bold;
-          font-size: 0.32rem;
-          line-height: 0.36rem;
-          color: #585858;
-          margin-bottom: 2px;
-        }
-        .order_time {
-          font-size: .3rem;
-          color: #999;
-          line-height: .6rem;
-        }
-      }
-      .order_info_b {
-        display: flex;
-        align-items: baseline;
-        justify-content: flex-end;
-        /*padding: 0.1rem 0 0.15rem 0;*/
-        .order_price {
-          font-size: 0.48rem;
-          color: #ff4000;
-          font-weight: bold;
-          margin-right: 0.05rem;
-        }
-        .order_price_text {
-          font-size: 0.22rem;
-          color: #ff4000;
-          font-weight: bold;
-          vertical-align: baseline;
-        }
-      }
-    }
-  }
-
 
 </style>

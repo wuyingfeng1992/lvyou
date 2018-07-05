@@ -37,7 +37,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Search.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Search.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Search.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="143">
@@ -49,13 +49,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Category.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Category.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Category.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="289" column="9" lean-forward="false" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
+            <state relative-caret-position="228">
+              <caret line="18" column="89" lean-forward="false" selection-start-line="18" selection-start-column="89" selection-end-line="18" selection-end-column="89" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,8 +65,8 @@
       <file leaf-file-name="One_product.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/small_components/One_product.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="106" column="9" lean-forward="true" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
+            <state relative-caret-position="57">
+              <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -117,7 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setDPR</find>
       <find>#0096ff</find>
       <find>登录</find>
       <find>Search</find>
@@ -139,11 +139,15 @@
       <find>8080</find>
       <find>includes</find>
       <find>orderSubmit</find>
-      <find>ban_tab_sel_item</find>
-      <find>order_title</find>
       <find>order_info_s_item</find>
       <find>.search-more</find>
       <find>order_info_b</find>
+      <find>ban_tab_sel_item</find>
+      <find>colum</find>
+      <find>order_one</find>
+      <find>el-tab-pane-con-item</find>
+      <find>order_title</find>
+      <find>multilShow</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -168,9 +172,9 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/components/small_components/Search_top.vue" />
         <option value="$PROJECT_DIR$/src/components/Refund.vue" />
-        <option value="$PROJECT_DIR$/src/components/Category.vue" />
-        <option value="$PROJECT_DIR$/src/components/small_components/One_product.vue" />
         <option value="$PROJECT_DIR$/src/components/Search.vue" />
+        <option value="$PROJECT_DIR$/src/components/small_components/One_product.vue" />
+        <option value="$PROJECT_DIR$/src/components/Category.vue" />
       </list>
     </option>
   </component>
@@ -276,12 +280,12 @@
       <workItem from="1529050636738" duration="9512000" />
       <workItem from="1530364675759" duration="8054000" />
       <workItem from="1530373410684" duration="74000" />
-      <workItem from="1530538854956" duration="2033000" />
+      <workItem from="1530538854956" duration="4666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20363000" />
+    <option name="totallyTimeSpent" value="22996000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="88" y="49" width="1380" height="658" extended-state="0" />
@@ -318,7 +322,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/falsedata/falsedata.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Search.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -512,30 +515,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Category.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="289" column="9" lean-forward="false" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/small_components/One_product.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="106" column="9" lean-forward="true" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Search.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
           <caret line="151" column="20" lean-forward="true" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
           <folding>
             <element signature="e#1461#1493#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Recommend.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="51" column="38" lean-forward="true" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/small_components/One_product.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Category.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" column="89" lean-forward="false" selection-start-line="18" selection-start-column="89" selection-end-line="18" selection-end-column="89" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

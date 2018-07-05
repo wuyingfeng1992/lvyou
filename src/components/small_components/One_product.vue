@@ -1,17 +1,17 @@
 <template>
   <div class="order_box">
-    <router-link to="/product/s0001" class="order_one">
+    <router-link to="/product/s0001" class="order_one " :class="colum">
       <div class="order_img">
         <img src="../../images/dingdan.jpg" alt="">
       </div>
-      <div class="order_info">
+      <div class="order_info ">
         <header class="order_info_t">
           <div class="order_title">
             【跟团游】全程无自费泰国6天 5晚至尊安心游！双岛出海＋三 合一夜秀表演
           </div>
 
         </header>
-        <div class="order_info_s">
+        <div class="order_info_s" v-if="!colum">
           <li class="order_info_s_item">
             <span class="start">★</span>
             <span class="text">【精选酒店】</span>
@@ -39,7 +39,8 @@
 
 <script>
     export default {
-        name: "one_product"
+        name: "one_product",
+      props:['colum']
     }
 </script>
 
@@ -58,6 +59,15 @@
     box-sizing: border-box;
     padding: 4px;
     display: flex;
+    /*&.colum{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .order_info_s{
+        text-align: left;
+      }
+    }*/
     .order_img {
       flex: none;
       width: 3.5rem;
@@ -88,12 +98,15 @@
       }
     }
     .order_info {
-      margin-left: 10px;
+      margin-left: 15px;
       box-sizing: border-box;
       word-break: break-all;
       padding: 3px 0;
+
       .order_info_t {
+        text-align: left;
         .order_title {
+          text-align: left;
           font-weight: bold;
           font-size: 0.34rem;
           line-height: 0.45rem;
