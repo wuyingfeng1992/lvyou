@@ -1,18 +1,5 @@
 <template>
   <div v-if="showMe">
-    <!-- <div class="re_search">
-       <svg @click="$router.go(-1)">
-         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
-       </svg>
-       <div class="search_wrap">
-         <svg @click="search_method" class="search_method_icon" >
-           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
-         </svg>
-         <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字"
-                @keydown.enter="search_method">
-       </div>
-       <div class="search_tip" @click="search_method">搜索</div>
-     </div>-->
     <Search_top></Search_top>
     <div class="search-result">
       <div class="search-result-item">
@@ -154,7 +141,7 @@
       padding-bottom: 0.1rem;
     }
     .city{
-      font-size: 0.26rem;
+      font-size: 0.36rem;
       border: 1px solid #cbcbcb;
       padding: 0.1rem 0.30rem;
       margin: 0.1rem 0.1rem;
@@ -167,8 +154,8 @@
       height: 0.9rem;
       align-items: center;
       .icon{
-        width: 0.45rem;
-        height: 0.45rem;
+        width: 0.55rem;
+        height: 0.55rem;
         display: inline-block;
         background-image: url("../images/icon/earth.png");
         background-size: 100% auto;
@@ -178,7 +165,7 @@
         top: 1px;
       }
       .text{
-        font-size: 0.28rem;
+        font-size: 0.32rem;
         color: #707070;
       }
     }

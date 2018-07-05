@@ -47,6 +47,8 @@
       </div>
     </div>
 
+    <el-button type="primary" @click="submitForm()">提交</el-button>
+
     <Fixedkefu></Fixedkefu>
   </div>
 </template>
@@ -70,9 +72,9 @@
     },
     computed: {},
     methods: {
-      orderSubmit() {
-        console.log('提交订单,orderSubmit')
-        this.$router.push('/submitOrder/s0001');
+      submitForm() {
+        console.log('提交订单,submitForm')
+
       },
       handleChange(value) {
         console.log(value);
@@ -90,6 +92,7 @@
   .product-box-online.refund-box {
     width: 100%;
     background: #eee;
+    text-align: center;
     .product-address {
       padding: 0;
       background: #eee;

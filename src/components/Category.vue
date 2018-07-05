@@ -13,11 +13,14 @@
           <span class="icon address"></span>
           <span class="text">目的地</span>
         </div>
-        <router-link to="/products/南宁" class="el-tab-pane-con">
+        <!--<router-link to="/products/南宁" class="el-tab-pane-con">
           <div class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
             南宁
           </div>
-        </router-link>
+        </router-link>-->
+        <div @click="" class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
+          南宁
+        </div>
       </el-tab-pane>
       <el-tab-pane class="ban_tab_sel_item" label="特价产品">
         <div class="tab_wrap" slot="label">
@@ -141,7 +144,7 @@
       margin-top: 1px;
       padding-left: 2px;
     }
-    .el-tab-pane-con {
+    .ban_tab_sel_item {
       display: flex;
       width: 100%;
       flex-wrap: wrap;
@@ -286,7 +289,7 @@
       .order_info_t {
         .order_title {
           font-weight: bold;
-          font-size: 0.26rem;
+          font-size: 0.32rem;
           line-height: 0.36rem;
           color: #585858;
           margin-bottom: 2px;

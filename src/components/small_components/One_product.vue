@@ -71,11 +71,11 @@
       }
     }
     .order_info_s_item {
-      font-size: 0.20rem;
+      font-size: 0.32rem;
       font-weight: normal;
       margin-left: 0.2rem;
       .start {
-        font-size: 0.16rem;
+        font-size: 0.22rem;
         color: #fc9a00;
       }
       .text {
@@ -95,8 +95,8 @@
       .order_info_t {
         .order_title {
           font-weight: bold;
-          font-size: 0.26rem;
-          line-height: 0.36rem;
+          font-size: 0.34rem;
+          line-height: 0.45rem;
           color: #585858;
           margin-bottom: 2px;
         }
@@ -110,6 +110,7 @@
         display: flex;
         align-items: baseline;
         justify-content: flex-end;
+        margin-top: 5px;
         /*padding: 0.1rem 0 0.15rem 0;*/
         .order_price {
           font-size: 0.48rem;

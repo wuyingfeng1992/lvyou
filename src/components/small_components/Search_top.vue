@@ -5,7 +5,7 @@
       <div class="search_wrap">
         <span class="search_method_icon"></span>
         <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字"
-               @keydown.enter="search_method">
+               @keydown.enter="search_method" @click="search_enter">
       </div>
       <div class="search_tip" @click="search_method">搜索</div>
     </div>
@@ -46,7 +46,7 @@
           this.toSearchPage(e)
           return;
         }
-        this.search_res = [];
+       /* this.search_res = [];
         var mainWord = this.$route.params.keyword;
         if (this.search_text !== '' && this.search_text !== this.$route.params.keyword) {
           mainWord = this.search_text;
@@ -56,7 +56,14 @@
           if (this.getFalseBussinessbrief[x].shop_name.includes(mainWord)) {
             this.search_res.push(this.getFalseBussinessbrief[x]);
           }
+        }*/
+      },
+      search_enter(e) {
+        if(this.$route.path!='search') {
+          this.toSearchPage(e)
+          return;
         }
+
       },
       toSearchPage: function (e) {
         let search_text = this.search_text?this.search_text:''
