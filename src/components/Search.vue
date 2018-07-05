@@ -1,26 +1,69 @@
 <template>
   <div v-if="showMe">
-    <div class="re_search">
-      <svg @click="$router.go(-1)">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
-      </svg>
-      <div class="search_wrap">
-        <svg @click="search_method" class="search_method_icon" >
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
-        </svg>
-        <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字"
-               @keydown.enter="search_method">
+    <!-- <div class="re_search">
+       <svg @click="$router.go(-1)">
+         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
+       </svg>
+       <div class="search_wrap">
+         <svg @click="search_method" class="search_method_icon" >
+           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
+         </svg>
+         <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字"
+                @keydown.enter="search_method">
+       </div>
+       <div class="search_tip" @click="search_method">搜索</div>
+     </div>-->
+    <Search_top></Search_top>
+    <div class="search-result">
+      <div class="search-result-item">
+        <div class="header">
+          <input type="text" class="header-input" placeholder="热门搜索">
+        </div>
+        <div class="search-content">
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+        </div>
       </div>
-      <div class="search_tip" @click="search_method">搜索</div>
+      <div class="search-more">
+        <div class="icon"></div>
+        <div class="text">更对热门目的地</div>
+      </div>
+      <div class="search-result-item">
+        <div class="header">
+          <input type="text" class="header-input" placeholder="历史搜索">
+        </div>
+        <div class="search-content">
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+          <div class="city">越南</div>
+        </div>
+      </div>
     </div>
-    <OneBusiness v-for="(item, n) in search_res" :key="n" :a="item"></OneBusiness>
+    <Fixedkefu></Fixedkefu>
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex';
   import OneBusiness from './small_components/One_business';
-console.log('的点点滴滴多多多')
+  import Search_top from './small_components/Search_top';
+  import Fixedkefu from './small_components/Fixed_kefu';
+
   export default {
     name: 'search',
     data() {
@@ -39,7 +82,7 @@ console.log('的点点滴滴多多多')
         this.$store.dispatch('setLoading', false);
         this.showMe = true;
       }, time);
-      if(this.$route.path!='/index'&&this.$route.path!='/recommend') {
+      if (this.$route.path != '/index' && this.$route.path != '/recommend') {
         this.search_method();
       }
 
@@ -52,8 +95,8 @@ console.log('的点点滴滴多多多')
     methods: {
 
       search_method(e) {
-        if(this.$route.path!='search') {
-         this.toSearchPage(e)
+        if (this.$route.path != 'search') {
+          this.toSearchPage(e)
           return;
         }
         this.search_res = [];
@@ -69,63 +112,76 @@ console.log('的点点滴滴多多多')
         }
       },
       toSearchPage: function (e) {
-        let search_text = this.search_text?this.search_text:''
-        this.$emit('toSearchPage', e , search_text);
+        let search_text = this.search_text ? this.search_text : ''
+        this.$emit('toSearchPage', e, search_text);
       }
     },
     components: {
-      OneBusiness
+      OneBusiness,
+      Search_top,
+      Fixedkefu,
     }
   };
 </script>
-
 <style lang="less" scoped>
-  .re_search {
-    background: #03a4ea;
-    line-height: 0;
-    padding: .27rem;
-    display: flex;
-    align-items:center;
-    svg {
-      width: .6rem;
-      height: .6rem;
+  body{
+    background: #fff;
+  }
+</style>
+<style lang="less" scoped>
+  .search-result{
+    padding: 0 0.3rem;
+    background: #ffffff;
+    padding-top: 0.1rem;
+    min-height: 100%;
+    .header{
+      border-bottom: 1px solid #d2d2d2;
+      height: 0.64rem;
+      line-height: 0.65rem;
+      display: flex;
     }
-    .search_tip{
-      font-size: 0.4rem;
-      color: #ffffff;
-      width: 0.82rem;
-      flex: none;
-      line-height: 100%;
-      text-align: center;
-      cursor: pointer;
-    }
-    .search_wrap{
-      position: relative;
-      display: inline-block;
-      height: .9rem;
-      width: 8rem;
-      box-sizing: border-box;
-      padding: 0 .2rem 0 0.8rem;
-      border-radius: .45rem;
-      background: #fff;
-      margin: 0 0.3rem;
-    }
-    .search_method_icon{
-      position: absolute;
-      left: 0.1rem;
-      top: 0.15rem;
-      fill: #c2c2c2;
-      cursor: pointer;
-    }
-    input[type="search"] {
-      display: inline-block;
-      height: 100%;
-      width: 100%;
-      outline: none;
+    .header-input{
       border: none;
-      border-radius: .45rem;
-      box-sizing: border-box;
-      font-size: .4rem;
+      outline: none;
+      background: none;
+      font-size: 0.28rem;
     }
+    .search-content{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0.1rem -0.1rem;
+      border-bottom: 1px solid #dfdfdf;
+      padding-bottom: 0.1rem;
+    }
+    .city{
+      font-size: 0.26rem;
+      border: 1px solid #cbcbcb;
+      padding: 0.1rem 0.30rem;
+      margin: 0.1rem 0.1rem;
+      color: #707070;
+    }
+
+    .search-more{
+      display: flex;
+      justify-content: center;
+      height: 0.9rem;
+      align-items: center;
+      .icon{
+        width: 0.45rem;
+        height: 0.45rem;
+        display: inline-block;
+        background-image: url("../images/icon/earth.png");
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        position: relative;
+        top: 1px;
+      }
+      .text{
+        font-size: 0.28rem;
+        color: #707070;
+      }
+    }
+
   }
 </style>

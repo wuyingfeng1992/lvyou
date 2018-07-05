@@ -2,13 +2,14 @@
   <!-- 列表单个商家 -->
 
   <nav class="fixed_button">
-    <div class="fixed_button_item left">
+
+    <div class="fixed_button_item left" v-if="calcMoney!==false">
       <span class="text1">在线支付:</span>
       <span class="text2">￥</span>
       <span class="text3">1780元</span>
     </div>
-    <div class="fixed_button_item right">
-      立即预订
+    <div class="fixed_button_item right" :class="calcMoney===false?'w100':''" @click="productSubmit">
+      {{btnText}}
     </div>
   </nav>
 </template>
@@ -19,6 +20,7 @@
     data() {
       return {};
     },
+    props:['btnText','calcMoney'],
     mounted() {
       setInterval(() => {
         // console.log(this.returnPageNow);
@@ -29,7 +31,12 @@
         return this.$store.getters.getwhichpage;
       }
     },
-    methods: {}
+    methods: {
+      productSubmit(){
+        this.$emit('orderSubmit')
+
+      }
+    }
   };
 </script>
 
@@ -54,8 +61,12 @@
       line-height: 1.48rem;
       font-size: 0.48rem;
       height: 1.48rem;
+      &.w100{
+        width: 100%;
+      }
       &.right {
         background: #03a4ea;
+        cursor: pointer;
       }
 
     }

@@ -2,11 +2,12 @@
     <!-- 我只是个头 -->
   <div class="back_box">
     <div class="back_arrow" @click="back_one">
-      <svg>
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
-      </svg>
+      <span class="back_arrow-icon"></span>
     </div>
     <h3>{{ title }}</h3>
+    <slot name="button">
+
+    </slot>
   </div>
 
 </template>
@@ -45,13 +46,23 @@ export default {
   left:0;
   right:0;
   z-index: 999;
+  border: 1px solid #dcdcdc;
+  z-index: 3000;
+  display: flex;
+  .button{
+    font-size: 0.36rem;
+    width: 15%;
+    text-align: center;
+    color:#03a4ea;
+    cursor: pointer;
+  }
   h3{
     color:#1c1a16;
     width:100%;
     display:block;
-    font-size:.52rem;
+    font-size:.48rem;
     text-align:center;
-    font-weight: 700;
+    font-weight: normal;
   }
   div.back_arrow{
     width:1rem;
@@ -68,6 +79,22 @@ export default {
       top:50%;
       margin-left: -.3rem;
       margin-top: -.3rem;
+    }
+    .back_arrow-icon{
+      width:.24rem;
+      height:.7rem;
+      position:absolute;
+      left:50%;
+      top:50%;
+      margin-left: -.3rem;
+      margin-top: -.3rem;
+      display: inline-block;
+      background-image: url("../../images/icon/arrow.png");
+      background-size:100% auto;
+      background-position:center;
+
+      background-repeat: no-repeat;
+      cursor: pointer;
     }
   }
 }

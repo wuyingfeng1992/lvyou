@@ -106,21 +106,21 @@ export var falseBussinessbrief=[
     'subname': 'tourism entrance ticket',
     'id': 's10001',
     'path': '/s10001',
-    'imgSrc':'./lvyou1.jpg'
+    'imgSrc':'lvyou1'
   },{
     'name': '酒店住宿',
     'description': '酒店住宿',
     'subname': 'Hotel accommodation',
     'id': 's10002',
     'path': '/s10002',
-    'imgSrc':'./lvyou2.jpg'
+    'imgSrc':'lvyou2'
   },{
     'name': '越南游',
     'description': '越南游',
     'subname': 'Vietnam tourism',
     'id': 's10003',
     'path': '/s10003',
-    'imgSrc':'./lvyou3.jpg'
+    'imgSrc':'lvyou3'
   }
 ]
 // 商家简略信息

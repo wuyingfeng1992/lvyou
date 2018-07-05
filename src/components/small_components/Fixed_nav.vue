@@ -4,48 +4,28 @@
   <nav class="fixed_nav">
     <router-link to="/index" class="fixed_nav_item">
       <span class="one_fixed_nav">
-        <svg v-if="returnPageNow == 'homepage'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#index.18edf5a"></use>
-        </svg>
-        <svg v-if="returnPageNow !== 'homepage'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#index-regular.b245d60"></use>
-        </svg>
+        <span class="icon home"></span>
         <span class="fixed_nav_text">首页</span>
       </span>
     </router-link>
 
-    <router-link to="/recommend" class="fixed_nav_item">
+    <router-link to="/category" class="fixed_nav_item">
       <span class="one_fixed_nav">
-        <svg v-if="returnPageNow == 'recommend'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#order.070ae2a"></use>
-        </svg>
-        <svg v-if="returnPageNow !== 'recommend'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#order-regular.41c17f8"></use>
-        </svg>
-        <span class="fixed_nav_text">推荐</span>
+       <span class="icon category"></span>
+        <span class="fixed_nav_text">分类</span>
       </span>
     </router-link>
 
     <router-link to="/specialOffer" class="fixed_nav_item">
       <span class="one_fixed_nav">
-        <svg v-if="returnPageNow == 'specialOffer'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#profile.dbc5ebf"></use>
-        </svg>
-        <svg v-if="returnPageNow !== 'specialOffer'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#profile-regular.c151d62"></use>
-        </svg>
+        <span class="icon specialOffer"></span>
         <span class="fixed_nav_text">特价</span>
       </span>
     </router-link>
 
     <router-link to="/myzone" class="fixed_nav_item">
       <span class="one_fixed_nav">
-        <svg v-if="returnPageNow == 'myzone'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#profile.dbc5ebf"></use>
-        </svg>
-        <svg v-if="returnPageNow !== 'myzone'">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#profile-regular.c151d62"></use>
-        </svg>
+       <span class="icon myzone"></span>
         <span class="fixed_nav_text">我的</span>
       </span>
     </router-link>
@@ -101,11 +81,24 @@
     .router-link-active{
       background: #0068ac;
     }
-    svg {
+    .icon{
       width: .6rem;
       height: .6rem;
       display: block;
       margin: .2rem auto .1rem;
+      background-size: 100% auto;
+      &.home{
+        background-image: url("../../images/icon/home.png");
+      }
+      &.category{
+        background-image: url("../../images/icon/start.png");
+      }
+      &.specialOffer{
+        background-image: url("../../images/icon/image.png");
+      }
+      &.myzone{
+        background-image: url("../../images/icon/person.png");
+      }
     }
     .one_fixed_nav {
       width: 32.6%;

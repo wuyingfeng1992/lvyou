@@ -2,26 +2,7 @@
   <div class="index_main" v-if="showMe">
     <!-- 首页 -->
     <div class="index_header">
-      <!-- 地址 -->
-      <!--<div class="index_location">
-        <div class="location_left ell">
-          <svg class="v-md">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location"></use>
-          </svg>
-          <span  class="v-md">深圳市福田区这里是个假定位村淡定啦~这不重要</span>
-        </div>
-
-        &lt;!&ndash; 登录按钮 &ndash;&gt;
-        <div class="index_login" v-if="!getLogin">
-          <router-link to="/login">登录</router-link>
-        </div>
-      </div>-->
-
-      <!-- 搜索 -->
-      <!--<div class="search_box">
-        <input type="text" placeholder="搜索商家、商品" @keydown.enter="enter_search" v-model="search_word">
-      </div>-->
-      <Search @toSearchPage="toSearchPage"></Search>
+      <Search_top @toSearchPage="toSearchPage"></Search_top>
 
       <!-- 热搜词 -->
       <!--<div class="hot_word">
@@ -47,9 +28,7 @@
       </Swipe>
     </div>
     <div class="index_banner_text">
-      <svg class="index_banner_text_icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left.6f6409e"></use>
-      </svg>
+      <span class="index_banner_text_icon"></span>
       <span class="index_banner_text_text">{{getScrollText}}</span>
     </div>
     <!-- 推荐商家标题 -->
@@ -63,7 +42,7 @@
     <div class="space"></div>
     <!-- 固定导航栏 -->
     <Fixednav></Fixednav>
-
+    <Fixedkefu></Fixedkefu>
   </div>
 </template>
 
@@ -72,7 +51,8 @@
   import OneBusiness from './small_components/One_business';
   import Fixednav from './small_components/Fixed_nav';
   import {mapGetters} from 'vuex';
-  import Search from './Search';
+  import Search_top from './small_components/Search_top';
+  import Fixedkefu from './small_components/Fixed_kefu';
   import image from '../images/banner.jpg'
 
   export default {
@@ -119,14 +99,8 @@
         this.$store.dispatch('setLoading', false);
         this.showMe = true;
       }, time);
-      setTimeout(() => {
-        window.addEventListener('scroll', this.dispatchLoad, false);
-      }, 0);
 
       this.scrollText=this.swipeInfo[0].desc;
-    },
-    beforeDestroy() {
-      window.removeEventListener('scroll', this.dispatchLoad, false);
     },
     computed: {
       // 使用对象展开运算符将 getters 混入 computed 对象中
@@ -140,16 +114,10 @@
       },
 
       ...mapGetters([
-        'getLogin',
-        'getFalseHotWord',
         'getFalseBussinessbrief' // 商家简略信息
       ])
     },
     methods: {
-      enter_search(e) {
-        console.log('ddd,toseacr');
-        this.$router.push('/search/' + this.search_word);
-      },
       onTransitionEnd: function (currentPage) {
         debugger;
         console.log('onTransitionEnd', currentPage);
@@ -161,37 +129,14 @@
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
       },
-      // 加载更多
-      loadMore() {
-        // 大于十五条不加载
-        if (this.getFalseBussinessbrief.length > 15) return;
-        this.$store.dispatch('setLoading', true);
-        if (!this.isLoadingMore) { // 是否加载中
-          this.isLoadingMore = true;
-          setTimeout(() => {
-            this.$store.dispatch('setLoading', false);
-            if (this.getFalseBussinessbrief.length <= 15) {
-              this.$store.dispatch('setHomepageMore', [...this.getFalseBussinessbrief, ...(this.getFalseBussinessbrief).slice(0, 5)]);
-              // console.log(this.getFalseBussinessbrief);
-            }
-            this.isLoadingMore = false;
-          }, 1000);
-        }
-      },
-      // 触发加载更多
-      dispatchLoad() {
-        var dscrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-        if (document.documentElement.offsetHeight <= (dscrollTop + window.innerHeight + 1)) {
-          console.info('触发加载');
-          this.loadMore();
-        }
-      }
+
     },
     components: {
       OneBusiness,
       Fixednav,
       Swipe,
-      Search,
+      Fixedkefu,
+      Search_top,
       SwipeItem
     }
   };
@@ -219,12 +164,15 @@
       background: #fff;
     }
     .index_banner_text_icon {
+      vertical-align: middle;
       width: 0.6rem;
       height: 0.6rem;
-      background: #ccc;
       vertical-align: middle;
       margin-top: -0.04rem;
       display: inline-block;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-image: url("../images/icon/bell.png");
     }
     .mint-swipe-indicator {
       width: 0.15rem;

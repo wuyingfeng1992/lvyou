@@ -1,58 +1,61 @@
 <template>
-  <div>
-    <div v-if="showMe">
-      <Backbar title="订单"></Backbar>
-      <div class="order_box">
-        <div v-for=" (item, index) in  getFalseOrder" class="order_one">
-          <div class="order_img">
-            <img src="../images/shop-logo.png" alt="">
-          </div>
-          <div class="order_info">
-            <header class="order_info_t">
-              <div class="order_title flex_align">
-                <p class="b_name">{{ item.store_name }}</p>
-                <p class="b_status">{{ item.order_state }}</p>
-              </div>
-              <p class="order_time">{{ item.order_birth_time }}</p>
-            </header>
-            <footer class="order_info_b flex_align">
-              <p class="order_brief_info">{{ item.order_brief_info }}</p>
-              <p class="order_price">￥{{ item.order_price }}</p>
-            </footer>
-            <div style="display:none;">{{ item.restaurant_id }}</div>
-          </div>
+  <div class="my-order-box">
+    <Backbar title="我的订单"></Backbar>
+    <div class="top-space"></div>
+    <el-tabs class="my-order-list" v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="全部" name="all">
+        <div class="el-tab-pane-con order_box">
+          <Orderitem></Orderitem>
         </div>
-      </div>
-      <Fixednav></Fixednav>
-    </div>
+      </el-tab-pane>
+      <el-tab-pane label="未付款" name="non-payment">
+        <div class="el-tab-pane-con order_box">
+          <Orderitem></Orderitem>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="退款" name="refund">
+        <div class="el-tab-pane-con order_box">
+          <Orderitem></Orderitem>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
+    <div class="space"></div>
+    <Fixednav></Fixednav>
+    <Fixedkefu></Fixedkefu>
   </div>
 
 </template>
 
 <script>
-import Backbar from './small_components/Back_bar';
-import Fixednav from './small_components/Fixed_nav';
-import { mapGetters } from 'vuex';
-export default {
-  name: 'order',
-  data () {
-    return {
-      showMe: false
-    };
-  },
-  computed: {
-    ...mapGetters([
-      'getLogin',
-      'getFalseOrder' // 已完成订单
-    ])
-  },
-  mounted () {
-    // console.log(this.getLogin);
-    // 设置当前标记为主页
-    this.$store.dispatch('setWhichpage', 'order');
-    if (!this.getLogin) {
-      this.$router.replace('/login');
-    } else {
+  import Backbar from './small_components/Back_bar';
+  import Fixednav from './small_components/Fixed_nav';
+  import Fixedkefu from './small_components/Fixed_kefu';
+  import Orderitem from './small_components/Order_item';
+  import {mapGetters} from 'vuex';
+
+
+  export default {
+    name: 'order',
+    data() {
+      return {
+        showMe: false,
+        activeName: ''
+      };
+    },
+    computed: {
+      ...mapGetters([
+        'getLogin',
+        'getFalseOrder' // 已完成订单
+      ]),
+
+    },
+    mounted() {
+      // console.log(this.getLogin);
+      // 设置当前标记为主页
+      this.$store.dispatch('setWhichpage', 'order');
+      /* if (!this.getLogin) {
+         this.$router.replace('/login');
+       } else {*/
       // 模拟加载
       this.$store.dispatch('setLoading', true);
       var time = Math.floor(Math.random() * 2000);
@@ -61,64 +64,107 @@ export default {
         this.$store.dispatch('setLoading', false);
         this.showMe = true;
       }, time);
-    }
-  },
-  methods: {
+      // }
 
-  },
-  components: {
-    Backbar,
-    Fixednav
-  }
-};
+      let keyword = this.$route.query.k
+      this.activeName = keyword;
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+       // history.pushState 无刷新
+       // history.pushState({title:"order"}, "order/", `?${this.activeName}`)
+        //this.$route.query.k=this.activeName;
+      }
+    },
+    components: {
+      Backbar,
+      Fixedkefu,
+      Orderitem,
+      Fixednav
+    }
+  };
 </script>
+<style lang="less">
+  body {
+    background: #eeeeee !important;
+  }
+</style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
-.order_box{
-  margin: 1rem 0 1.55rem;
-}
-.order_one{
-  background:#fff;
-  margin-bottom: .2rem;
-  .order_img{
-    width:1rem;
-    height:1rem;
-    float:left;
-    padding: .2rem .4rem;
-    img{
-      width:100%;
-    }
+<style lang="less">
+  .top-space {
+    height: 1.08rem;
   }
-  .order_info{
-    margin-left:1.6rem;
-    padding:.2rem .2rem 0 0;
-    box-sizing:border-box;
-    .order_info_t{
-      border-bottom: 1px solid #eee;
-      .order_title{
-        font-size: 0.36rem;
+
+  .space {
+    width: 100%;
+    height: 1.55rem;
+    background: #eeeeee;
+  }
+
+  .my-order-box {
+    background: #eeeeee;
+    min-height: 100%;
+  }
+
+  .my-order-list {
+    .order_info_b {
+      .order_price {
         font-weight: bold;
       }
-      .order_time{
-        font-size:.3rem;
-        color:#999;
-        line-height:.6rem;
-      }
+      font-size: 0.30rem;
+      color: #ff4000;
     }
-    .order_info_b{
-      padding: 0.2rem 0;
-      .order_brief_info{
-        font-size: 0.346667rem;
-        color: #666;
-      }
-      .order_price{
-        text-align: right;
-        font-size: 0.346667rem;
-        color: #333;
-        font-weight: bold;
-      }
+    .el-tab-pane-con {
+
+      background: #eeeeee;
+
+    }
+
+    .order_one {
+      border: none;
+
+    }
+    .el-tabs__active-bar {
+      color: #00a0e9;
+    }
+    .el-tabs__nav-wrap {
+      margin-bottom: 0;
+    }
+    .el-tabs__nav {
+      width: 100%;
+    }
+    .el-tabs__nav-wrap::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: transparent;
+      z-index: 1;
+    }
+    .el-tabs__item {
+      font-size: .4rem;
+      margin-bottom: -3px;
+      height: 100%;
+      line-height: 100%;
+      position: relative;
+      top: -.2rem;
+      width: 33.333333333%;
+      text-align: center;
+
+    }
+    .el-tabs__item.is-active, .el-tabs__item:hover {
+      color: #00a0e9;
+    }
+    .el-tabs__header {
+      background: #dcdcdc;
+      margin: 0;
+      height: 0.94rem;
+      line-height: 0.94rem;
     }
   }
-}
+
 </style>

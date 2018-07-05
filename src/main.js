@@ -8,6 +8,8 @@ Vue.use(ElementUI)
 import { setDPR, remChange } from './js/remChange';
 setDPR();
 remChange();
+import fullCalendar from 'vue-fullcalendar'
+Vue.component('full-calendar', fullCalendar)
 
 /* eslint-disable no-new */
 new Vue({

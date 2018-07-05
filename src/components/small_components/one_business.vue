@@ -1,28 +1,30 @@
 <template>
   <!-- 列表单个商家 -->
-  <router-link :to="'/business' + a.id">
+  <router-link :to="'/products/' + a.name">
     <section class="one_business clear">
       <div class="business_img">
-        <img src="../../images/lvyou1.jpg" :alt="a.description" :title="a.description">
+        <!--在静态服务器的资源直接用 :src="a.imgSrc"-->
+        <img :src="imageSrc[a.imgSrc]" :alt="a.description" :title="a.description">
       </div>
       <div class="business_img_desc">
         <div class="business_img_name">{{ a.name}}</div>
         <div class="business_img_subname">{{ a.subname}}</div>
       </div>
     </section>
-
   </router-link>
-
 </template>
 
 <script>
+  import lvyou1 from '../../images/lvyou1.jpg'
+  import lvyou2 from '../../images/lvyou2.jpg'
+  import lvyou3 from '../../images/lvyou3.jpg'
   export default {
     name: 'one_business',
     props: ['a'],
     data() {
       return {
-        msg: '1'
-
+        msg: '1',
+        imageSrc:{lvyou1:lvyou1,lvyou2:lvyou2,lvyou3:lvyou3}
       };
     },
     mounted() {
@@ -36,28 +38,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-  @baseBlue: #03a4ea;
-  @com_gray1: #666;
-  @com_gray2: #999;
-  .com_gray1 {
-    color: @com_gray1;
-  }
-
-  .com_gray2 {
-    color: @com_gray2;
-  }
-
-  .com_blue {
-    color: @baseBlue;
-  }
-
   /* 单个商家 */
   .one_business {
     background: #fff;
     margin:5px 0;
     position: relative;
-
-
     .business_img {
       width: 100%;
       height: 2.42rem;
@@ -108,22 +93,7 @@
             margin-right: .04rem;
           }
         }
-        .bzp {
-          width: .3rem;
-          height: .3rem;
-          font-size: .26rem;
-          text-align: center;
-          line-height: .3rem;
-          display: inline-block;
-          color: @com_gray2;
-          border: 0.01rem solid #ddd;
-          padding: 0.01rem;
-          border-radius: 3px;
-          i {
-            font-style: normal;
-          }
 
-        }
       }
       .business_code, .business_other {
         font-size: .25rem;
@@ -132,36 +102,6 @@
       }
 
     }
-    .code_num {
-      svg {
-        width: .3rem;
-        height: .3rem;
-        fill: #ffaa0c;
-      }
-    }
-    .zsd {
-      font-size: .25rem;
-      height: .35rem;
-      line-height: .3rem;
-      padding: 0 0.05rem;
-      display: inline-block;
-      color: @baseBlue;
-      background: #fff;
-      border: 0.01rem solid @baseBlue;
-      box-sizing: border-box;
-      border-radius: 3px;
-    }
-    .fnzs {
-      font-size: .25rem;
-      height: .35rem;
-      padding: 0 0.05rem;
-      line-height: .3rem;
-      display: inline-block;
-      background: @baseBlue;
-      color: #fff;
-      border: 0.01rem solid @baseBlue;
-      box-sizing: border-box;
-      border-radius: 3px;
-    }
+
   }
 </style>

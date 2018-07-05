@@ -2,22 +2,26 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Homepage from 'components/Homepage';
-import Recommend from 'components/Recommend';
+import Category from 'components/Category';
 import Myzone from 'components/Myzone';
+import Order from 'components/Order';
 import SpecialOffer from 'components/SpecialOffer';
-/*import Business from 'components/Business';*/
+import Products from 'components/Products';
 import Product from 'components/Product';
-import Login from 'components/Login';
+import OnlineOrder from 'components/OnlineOrder';
 import Search from 'components/Search';
+import Associates from 'components/Associates';
+import Associate from 'components/Associate';
+import CustomService from 'components/CustomService';
+import Refund from 'components/Refund';
 Vue.use(Router);
 
 export default new Router({
   routes: [
-
     {
-      path: '/recommend',
-      name: 'recommend',
-      component: Recommend
+      path: '/category',
+      name: 'Category',
+      component: Category
     },
     {
       path: '/myzone',
@@ -28,6 +32,16 @@ export default new Router({
       path: '/specialOffer',
       name: 'specialOffer',
       component: SpecialOffer
+    },
+    {
+      path: '/products/:id',
+      name: 'Products',
+      component: Products
+    },
+    {
+      path: '/refund/:id',
+      name: 'Refund',
+      component: Refund
     },
     {
       path: '/',
@@ -42,12 +56,22 @@ export default new Router({
       path: '/product/:id',
       name: 'product',
       component: Product
-    },/*
+    },
     {
-      path: '/business/:id',
-      name: 'business',
-      component: Business
-    },*/
+      path: '/associates/',
+      name: 'Associates',
+      component:Associates
+    },
+    {
+      path: '/associate/:id',
+      name: 'Associate',
+      component:Associate
+    },
+    {
+      path: '/onlineOrder/:id',
+      name: 'onlineOrder',
+      component: OnlineOrder
+    },
     {
       path: '/search/:keyword',
       name: 'Search',
@@ -59,9 +83,14 @@ export default new Router({
       component: Search
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: '/order',
+      name: 'Order',
+      component: Order
+    },
+    {
+      path: '/customService',
+      name: 'CustomService',
+      component: CustomService
     }
   ]
 });

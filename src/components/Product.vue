@@ -2,7 +2,7 @@
   <div class="product-box">
     <div class="product-banner-wrap">
       <div class="product-back">
-        <span class="back-icon"></span>
+        <span class="back-icon" @click="back_one"></span>
       </div>
       <div class="product-banner">
         <img src="../images/xqy.jpg" alt="">
@@ -11,13 +11,13 @@
         <span class="product-desc">青海湖两日游自由行 纯玩</span>
       </div>
     </div>
-    <div class="product-price">
-      <div class="product-price-item">
+    <div class="product-price-d">
+      <div class="product-price-d-item">
         <span class="text1">促销价:</span>
         <span class="text2">￥</span>
         <span class="text3">1780元</span>
       </div>
-      <div class="product-price-item">
+      <div class="product-price-d-item">
         <span class="text1">会员价:</span>
         <span class="text2">￥</span>
         <span class="text3">1780元</span>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="product-address">
-      <div class="product-address-item">
+      <div class="product-address-item noselect">
         <div class="name">
           出发地点
         </div>
@@ -41,107 +41,258 @@
           出游日期
         </div>
         <div class="list">
-          <div class="list-item">6月11日</div>
+          <div class="list-item" @click="dialogVisible  = true">6月11日</div>
           <div class="list-item">6月11日</div>
           <div class="list-item">6月11日</div>
         </div>
       </div>
     </div>
+    <el-dialog
+      :visible.sync="dialogVisible"
+      width="90%"
+    >
+      <full-calendar :events="fcEvents" lang='zh'
+                     @changeMonth="changeMonth"
+                     @eventClick="eventClick"
+                     @dayClick="dayClick"
+                     @moreClick="moreClick"
+      ></full-calendar>
+      <div class="product-price-d">
+        <div class="product-price-d-item">
+          成人 <span class="price">￥1245</span>
+        </div>
+        <div class="product-price-d-item">
+          儿童 <span class="price">￥800</span>
+        </div>
+      </div>
+    </el-dialog>
 
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
     <!-- 固定导航栏 -->
-    <FixedButton></FixedButton>
+    <FixedButton :btnText="btnText" @orderSubmit="dialogVisible  = true" :calcMoney="false"></FixedButton>
+    <Fixedkefu></Fixedkefu>
+
+
   </div>
 </template>
 
 <script>
   import FixedButton from './small_components/Fixed_button';
-
+  import Fixedkefu from './small_components/Fixed_kefu';
 
   export default {
     name: 'product',
     data() {
       return {
+        btnText: '在线预订',
+        dialogVisible: false,
+        fcEvents: [
+          {
+            title: '￥1245',
+            start: '2018-07-2',
+            end: '2018-07-2'
+          }
+        ]
 
       };
     },
     mounted() {
 
     },
-    computed: {
-
-    },
+    computed: {},
     methods: {
-
+      /*onlineOrder() {
+        console.log('产品预订')
+        this.$router.push('/onlineOrder/s0001');
+      },*/
+      back_one() {
+        this.$router.go(-1);
+      },
+      changeMonth() {
+        console.log('changeMonth')
+      },
+      eventClick() {
+        console.log('eventClick ')
+      },
+      dayClick() {
+        console.log('dayClick ')
+        this.$router.push('/onlineOrder/s0001');
+      },
+      moreClick() {
+        console.log('moreClick  ')
+      }
     },
     components: {
-      FixedButton
+      FixedButton,
+      Fixedkefu,
     }
   };
 </script>
+<style>
+
+</style>
 
 <style lang="less">
-  .product-box{
+  .product-box {
+    .product-price-d{
+      display: flex;
+      justify-content: center;
+
+      .product-price-d-item{
+        width: 30%;
+        font-size: 0.34rem;
+      }
+      .price{
+        color: #ff4200;
+      }
+    }
+    .el-dialog__body {
+      padding: 0;
+
+    }
+    .el-dialog__headerbtn{
+      width: 0.4rem;
+      height: 0.4rem;
+      font-size: 0.38rem;
+    }
+    .comp-full-calendar {
+      padding: 0 0.6rem 0.15rem 0.6rem;
+      font-size: 0.32rem;
+      max-width: 100%;
+      .title {
+        font-size: 0.48rem;
+      }
+      .full-calendar-body {
+        margin-top: 10px;
+      }
+      .full-calendar-body .dates .dates-events .events-week .events-day {
+        height: 1.2rem;
+        min-height: 1.2rem;
+      }
+      .full-calendar-body .dates .week-row .day-cell {
+        height: 1.2rem;
+        min-height: 1.2rem;
+      }
+      .full-calendar-body .weeks .week {
+        line-height: 0.7rem;
+      }
+      .full-calendar-body .dates .dates-events .events-week .events-day .day-number, .full-calendar-body .dates .week-row .day-cell .day-number {
+        text-align: center;
+        margin-top: 3px;
+        font-size: 0.32rem;
+      }
+      .full-calendar-body .dates .dates-events .events-week .events-day .event-box .event-item {
+        background: #03a4ea;
+        color: #fff;
+      }
+      .full-calendar-body .dates .week-row .day-cell {
+        padding: 0;
+      }
+      .full-calendar-body .dates .dates-events .events-week .events-day .event-box .event-item{
+        font-size: 0.26rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+      }
+      .full-calendar-header .header-center .prev-month, .full-calendar-header .header-center .next-month{
+        font-size: 0.38rem;
+      }
+      .full-calendar-body .dates .week-row .day-cell{
+        border-right: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+      }
+      .full-calendar-body .dates .week-row{
+        border-left: 1px solid #aaa;
+      }
+      .full-calendar-body .weeks{
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        border-left: 1px solid #aaa;
+      }
+      .full-calendar-body .weeks .week{
+        border-right: 1px solid #aaa;
+      }
+      ul, p {
+        height: 0.5rem;
+        font-size: 0.32rem;
+      }
+
+    }
     width: 100%;
-    .product-address{
+    .product-address {
       padding: 0 0.3rem;
       background: #fff;
       font-size: 0.30rem;
       color: #696969;
       margin-bottom: 8px;
-      .name{
+      .name {
         color: #1c1a16;
         margin-right: 0.3rem;
       }
-      .product-address-item{
+      .product-address-item {
         display: flex;
         line-height: 0.96rem;
         height: 0.96rem;
-        &:first-child{
+        &:first-child {
           border-bottom: 1px solid #dcdcdc;
         }
-        .list{
+        .list {
           display: flex;
-          .list-item{
-            padding: 0  0.2rem;
-            position: relative;
 
-            &.selected::after,&:hover:after{
-              content: '';
-              border: 1px solid #00a0e9;
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              left: 0;
-              top: 25%;
-              height: 50%;
-            }
-          }
+        }
+        .list-item {
+          padding: 0 0.2rem;
+          position: relative;
+        }
+        &:not(.noselect) .list-item .selected::after, &:not(.noselect) .list-item:hover:after {
+          content: '';
+          border: 1px solid #00a0e9;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 25%;
+          height: 50%;
+          cursor: pointer;
+        }
+        &:not(.noselect) .list-item .selected::before, &:not(.noselect) .list-item:hover:before {
+          content: '';
+          width: 0.35rem;
+          height: 0.35rem;
+          position: absolute;
+          right: -2px;
+          bottom: 22%;
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          background-image: url("../images/icon/selected.png");
         }
       }
+
     }
 
-    .back-icon{
-      width: 0.5rem;
-      height: 0.5rem;
-      background: red;
+    .back-icon {
+      width: 0.8rem;
+      height: 0.8rem;
       display: block;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      background-image: url("../images/icon/back2.png");
     }
-    .product-price{
+    .product-price-d {
       height: 1.2rem;
       line-height: 1.2rem;
       overflow: hidden;
       font-size: 0.3rem;
       display: flex;
       justify-content: flex-end;
-      .product-price-item{
+      .product-price-d-item {
         padding-right: 0.3rem;
-        .text2{
+        .text2 {
           font-size: 0.2rem;
           color: #ff4200;
         }
-        .text3{
+        .text3 {
           color: #ff4200;
           font-size: 0.38rem;
           font-weight: bold;
@@ -150,23 +301,23 @@
 
     }
 
-    .product-banner-wrap{
+    .product-banner-wrap {
       position: relative;
       /*height: 5.48rem;*/
       position: relative;
     }
-    .product-back{
+    .product-back {
       position: absolute;
-      left:0.6rem;
+      left: 0.6rem;
       top: 0.6rem;
       width: 0.6rem;
       height: 0.6rem;
     }
-    .product-banner-bottom{
+    .product-banner-bottom {
       height: 0.83rem;
       line-height: 0.83rem;
       width: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       position: absolute;
       left: 0;
       bottom: 0;
@@ -177,11 +328,11 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .product-banner{
+    .product-banner {
       height: 100%;
       width: auto;
       font-size: 0;
-      img{
+      img {
         width: 100%;
         height: auto;
       }
