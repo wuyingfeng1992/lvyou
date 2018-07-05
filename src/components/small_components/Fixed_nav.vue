@@ -71,7 +71,7 @@
       width: 25%;
       color: #fff;
       height: 100%;
-      font-size: 0.36rem;
+      font-size: 0.40rem;
 
     }
     .fixed_nav_text{

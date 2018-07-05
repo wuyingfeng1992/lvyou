@@ -206,7 +206,7 @@
         background: #e5e5e5;
         color: #585858;
         height: 1.8rem;
-        font-size: 0.37rem;
+        font-size: 0.41rem;
         width: 2.1rem;
 
         .tab_wrap {

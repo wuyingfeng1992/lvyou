@@ -81,7 +81,7 @@ export default {
       margin-top: -.3rem;
     }
     .back_arrow-icon{
-      width:.24rem;
+      width:.28rem;
       height:.7rem;
       position:absolute;
       left:50%;
