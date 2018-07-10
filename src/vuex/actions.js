@@ -1,22 +1,21 @@
+import {getHomeBannerInfoEvt,getProductCateoryType} from "../axioser/request";
 export default {
-  // 改变是否登录状态
-  setLogin ({commit}, platform) {
-    commit('SET_LOGIN', platform);
-  },
   // 改变是否正在加载状态
   setLoading ({commit}, platform) {
     commit('SET_LOADING', platform);
   },
-  // 改变当前页
-  setWhichpage ({commit}, platform) {
-    commit('SET_WHICHPAGE', platform);
+  async getHomeBannerInfoEvt({commit, state}) {
+    let res = await getHomeBannerInfoEvt({})
+    console.log(res.data)
+    var data = res.data
+    commit('GET_HOME_BANNER_INFO', data)
   },
-  // 首页加载更多
-  setHomepageMore ({commit}, platform) {
-    commit('SET_HOME_PAGE_MORE', platform);
-  },
-  // 添加订单
-  setOrder ({commit}, platform) {
-    commit('SET_ORDER', platform);
+  async getProductCategoryTypeEvt({commit, state}) {
+    let res = await getProductCateoryType({})
+    console.log(res.data)
+    var data = res.data
+    commit('GET_PRODUCT_CATEGORY_TYPE', data)
+    commit('CURRENT_CATEGORY_TYPE', data.rows[0].type)
   }
 };
+

@@ -4,6 +4,9 @@ import router from './router';
 import store from './vuex/store';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+/*import axios from 'axios';
+console.log(axios,'少时诵诗书所')
+Vue.use(axios)*/
 Vue.use(ElementUI)
 import { setDPR, remChange } from './js/remChange';
 setDPR();

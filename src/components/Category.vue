@@ -1,5 +1,5 @@
 <template>
-  <div class="index_main_category" v-if="showMe">
+  <div class="index_main_category">
     <div class="index_header">
       <Search_top @toSearchPage="toSearchPage"></Search_top>
     </div>
@@ -7,11 +7,11 @@
     <div class="sub_banner">
       <img src="../images/subBanner.jpg">
     </div>
-    <el-tabs class="ban_tab_sel" v-model="activeName2" type="card" @tab-click="handleClick">
-      <el-tab-pane class="ban_tab_sel_item" label="目的地" name="first" >
+    <el-tabs class="ban_tab_sel" v-model="currentCategoryType" type="card" @tab-click="handleClick">
+      <el-tab-pane v-for="item in getProductCategoryType.rows" class="ban_tab_sel_item" :label="item.name" :name="item.type" >
         <div class="tab_wrap" slot="label" @click="multilShow">
           <span class="icon address"></span>
-          <span class="text">目的地</span>
+          <span class="text">{{item.name}}</span>
         </div>
         <div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">
           越南
@@ -22,26 +22,31 @@
         <div class="list" v-if="showItemListFlag">
           <One_product colum="colum"></One_product>
         </div>
-        <!--<router-link to="/products/南宁" class="el-tab-pane-con">
-          <div class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
-            南宁
-          </div>
-        </router-link>
-        <router-link to="/products/南宁" class="el-tab-pane-con">
-          <div class="el-tab-pane-con-item" style="width: calc((100% - 10px)/3);">
-            越南
-          </div>
-        </router-link>-->
       </el-tab-pane>
-      <el-tab-pane class="ban_tab_sel_item" label="特价产品">
-        <div class="tab_wrap" slot="label">
-          <span class="icon specialOffer"></span>
-          <span class="text">专区</span>
-        </div>
-        <div class="el-tab-pane-con ">
-          <One_product colum="colum"></One_product>
-        </div>
-      </el-tab-pane>
+      <!--<el-tab-pane class="ban_tab_sel_item" label="目的地" name="first" >-->
+        <!--<div class="tab_wrap" slot="label" @click="multilShow">-->
+          <!--<span class="icon address"></span>-->
+          <!--<span class="text">目的地</span>-->
+        <!--</div>-->
+        <!--<div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">-->
+          <!--越南-->
+        <!--</div>-->
+        <!--<div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList"  style="width: calc((100% - 10px)/3);">-->
+          <!--南宁-->
+        <!--</div>-->
+        <!--<div class="list" v-if="showItemListFlag">-->
+          <!--<One_product colum="colum"></One_product>-->
+        <!--</div>-->
+      <!--</el-tab-pane>-->
+      <!--<el-tab-pane class="ban_tab_sel_item" label="特价产品">-->
+        <!--<div class="tab_wrap" slot="label">-->
+          <!--<span class="icon specialOffer"></span>-->
+          <!--<span class="text">专区</span>-->
+        <!--</div>-->
+        <!--<div class="el-tab-pane-con ">-->
+          <!--<One_product colum="colum"></One_product>-->
+        <!--</div>-->
+      <!--</el-tab-pane>-->
     </el-tabs>
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
@@ -56,7 +61,7 @@
   import Fixednav from './small_components/Fixed_nav';
   import Search_top from './small_components/Search_top';
   import One_product from './small_components/One_product';
-  import {mapGetters} from 'vuex';
+  import {mapGetters,mapActions,mapState} from 'vuex';
 
   export default {
     name: 'homepage',
@@ -66,34 +71,28 @@
         search_word: '', // 搜索框搜索词
         isLoadingMore: false,
         showItemListFlag: false,
-        activeName2: 'first'
+       // currentCategoryType: '',
       };
     },
     mounted() {
-      // 设置当前状态为加载中
-      this.$store.dispatch('setLoading', true);
-      // 设置当前标记为主页
-      this.$store.dispatch('setWhichpage', 'homepage');
-      // 模拟请求等待
-      var time = Math.floor(Math.random() * 2000);
-      console.log('模拟加载用时' + time);
-      setTimeout(() => {
-        // 页面显示
-        this.$store.dispatch('setLoading', false);
-        this.showMe = true;
-      }, time);
-      setTimeout(() => {
-        window.addEventListener('scroll', this.dispatchLoad, false);
-      }, 0);
-    },
-    beforeDestroy() {
-      window.removeEventListener('scroll', this.dispatchLoad, false);
+      this.getProductCategoryTypeEvt();
+
     },
     computed: {
       ...mapGetters([
-        'getFalseHotWord',
-        'getFalseBussinessbrief' // 商家简略信息
-      ])
+        'getProductCategoryType',
+        'getCurrentCategoryType'
+      ]),
+      ...mapState([
+        'productCategoryType',
+        'currentCategoryType',
+      ]),
+     /* getCurrentCategoryType(){
+        console.log(this.productCategoryType)
+        debugger
+        this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
+        return this.currentCategoryType
+      }*/
     },
     methods: {
       handleClick(tab, event) {
@@ -108,30 +107,31 @@
       multilShow() {
         this.showItemListFlag=false;
       },
+      ...mapActions(['getProductCategoryTypeEvt']),
       // 加载更多
       loadMore() {
         // 大于十五条不加载
-        if (this.getFalseBussinessbrief.length > 15) return;
+        /*if (this.getProductCategory.length > 15) return;
         this.$store.dispatch('setLoading', true);
         if (!this.isLoadingMore) { // 是否加载中
           this.isLoadingMore = true;
           setTimeout(() => {
             this.$store.dispatch('setLoading', false);
-            if (this.getFalseBussinessbrief.length <= 15) {
-              this.$store.dispatch('setHomepageMore', [...this.getFalseBussinessbrief, ...(this.getFalseBussinessbrief).slice(0, 5)]);
-              // console.log(this.getFalseBussinessbrief);
+            if (this.getProductCategory.length <= 15) {
+              this.$store.dispatch('setHomepageMore', [...this.getProductCategory, ...(this.getProductCategory).slice(0, 5)]);
+              // console.log(this.getProductCategory);
             }
             this.isLoadingMore = false;
           }, 1000);
-        }
+        }*/
       },
       // 触发加载更多
       dispatchLoad() {
-        var dscrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        /*var dscrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         if (document.documentElement.offsetHeight <= (dscrollTop + window.innerHeight + 1)) {
           console.info('触发加载');
           this.loadMore();
-        }
+        }*/
       }
     },
     components: {

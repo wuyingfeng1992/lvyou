@@ -76,7 +76,7 @@
     },
     computed: {
       ...mapGetters([
-        'getFalseBussinessbrief' // 商家简略信息
+        'getProductCategory' // 商家简略信息
       ])
     },
     methods: {
@@ -92,9 +92,9 @@
           mainWord = this.search_text;
         }
         this.search_text = mainWord;
-        for (var x in this.getFalseBussinessbrief) {
-          if (this.getFalseBussinessbrief[x].shop_name.includes(mainWord)) {
-            this.search_res.push(this.getFalseBussinessbrief[x]);
+        for (var x in this.getProductCategory) {
+          if (this.getProductCategory[x].shop_name.includes(mainWord)) {
+            this.search_res.push(this.getProductCategory[x]);
           }
         }
       },

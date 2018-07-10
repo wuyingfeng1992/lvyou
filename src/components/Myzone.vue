@@ -73,7 +73,7 @@
        } else {*/
       this.uname = this.$store.getters.getuname;
       // 设置当前标记为我的
-      this.$store.dispatch('setWhichpage', 'myzone');
+     // this.$store.dispatch('setWhichpage', 'myzone');
       // }
     },
     computed: {

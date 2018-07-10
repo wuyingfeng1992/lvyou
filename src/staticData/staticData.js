@@ -1,105 +1,5 @@
-// 热搜词
-export var falseHotWord = [
-  {
-    'search_word': '辣鸭脖',
-    'title': '辣鸭脖'
-  },
-  {
-    'search_word': '韩国炸鸡',
-    'title': '韩国炸鸡'
-  },
-  {
-    'search_word': '我是一只鸡',
-    'title': '我是一只鸡'
-  },
-  {
-    'search_word': '脆皮鸡',
-    'title': '脆皮鸡'
-  },
-  {
-    'search_word': '麦当劳',
-    'title': '麦当劳'
-  },
-  {
-    'search_word': '老鸭粉丝',
-    'title': '老鸭粉丝'
-  },
-  {
-    'search_word': '牛排',
-    'title': '牛排'
-  },
-  {
-    'search_word': '黄焖鸡',
-    'title': '黄焖鸡'
-  },
-  {
-    'search_word': '铁板炒饭',
-    'title': '铁板炒饭'
-  },
-  {
-    'search_word': '麻辣香锅',
-    'title': '麻辣香锅'
-  },
-  {
-    'search_word': '煎饼',
-    'title': '煎饼'
-  }
 
-];
-// 订单信息
-export var falseOrder = [
-  {
-    'restaurant_id': 's10001',
-    'img_src': '',
-    'store_name': '上沙麦当劳',
-    'order_birth_time': '2017-02-17 18:36',
-    'order_state': '订单已完成',
-    'order_content': {},
-    'order_brief_info': '麦香鸡腿堡',
-    'order_price': 22.9
-  },
-  {
-    'restaurant_id': 's10001',
-    'img_src': '',
-    'store_name': '下沙麦当劳',
-    'order_birth_time': '2017-02-17 18:43',
-    'order_state': '订单已完成',
-    'order_content': {},
-    'order_brief_info': '七虾堡等2件商品',
-    'order_price': 20
-  },
-  {
-    'restaurant_id': 's10001',
-    'img_src': '',
-    'store_name': '沙嘴麦当劳',
-    'order_birth_time': '2017-02-17 18:45',
-    'order_state': '订单已完成',
-    'order_content': {},
-    'order_brief_info': '麦香鸡腿堡等2件商品',
-    'order_price': 23
-  },
-  {
-    'restaurant_id': 's10001',
-    'img_src': '',
-    'store_name': '沙尾麦当劳',
-    'order_birth_time': '2017-02-17 18:55',
-    'order_state': '订单已完成',
-    'order_content': {},
-    'order_brief_info': '薯条等3件商品',
-    'order_price': 31.9
-  },
-  {
-    'restaurant_id': 's10001',
-    'img_src': '',
-    'store_name': '沙头麦当劳',
-    'order_birth_time': '2017-02-17 17:36',
-    'order_state': '订单已完成',
-    'order_content': {},
-    'order_brief_info': '麦香鸡腿堡',
-    'order_price': 22.9
-  }
-];
-export var falseBussinessbrief=[
+export var productCategory=[
   {
     'name': '景区门票',
     'description': '景区门票',
@@ -124,7 +24,7 @@ export var falseBussinessbrief=[
   }
 ]
 // 商家简略信息
-export var falseBussinessbrief1 = [
+export var homeBanner1 = [
   {
     'shop_name': '上沙麦当劳', // 店名
     'id': 's10001',

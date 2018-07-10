@@ -44,18 +44,12 @@
     },
     computed: {
       ...mapGetters([
-        'getLogin',
-        'getFalseOrder' // 已完成订单
       ]),
 
     },
     mounted() {
-      // console.log(this.getLogin);
       // 设置当前标记为主页
-      this.$store.dispatch('setWhichpage', 'order');
-      /* if (!this.getLogin) {
-         this.$router.replace('/login');
-       } else {*/
+      //this.$store.dispatch('setWhichpage', 'order');
       // 模拟加载
       this.$store.dispatch('setLoading', true);
       var time = Math.floor(Math.random() * 2000);
@@ -72,9 +66,6 @@
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
-       // history.pushState 无刷新
-       // history.pushState({title:"order"}, "order/", `?${this.activeName}`)
-        //this.$route.query.k=this.activeName;
       }
     },
     components: {

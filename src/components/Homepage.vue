@@ -1,41 +1,38 @@
 <template>
-  <div class="index_main" v-if="showMe">
+  <div class="index_main">
     <!-- 首页 -->
     <div class="index_header">
       <Search_top @toSearchPage="toSearchPage"></Search_top>
-
-      <!-- 热搜词 -->
-      <!--<div class="hot_word">
-        <router-link v-for="x in getFalseHotWord" :to="'/search/' + x.search_word">
-          <span>{{ x.title }}</span>
-        </router-link>
-      </div>-->
     </div>
     <!-- 首页导航 -->
     <div class="index_banner">
       <Swipe class="my-swipe"
-             @on-transition-end="onTransitionEnd"
-             @slide-revert-end="onSlideRevertEnd"
              :loop="true"
-             :auto="5000"><!-- swipe 设置自动滚动 -->
-        <Swipe-item v-for="(item,index  ) in swipeInfo" class="slide" :class="'slide'+JSON.stringify(index)">
-          <router-link :to="item.href">
+             :auto="0"><!-- swipe 设置自动滚动 -->
+        <Swipe-item v-for="(item,index  ) in getHomeBannerInfo.Slide" class="slide" :class="'slide'+JSON.stringify(index)">
+          <router-link :to="item.url"><!--:to="item.url"-->
             <div class="common_banner">
-              <img :src="item.imgSrc" :alt="item.desc">
+              <img :src="item.image" :alt="item.title">
             </div>
           </router-link>
         </Swipe-item>
       </Swipe>
     </div>
     <div class="index_banner_text">
-      <span class="index_banner_text_icon"></span>
-      <span class="index_banner_text_text">{{getScrollText}}</span>
+      <div class="iconWrap">
+        <span class="index_banner_text_icon"></span>
+      </div>
+      <Swipe class="my-swipe"
+             :loop="true"
+             :auto="0"><!-- swipe 设置自动滚动 -->
+        <Swipe-item v-for="(item,index ) in getHomeBannerInfo.shuf" class="slide" :class="'slide'+JSON.stringify(index)">
+          <span class="index_banner_text_text">{{item.name}}</span>
+        </Swipe-item>
+      </Swipe>
     </div>
-    <!-- 推荐商家标题 -->
-    <!-- <h3 class="index_title">推荐商家</h3>-->
     <!-- 推荐商家列表 -->
     <div classs="one_business_wrap" style="padding: 0 5px;">
-      <OneBusiness v-for="n in getFalseBussinessbrief" :a="n"></OneBusiness>
+      <OneBusiness v-for="n in getProductCategory" :a="n"></OneBusiness>
     </div>
 
     <!-- 撑开Fixednav挡住的位置 -->
@@ -50,7 +47,7 @@
   import {Swipe, SwipeItem} from 'vue-swipe';
   import OneBusiness from './small_components/One_business';
   import Fixednav from './small_components/Fixed_nav';
-  import {mapGetters} from 'vuex';
+  import {mapGetters,mapActions} from 'vuex';
   import Search_top from './small_components/Search_top';
   import Fixedkefu from './small_components/Fixed_kefu';
   import image from '../images/banner.jpg'
@@ -83,52 +80,20 @@
       };
     },
     mounted() {
-      console.log(mapGetters([
-        'getLogin',
-        'falseHotWord'
-      ]));
-      // 设置当前状态为加载中
-      this.$store.dispatch('setLoading', true);
-      // 设置当前标记为主页
-      this.$store.dispatch('setWhichpage', 'homepage');
-      // 模拟请求等待
-      var time = Math.floor(Math.random() * 2000);
-      console.log('模拟加载用时' + time);
-      setTimeout(() => {
-        // 页面显示
-        this.$store.dispatch('setLoading', false);
-        this.showMe = true;
-      }, time);
-
-      this.scrollText=this.swipeInfo[0].desc;
+      this.getHomeBannerInfoEvt();
     },
     computed: {
-      // 使用对象展开运算符将 getters 混入 computed 对象中
-      // 等同于
-      // isLogin () {
-      //   return this.$store.getters.getLogin
-      // }
-      // 能少写不少代码
-      getScrollText(){
-        return this.scrollText
-      },
-
       ...mapGetters([
-        'getFalseBussinessbrief' // 商家简略信息
+        'getProductCategory',
+        'getHomeBannerInfo',
+        //'getProductCategory'
       ])
     },
     methods: {
-      onTransitionEnd: function (currentPage) {
-        debugger;
-        console.log('onTransitionEnd', currentPage);
-      },
-      onSlideRevertEnd: function (currentPage) {
-        debugger;
-        console.log('onSlideRevertEnd', currentPage);
-      },
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
       },
+      ...mapActions(['getHomeBannerInfoEvt']),
 
     },
     components: {
@@ -162,13 +127,34 @@
       font-size: .44rem;
       color: #545454;
       background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      word-break: nowrap;
+      .mint-swipe-indicator{
+        display: none;
+      }
+      .mint-swipe.my-swipe{
+        width: auto;
+      }
+      .mint-swipe-items-wrap > div{
+        width: auto;
+        position: relative;
+      }
+      .iconWrap{
+        text-align: right;
+      }
+      .index_banner_text_text{
+        display: inline-block;
+        white-space: nowrap;
+      }
     }
     .index_banner_text_icon {
       vertical-align: middle;
       width: 0.6rem;
       height: 0.6rem;
       vertical-align: middle;
-      margin-top: -0.04rem;
+      margin-top: -0.08rem;
       display: inline-block;
       background-size: auto 100%;
       background-repeat: no-repeat;

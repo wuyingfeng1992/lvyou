@@ -231,7 +231,7 @@ export default {
     ...mapGetters([
       'getLogin',
       'getFalseHotWord',
-      'getFalseBussinessbrief' // 商家简略信息
+      'getProductCategory' // 商家简略信息
     ])
   }
 };
