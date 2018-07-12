@@ -12,7 +12,7 @@
         <Swipe-item v-for="(item,index  ) in getHomeBannerInfo.slide" class="slide" :class="'slide'+JSON.stringify(index)">
           <router-link :to="item.url"><!--:to="item.url"-->
             <div class="common_banner">
-              <img :src="'api/'+item.image" :alt="item.title">
+              <img :src="proxyapi+item.image" :alt="item.title">
             </div>
           </router-link>
         </Swipe-item>
@@ -50,12 +50,12 @@
   import {mapGetters,mapActions} from 'vuex';
   import Search_top from './small_components/Search_top';
   import Fixedkefu from './small_components/Fixed_kefu';
-  import image from '../images/banner.jpg'
-
+  import {proxyapi} from '../staticData/proxyapi';
   export default {
     name: 'homepage',
     data() {
       return {
+        proxyapi
 
       };
     },

@@ -1,11 +1,20 @@
 <template>
-  <div class="product-box" v-if="getProductDetail" :a="getProductDetail" :productId="getProductDetail.id">
+  <div class="product-box" v-if="getProductDetail" >
     <div class="product-banner-wrap">
       <div class="product-back">
         <span class="back-icon" @click="back_one"></span>
       </div>
       <div class="product-banner">
-        <img :src="proxyapi+getProductDetail.image" alt="">
+        <Swipe class="my-swipe"
+               :loop="true"
+               :auto="5000"><!-- swipe 设置自动滚动 -->
+          <Swipe-item v-for="(item,index  ) in getProductDetail.image" class="slide"
+                      :class="'slide'+JSON.stringify(index)">
+            <div class="common_banner">
+              <img :src="proxyapi+item" alt="">
+            </div>
+          </Swipe-item>
+        </Swipe>
       </div>
       <div class="product-banner-bottom">
         <span class="product-desc">{{getProductDetail.title}}</span>
@@ -28,7 +37,7 @@
         <div class="name">
           出发地点
         </div>
-        <div class="list" :a="JSON.stringify(getProductDetail.origin)">
+        <div class="list">
           <div class="list-item" v-for="(inedx,item) in getProductDetail.origin" :originId="item">
             {{inedx}}
           </div>
@@ -78,6 +87,7 @@
   import Fixedkefu from './small_components/Fixed_kefu';
   import {mapGetters, mapActions} from 'vuex';
   import {proxyapi} from '../staticData/proxyapi';
+  import {Swipe, SwipeItem} from 'vue-swipe';
 
   export default {
     name: 'product',
@@ -142,10 +152,10 @@
       dayClick(day, jsEvent) {
         var data = this.getProductDetail;
         var date = new Date(day.toString());
-        day = date.getFullYear() + '-' + ((date.getMonth() + 1)<10? '0'+(date.getMonth() + 1):date.getMonth() + 1)+ '-' + date.getDate()
-        var dayData=this.getDataByDay(day);
-        data.dayDate=dayData;
-        data.currentDay=day;
+        day = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate()
+        var dayData = this.getDataByDay(day);
+        data.dayDate = dayData;
+        data.currentDay = day;
         this.$store.commit("SET_CURRENT_PRODUCT_INFO", data);
         this.$router.push('/onlineOrder/' + this.id);
       },
@@ -155,6 +165,8 @@
     },
     components: {
       FixedButton,
+      SwipeItem,
+      Swipe,
       Fixedkefu,
     }
   };
@@ -341,7 +353,7 @@
 
     .product-banner-wrap {
       position: relative;
-      /*height: 5.48rem;*/
+      height: 5.48rem;
       position: relative;
     }
     .product-back {
@@ -349,6 +361,7 @@
       left: 0.6rem;
       top: 0.6rem;
       width: 0.6rem;
+      z-index: 20;
       height: 0.6rem;
     }
     .product-banner-bottom {
