@@ -7,17 +7,15 @@
     <div class="sub_banner">
       <img src="../images/subBanner.jpg">
     </div>
-    <!--@tab-click="handleClick"--> <!-- @click="multilShow" -->
+    <!--@tab-click="handleClick"--> <!--  -->
     <el-tabs class="ban_tab_sel" v-model="getCurrentCategoryType"  type="card" >
-      <el-tab-pane v-for="item in getProductCategoryType.rows" class="ban_tab_sel_item" :label="item.name" :name="item.type" >
+      <el-tab-pane v-for="item in getProductCategoryType.rows"  class="ban_tab_sel_item" :label="item.name" :name="item.type" >
         <div class="tab_wrap" slot="label">
           <span class="icon address"></span>
           <span class="text">{{item.name}}</span>
         </div>
         <div class="el-tab-pane-con-item"
-             :a="JSON.stringify(getProductCategoryTypeList.rows)"
              v-for="item in getProductCategoryTypeList.rows"
-             :category_id="item.category_id"
              v-if="!showItemListFlag&&getProductCategoryTypeList"
              @click="showItemList(item.category_id)" style="width: calc((100% - 10px)/3);">
           {{item.nickname}}
@@ -71,7 +69,7 @@
   import Search_top from './small_components/Search_top';
   import One_product from './small_components/One_product';
   import {mapGetters,mapActions,mapState} from 'vuex';
-
+var first=true;
   export default {
     name: 'homepage',
     data() {
@@ -111,7 +109,10 @@
           if(key){
             this.currentCategoryType=key;
             console.log('1')
-
+            if(first){
+             first=false;
+              this.getProductCategoryTypeListEvt(key);
+            }
           }else{
             this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
           }
@@ -120,7 +121,6 @@
         set(val){
           if(val&&val!=='0'){
             console.log('2')
-
             this.currentCategoryType = val;
             this.getProductCategoryTypeListEvt(val);
             //this.getProductCategoryTypeListEvt(val.toString());
@@ -140,11 +140,11 @@
       showItemList(categoryId) {
         this.showItemListFlag=!this.showItemListFlag;
         this.getProductListEvt({categoryId,offset:0})
+
+      },
+     multilShow() {
         this.showItemListFlag=false;
       },
-    /*  multilShow() {
-        this.showItemListFlag=false;
-      },*/
       ...mapActions(['getProductCategoryTypeEvt'
         ,'getProductCategoryTypeListEvt'
         ,'getProductListEvt'
