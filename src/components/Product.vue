@@ -5,7 +5,7 @@
         <span class="back-icon" @click="back_one"></span>
       </div>
       <div class="product-banner">
-        <img :src="'/proxyapi'+getProductDetail.image" alt="">
+        <img :src="proxyapi+getProductDetail.image" alt="">
       </div>
       <div class="product-banner-bottom">
         <span class="product-desc">{{getProductDetail.title}}</span>
@@ -77,11 +77,13 @@
   import FixedButton from './small_components/Fixed_button';
   import Fixedkefu from './small_components/Fixed_kefu';
   import {mapGetters, mapActions} from 'vuex';
+  import {proxyapi} from '../staticData/proxyapi';
 
   export default {
     name: 'product',
     data() {
       return {
+        proxyapi,
         btnText: '在线预订',
         dialogVisible: false,
         id: '',

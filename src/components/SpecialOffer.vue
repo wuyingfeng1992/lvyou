@@ -6,7 +6,7 @@
       <One_product></One_product>
       <One_product></One_product>
     </div>-->
-    <Productlist title="特价商品" :data="getFeatureProduct.rows"></Productlist>
+    <Productlist title="特价商品" :data="getFeatureProduct.rows" header="no" ></Productlist>
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
     <Fixednav></Fixednav>

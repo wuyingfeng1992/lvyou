@@ -8,7 +8,7 @@
       <div class="chatting-content-item " v-for="item in getCustomServiceHistory.msgs"
            :class="{'no-reverse':!item.is_my,'reverse':item.is_my}">
         <div class="chatting-content-avatar" v-if="getUserInfo"
-             :style="item.is_my?'background-image:url(/proxyapi'+getUserInfo.avatar+')':''">
+             :style="item.is_my?'background-image:url('+proxyapi+getUserInfo.avatar+')':''">
         </div>
         <div class="chatting-content-text">
           <div class="arrow"></div>
@@ -33,6 +33,7 @@
   import Backbar from './small_components/Back_bar';
   import {mapGetters, mapActions} from 'vuex'
   import {setCustomServiceInfo} from '../axioser/request'
+  import {proxyapi} from '../staticData/proxyapi';
 var timer;
   export default {
     name: "customService",
@@ -89,6 +90,7 @@ var timer;
     },
     data() {
       return {
+        proxyapi,
         msgs: localStorage.msgs_group && JSON.parse(localStorage.msgs_group) || [{
           date: '2015-11-09 09:57:08',
           loc: '江西省南昌市',

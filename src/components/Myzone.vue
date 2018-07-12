@@ -1,13 +1,13 @@
 <template>
   <div class="myzone_index">
-    <Backbar title="个人中心"></Backbar>
+    <!--<Backbar title="个人中心"></Backbar>-->
     <div class="myzone_content">
       <!-- 头 -->
       <div class="myzone_info" v-if="getUserInfo">
         <div class="pic">
           <div class="image-wrap" :userId="getUserInfo.id">
             <div class="huangguan" v-if="getUserInfo.is_vip"></div>
-            <img :src="'/proxyapi'+getUserInfo.avatar" alt="">
+            <img :src="proxyapi+getUserInfo.avatar" alt="">
           </div>
         </div>
 
@@ -61,11 +61,13 @@
   import Backbar from './small_components/Back_bar';
   import Fixednav from './small_components/Fixed_nav';
   import {mapGetters,mapActions} from 'vuex';
+  import {proxyapi} from '../staticData/proxyapi';
 
   export default {
     name: 'myzone',
     data() {
       return {
+        proxyapi:proxyapi
       };
     },
     mounted() {
@@ -103,7 +105,6 @@
   .myzone_content {
     width: 100%;
     height: 4.9rem;
-    margin-top: 1rem;
     padding: .8rem .4rem;
     box-sizing: border-box;
     background: #0097ff;

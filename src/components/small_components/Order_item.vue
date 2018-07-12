@@ -10,7 +10,7 @@
     </div>
     <div class="order_one">
       <router-link class="order_img" :to="'product/'+data.order_id">
-        <img :src="'/proxyapi'+data.goods_image" :alt="data.goods_name">
+        <img :src="proxyapi+data.goods_image" :alt="data.goods_name">
       </router-link>
       <div class="order_info">
         <header class="order_info_t">
@@ -39,9 +39,15 @@
 </template>
 
 <script>
+  import {proxyapi} from '../../staticData/proxyapi';
     export default {
         name: "order_item",
       props:['data'],
+      data(){
+        return{
+          proxyapi:proxyapi
+        }
+      },
       methods:{
         removeOrder(id){
           console.log(id)
