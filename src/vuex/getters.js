@@ -19,6 +19,7 @@ export default {
   getCustomServiceInfo: (state) => state.customServiceInfo,
   getCustomServiceHistory: (state) => state.customServiceHistory,
   getUserInfo: (state) => state.userInfo,
+  getCustomServiceListInfo: (state) => state.customServiceListInfo,
   getCurrentContactUser: (state) => {
     let currentContactUser=window.localStorage.getItem('currentContactUser');
     if(currentContactUser){

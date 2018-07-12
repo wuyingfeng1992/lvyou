@@ -3,9 +3,9 @@
     <Backbar title="光之蓝客服"></Backbar>
     <div class="top-space"></div>
     <!--@click.stop.prevent="isShowEmoji=false" ref="chattingContent"-->
-    <div class="chatting-content" v-if="getCustomServiceHistory">
+    <div class="chatting-content" v-if="getCustomServiceListInfo">
 
-      <div class="chatting-content-item " v-for="item in getCustomServiceHistory.msgs"
+      <div class="chatting-content-item " v-for="item in getCustomServiceListInfo"
            :class="{'no-reverse':!item.is_my,'reverse':item.is_my}">
         <div class="chatting-content-avatar" v-if="getUserInfo"
              :style="item.is_my?'background-image:url('+proxyapi+getUserInfo.avatar+')':''">
@@ -34,7 +34,8 @@
   import {mapGetters, mapActions} from 'vuex'
   import {setCustomServiceInfo} from '../axioser/request'
   import {proxyapi} from '../staticData/proxyapi';
-var timer;
+
+  var timer;
   export default {
     name: "customService",
     components: {
@@ -43,21 +44,22 @@ var timer;
     mounted() {
       //this.getCustomServiceInfoEvt();
       this.getCustomServiceHistoryEvt();
-      this.getUserInfo();
-      var _this=this;
-      timer=setInterval(function () {
-        _this.getCustomServiceHistoryEvt();
-      //  _this.getCustomServiceInfoEvt();
-      },1000)
+      this.getUserInfoEvt();
+      var _this = this;
+      timer = setInterval(function () {
+        // _this.getCustomServiceHistoryEvt();
+        _this.getCustomServiceInfoEvt();
+      }, 1000)
     },
-    destroyed(){
+    destroyed() {
       clearInterval(timer);
     },
     computed: {
       ...mapGetters([
-        'getCustomServiceHistory',
-        'getCustomServiceInfo',
+        // 'getCustomServiceHistory',
+        // 'getCustomServiceInfo',
         'getUserInfo',
+        'getCustomServiceListInfo',
       ])
     },
     methods: {
@@ -69,14 +71,16 @@ var timer;
       ]),
       sendMessage() {
         if (this.inputContent.trim() !== '') {
-          var params={msg:this.inputContent.trim()}
-          var _this=this;
-            setCustomServiceInfo(params)
+          var params = {msg: this.inputContent.trim()}
+          var _this = this;
+          setCustomServiceInfo(params)
             .then(({data}) => {
               console.log(data);
               if (data.code === 1) {
-                _this.inputContent='';
-                this.getCustomServiceHistoryEvt();
+                _this.inputContent = '';
+                //this.getCustomServiceHistoryEvt();
+                params.is_my=1;
+                this.$store.commit("SET_CUSTOM_SERVER_LIST_INFO", {data:[data],type:'add'});
               } else {
                 this.$message({
                   type: 'info',
@@ -118,7 +122,7 @@ var timer;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    .fiexH{
+    .fiexH {
       height: 1.8rem;
     }
     .chatting-content-item {
@@ -131,7 +135,7 @@ var timer;
         .chatting-content-avatar {
           margin-left: 0.5rem;
         }
-        .chatting-content-text{
+        .chatting-content-text {
           right: 0.15rem;
         }
         .arrow {
@@ -172,7 +176,7 @@ var timer;
           border: 0.3rem solid #eee;
           border-right-color: #fff;
         }
-        .chatting-content-text{
+        .chatting-content-text {
           left: 0.15rem;
         }
 

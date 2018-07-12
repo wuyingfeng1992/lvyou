@@ -50,6 +50,9 @@ export default {
     state.currentProductInfo = preload
     window.localStorage.setItem('currentProductInfo',JSON.stringify(preload))
   },
+  GET_CUSTOM_SERVICE_INFO(state, preload) {
+    state.customServiceInfo = preload
+  },
   GET_CUSTOM_SERVICE(state, preload) {
     state.customService = preload
   },
@@ -58,6 +61,10 @@ export default {
   },
   GET_CUSTOM_SERVICE_HISTORY(state, preload) {
     state.customServiceHistory = preload
+  },
+  SET_CUSTOM_SERVER_LIST_INFO(state, preload) {
+    var {data,type}=preload;
+    state.customServiceListInfo = state.customServiceListInfo.concat(data);
   },
  /* CURRENT_CATEGORY_TYPE(state, preload) {
     state.currentCategoryType = preload

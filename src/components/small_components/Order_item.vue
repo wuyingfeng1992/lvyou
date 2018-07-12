@@ -33,8 +33,14 @@
           申请退款
         </router-link>
       </div>
-      <div class="order_box_one_btn" @click="removeOrder(data.order_id)">删除订单</div>
-    </div>
+      <div class="order_box_one_btn1" v-if="data.status_text=='未付款'">
+        <router-link :to="'order/'+data.order_id" >
+          立即付款
+        </router-link>
+      </div>
+
+      <!--<div class="order_box_one_btn" @click="removeOrder(data.order_id)">删除订单</div>-->
+  </div>
   </div>
 </template>
 

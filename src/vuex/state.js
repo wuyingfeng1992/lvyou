@@ -23,5 +23,6 @@ export default {
   refundOrderInfo:{},
   customServiceInfo:{},
   customServiceHistory:{},
+  customServiceListInfo:[],
   //currentCategoryType:'',
 };

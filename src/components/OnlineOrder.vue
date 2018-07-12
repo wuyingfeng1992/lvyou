@@ -87,7 +87,7 @@
         </div>
         <div class="product-bao-checkBox selected">
           <el-input-number v-model="num1" @change="handleChange" :min="0" :max="getMaxNum"
-                           :step="singlePrice" label="描述文字"></el-input-number>
+                           label="描述文字"></el-input-number>
         </div>
       </div>
     </div>
@@ -176,7 +176,7 @@
             this.maxNum++;
           }
         }
-        var num = this.maxNum * 10;
+        var num = this.maxNum ;
         this.num1 = num
         return num
       },

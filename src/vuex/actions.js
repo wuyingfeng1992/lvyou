@@ -134,13 +134,17 @@ export default {
     console.log(res.data)
     var data = res.data
     commit('GET_CUSTOM_SERVICE_INFO', data)
+    if(!data.msgs) return;
+    commit('SET_CUSTOM_SERVER_LIST_INFO', {data:data.msgs,type:'add'})
   },
   //获取客服历史消息消息
   async getCustomServiceHistoryEvt({commit, state},preload) {
     let res = await getCustomServiceHistory(preload)
     console.log(res.data)
     var data = res.data
-    commit('GET_CUSTOM_SERVICE_HISTORY', data)
+    commit('GET_CUSTOM_SERVICE_HISTORY', data);
+    if(!data.msgs) return;
+    commit('SET_CUSTOM_SERVER_LIST_INFO', {data:data.msgs,type:'add'})
   }
 };
 

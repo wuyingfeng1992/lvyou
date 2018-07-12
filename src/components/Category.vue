@@ -7,9 +7,10 @@
     <div class="sub_banner">
       <img src="../images/subBanner.jpg">
     </div>
-    <el-tabs class="ban_tab_sel" v-model="getCurrentCategoryType"  type="card" @tab-click="handleClick">
+    <!--@tab-click="handleClick"--> <!-- @click="multilShow" -->
+    <el-tabs class="ban_tab_sel" v-model="getCurrentCategoryType"  type="card" >
       <el-tab-pane v-for="item in getProductCategoryType.rows" class="ban_tab_sel_item" :label="item.name" :name="item.type" >
-        <div class="tab_wrap" slot="label" @click="multilShow" :b="item.type">
+        <div class="tab_wrap" slot="label">
           <span class="icon address"></span>
           <span class="text">{{item.name}}</span>
         </div>
@@ -109,7 +110,8 @@
           var key=this.$route.params.id;
           if(key){
             this.currentCategoryType=key;
-            this.getProductCategoryTypeListEvt(key);
+            console.log('1')
+
           }else{
             this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
           }
@@ -117,26 +119,32 @@
         },
         set(val){
           if(val&&val!=='0'){
+            console.log('2')
+
             this.currentCategoryType = val;
-            this.getProductCategoryTypeListEvt(val.toString());
+            this.getProductCategoryTypeListEvt(val);
+            //this.getProductCategoryTypeListEvt(val.toString());
           }
         }
       }
     },
     methods: {
-      handleClick(tab, event) {
+    /*  handleClick(tab, event) {
         console.log(tab, event);
-      },
+        console.log(categoryId)
+
+      },*/
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
       },
       showItemList(categoryId) {
         this.showItemListFlag=!this.showItemListFlag;
         this.getProductListEvt({categoryId,offset:0})
-      },
-      multilShow() {
         this.showItemListFlag=false;
       },
+    /*  multilShow() {
+        this.showItemListFlag=false;
+      },*/
       ...mapActions(['getProductCategoryTypeEvt'
         ,'getProductCategoryTypeListEvt'
         ,'getProductListEvt'

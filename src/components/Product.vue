@@ -214,6 +214,10 @@
       .full-calendar-body .dates .week-row .day-cell {
         height: 1.2rem;
         min-height: 1.2rem;
+        &:not(.eventAble){
+          opacity: 0.75;
+          pointer-events: none;
+        }
       }
       .full-calendar-body .weeks .week {
         line-height: 0.7rem;
