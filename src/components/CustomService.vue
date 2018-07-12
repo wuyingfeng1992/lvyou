@@ -7,7 +7,9 @@
 
       <div class="chatting-content-item " v-for="item in getCustomServiceHistory.msgs"
            :class="{'no-reverse':!item.is_my,'reverse':item.is_my}">
-        <div class="chatting-content-avatar"></div>
+        <div class="chatting-content-avatar" v-if="getUserInfo"
+             :style="item.is_my?'background-image:url(/proxyapi'+getUserInfo.avatar+')':''">
+        </div>
         <div class="chatting-content-text">
           <div class="arrow"></div>
           {{item.msg}}
@@ -40,11 +42,12 @@ var timer;
     mounted() {
       //this.getCustomServiceInfoEvt();
       this.getCustomServiceHistoryEvt();
+      this.getUserInfo();
       var _this=this;
       timer=setInterval(function () {
         _this.getCustomServiceHistoryEvt();
       //  _this.getCustomServiceInfoEvt();
-      },5000)
+      },1000)
     },
     destroyed(){
       clearInterval(timer);
@@ -53,6 +56,7 @@ var timer;
       ...mapGetters([
         'getCustomServiceHistory',
         'getCustomServiceInfo',
+        'getUserInfo',
       ])
     },
     methods: {
@@ -60,6 +64,7 @@ var timer;
         //'getCustomServiceInfoEvt',
         'getCustomServiceHistoryEvt',
         'getCustomServiceInfoEvt',
+        'getUserInfoEvt',
       ]),
       sendMessage() {
         if (this.inputContent.trim() !== '') {
@@ -124,6 +129,9 @@ var timer;
         .chatting-content-avatar {
           margin-left: 0.5rem;
         }
+        .chatting-content-text{
+          right: 0.15rem;
+        }
         .arrow {
           position: absolute;
           right: -0.6rem;
@@ -161,6 +169,9 @@ var timer;
           margin-top: -0.3rem;
           border: 0.3rem solid #eee;
           border-right-color: #fff;
+        }
+        .chatting-content-text{
+          left: 0.15rem;
         }
 
       }
