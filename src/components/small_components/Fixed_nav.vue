@@ -77,6 +77,7 @@
     .fixed_nav_text{
       margin-top: 0.05rem;
       display: inline-block;
+      white-space: nowrap;
     }
     .router-link-active{
       background: #0068ac;

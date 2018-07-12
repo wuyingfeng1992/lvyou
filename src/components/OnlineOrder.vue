@@ -1,10 +1,10 @@
 <template>
-  <div class="product-box-online">
+  <div class="product-box-online" v-if="data" :data="JSON.stringify(data)">
     <Backbar title="提交订单"></Backbar>
     <div class="top-space"></div>
     <div class="product-address">
       <div class="product-address-item desc">
-        <div class="product-desc">德天跨国瀑布景区门票</div>
+        <div class="product-desc">{{data.title}}</div>
       </div>
 
       <div class="product-address-item address">
@@ -12,9 +12,9 @@
           出发地点
         </div>
         <div class="list">
-          <div class="list-item">南宁</div>
-          <div class="list-item">深圳</div>
-          <div class="list-item">广州</div>
+          <div class="list-item" @click="addDressSel(index)" v-for="(index,item) in data.origin"
+               :class="{'selected':index==getAddDressSel}">{{index}}
+          </div>
         </div>
       </div>
       <div class="product-address-item data">
@@ -23,45 +23,50 @@
         </div>
         <div class="list">
           <div class="list-item noselect selected">
-            <div class="text1">今天06-12</div>
-            <div class="text2">￥119</div>
+            <div class="text1" v-if="data.currentDay">
+              今天{{data.currentDay.split('-')[1]+'-'+data.currentDay.split('-')[2]}}
+            </div>
+            <div class="text2" v-if="data.price">￥{{data.price.adult_price}}</div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-address">
+      <div class="product-address-item person" >
+        <div class="name">
+          购&nbsp;&nbsp;&nbsp;买&nbsp;&nbsp;&nbsp;人:
+        </div>
+        <div class="phone">
+          <el-input v-model="buyer_name" placeholder="购买人姓名"></el-input>
+        </div>
+      </div>
+      <div class="product-address-item person" >
+        <div class="name">
+          购买人电话:
+        </div>
+        <div class="phone">
+          <el-input v-model="buyer_phone" placeholder="购买人电话"></el-input>
         </div>
       </div>
     </div>
     <div class="product-address">
       <div class="product-address-item add">
 
-        <div class="product-add"  @click="dialogVisible  = true">
+        <div class="product-add" @click="dialogVisible  = true">
           <div class="icon"></div>
           <div class="text">添加/修改游客</div>
         </div>
       </div>
-      <div class="product-address-item person">
-        <div class="name">
-          彭于晏
+      <div class="product-address-item person" v-for="item in getContactUser.tusers" v-if="item.check">
+        <div class="name" style="width:20%;">
+          {{item.name}}
         </div>
         <div class="phone">
-          13532665489
+          {{item.phone}}
         </div>
-        <div class="iconWrap">
-          <!--<div class="checkBox selected"></div>-->
+        <div class="iconWrap" @click="removeContactSel(item.tuid)">
           <div class="delete"></div>
         </div>
-      </div>
-
-      <div class="product-address-item person">
-        <div class="name">
-          彭于晏
-        </div>
-        <div class="name phone">
-          13532665489
-        </div>
-        <div class="iconWrap">
-          <!--<div class="checkBox"></div>-->
-          <div class="delete"></div>
-        </div>
-
       </div>
     </div>
     <div class="product-address">
@@ -75,13 +80,14 @@
           <span>保</span>
         </div>
         <div class="product-bao2">
-          ￥10/人x1份
+          ￥{{singlePrice}}/人x1份
         </div>
         <div class="product-bao-desc">
           （意外事故10万，社保内医疗1万）
         </div>
         <div class="product-bao-checkBox selected">
-          <el-input-number v-model="num1" @change="handleChange" :min="0" :max="3000" label="描述文字"></el-input-number>
+          <el-input-number v-model="num1" @change="handleChange" :min="0" :max="getMaxNum"
+                           :step="singlePrice" label="描述文字"></el-input-number>
         </div>
       </div>
     </div>
@@ -92,26 +98,31 @@
     <Fixedkefu></Fixedkefu>
 
 
-<!--:before-close="handleClose"-->
+    <!--:before-close="handleClose"-->
     <el-dialog
       title="选择出游同伴"
       :visible.sync="dialogVisible"
       width="90%"
-      >
-      <div class="associalSel" >
+    >
+      <div class="associalSel">
         <div class="list-associates">
-          <div class="some_bar">
+          <div class="some_bar" v-for="item in getContactUser.tusers">
+            <span class="v-md">{{item.name}}</span>
+            <span class="v-mc">{{item.phone}}</span>
+            <el-checkbox v-model="item.check"></el-checkbox>
+          </div>
+          <!--<div class="some_bar">
               <span class="v-md">黎明</span>
               <span class="v-mc">18533264595</span>
               <el-checkbox ></el-checkbox>
-              <!--<span class="v-all">查看全部订单></span>-->
+              &lt;!&ndash;<span class="v-all">查看全部订单></span>&ndash;&gt;
           </div>
           <div class="some_bar">
               <span class="v-md">黎明2</span>
               <span class="v-mc">18533264595</span>
               <el-checkbox></el-checkbox>
-              <!--<span class="v-all">查看全部订单></span>-->
-          </div>
+              &lt;!&ndash;<span class="v-all">查看全部订单></span>&ndash;&gt;
+          </div>-->
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -119,25 +130,6 @@
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
     </el-dialog>
-
-    <div class="associalSel" v-if="associalShow">
-      <div class="list-associates">
-        <div class="some_bar">
-          <router-link to="/associate/id001">
-            <span class="v-md">黎明</span>
-            <span class="v-mc">18533264595</span>
-            <!--<span class="v-all">查看全部订单></span>-->
-          </router-link>
-        </div>
-        <div class="some_bar">
-          <router-link to="/associate/id002">
-            <span class="v-md">黎明2</span>
-            <span class="v-mc">18533264595</span>
-            <!--<span class="v-all">查看全部订单></span>-->
-          </router-link>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -145,6 +137,8 @@
   import Fixedkefu from './small_components/Fixed_kefu';
   import FixedButton from './small_components/Fixed_button';
   import Backbar from './small_components/Back_bar';
+  import {mapGetters, mapActions} from 'vuex'
+  import {submitShopBuy} from '../axioser/request'
 
   export default {
     name: 'product',
@@ -152,33 +146,145 @@
       return {
         btnText: '提交订单',
         associalShow: false,
-        num1: 3000,
+        num1: 0,
         dialogVisible: false,
-
+        data: '',
+        addSel: '',
+        maxNum: 0,
+        checked1: '',
+        buyer_phone: '',
+        buyer_name: '',
+        singlePrice: 10
       };
     },
+    created: function () {
+      debugger
+      var data = this.$store.getters.getCurrentCurrentProductInfo;
+      var id = this.$route.params.id;
+      this.data = data;
+    },
     mounted() {
+      this.getContactUserEvt();
+    },
+    computed: {
+      getMaxNum() {
+        this.maxNum = 0;
+        if (!this.getContactUser.tusers) return
+        for (var i = 0; i < this.getContactUser.tusers.length; i++) {
+          var item = this.getContactUser.tusers[i];
+          // debugger
+          if (item.check) {
+            this.maxNum++;
+          }
+        }
+        var num = this.maxNum * 10;
+        this.num1 = num
+        return num
+      },
+
+      getAddDressSel() {
+        console.log(this.addSel);
+        return this.addSel;
+      },
+      ...mapGetters([
+        'getContactUser',
+      ])
 
     },
-    computed: {},
     methods: {
+      ...mapActions(['getContactUserEvt']),
+      addDressSel(val) {
+        console.log(val)
+        this.addSel = val;
+      },
       orderSubmit() {
-        console.log('提交订单,orderSubmit')
+        if (!this.addSel ) {
+          this.$message({
+            type: 'info',
+            message: '请选择地址'
+          });
+          return
+        }
+        var tusers = []
+        for (var i = 0; i < this.getContactUser.tusers.length; i++) {
+          var item = this.getContactUser.tusers[i];
+          // debugger
+          if (item.check) {
+            tusers.push(item.tuid)
+          }
+
+        }
+        if (tusers.length == 0) {
+          this.$message({
+            type: 'info',
+            message: '请选择出行人员'
+          });
+          return
+        }
+        if (this.buyer_name=='') {
+          this.$message({
+            type: 'info',
+            message: '请输入购买人'
+          });
+          return
+        }
+        if (this.buyer_phone=='' ) {
+          this.$message({
+            type: 'info',
+            message: '请输入购买人电话'
+          });
+          return
+        }
+        debugger
+
+        var price_id = this.data.dayDate.id;
+        if (!price_id) {
+          this.$message({
+            type: 'info',
+            message: `没有${this.data.currentDay}的价格信息！`
+          });
+          return
+        }
+
+        var params = {
+          goods_id: this.data.id,
+          addr_id: this.addSel,
+          tusers: tusers,
+          policys: this.num1 / 10,
+          price_id: price_id,
+          buyer_phone: this.buyer_phone,
+          buyer_name:this.buyer_name,
+        }
+        console.log(JSON.stringify(params))
+        submitShopBuy(params)
+          .then(({data}) => {
+            if (data.code === 1) {
+              this.$message({
+                type: 'success',
+                message: '新增成功'
+              });
+            } else {
+              this.$message({
+                type: 'info',
+                message: data.msg || '新增失败'
+              });
+            }
+          })
 
       },
       handleChange(value) {
         console.log(value);
       },
-      associalSel(flag) {
-        this.associalShow = flag;
+      removeContactSel(id) {
+        for (var i = 0; i < this.getContactUser.tusers.length; i++) {
+          var item = this.getContactUser.tusers[i];
+          // debugger
+          if (item.tuid == id) {
+            item.check = false;
+            break;
+          }
+        }
       },
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
     },
     components: {
       FixedButton,
@@ -191,50 +297,61 @@
 <style lang="less">
   .product-box-online {
     width: 100%;
-    .el-dialog__headerbtn{
+    .phone{
+      display: flex;
+      .el-input{
+        height: 0.6rem;
+       line-height: 0.6rem;
+      }
+      .el-input__inner{
+        height: 100%;
+        font-size: 0.30rem;
+      }
+    }
+    .el-dialog__headerbtn {
       width: 0.4rem;
       height: 0.4rem;
       font-size: 0.38rem;
     }
-    .el-dialog__wrapper{
-      .el-dialog{
+    .el-dialog__wrapper {
+      .el-dialog {
         border-radius: 5px;
       }
-      .el-dialog__body{
+      .el-dialog__body {
         padding: 0 0.3rem;
       }
-      div.some_bar{
+      div.some_bar {
         font-size: .32rem;
         padding: 0;
         display: flex;
         line-height: 0.8rem;
-        .el-checkbox{
+        .el-checkbox {
           margin-right: 0.3rem;
           margin-left: auto;
         }
       }
 
     }
-    .el-dialog__header{
+    .el-dialog__header {
       height: 1.2rem;
       line-height: 1.2rem;
       font-size: 0.28rem;
       padding: 0 10px;
       padding: 0 0.4rem;
-      .el-dialog__title{
+      .el-dialog__title {
         font-size: 0.32rem;
         color: #000;
       }
     }
-    .el-checkbox{
+    .el-checkbox {
       font-size: 0.32rem;
-      .el-checkbox__inner{
+      .el-checkbox__inner {
         width: 0.38rem;
         height: 0.38rem;
         border: 1px solid #ccc;
       }
-      .el-checkbox__inner::after{
-        width: 0.2rem;
+      .el-checkbox__inner::after {
+        width: 0.09rem;
         height: 0.3rem;
         top: -0.05rem;
         border: 0.05rem solid #fff;
@@ -242,7 +359,7 @@
         border-top: 0;
       }
     }
-    .el-button{
+    .el-button {
       font-size: 0.32rem;
       padding: 0.2rem 0.3rem;
     }
@@ -378,9 +495,9 @@
                 display: inline-block;
                 outline: none;
                 line-height: 0.6rem;
-                height: 0.6rem;
+                height: 0.62rem;
                 display: inline-block;
-                border: 1px solid #666;
+                border: 1px solid #ccc;
                 border-left: none;
                 border-right: none;
                 font-size: 0.3rem;
@@ -391,7 +508,7 @@
                 font-size: 0.3rem;
                 border: 1px solid #ccc;
                 box-sizing: border-box;
-               /* height: calc(100% - 2px);*/
+                /* height: calc(100% - 2px);*/
                 border-top: 0;
               }
               .el-input-number__increase {
@@ -452,6 +569,7 @@
           padding-bottom: 0.5rem;
           .name {
             margin-right: 0.25rem;
+
           }
         }
 

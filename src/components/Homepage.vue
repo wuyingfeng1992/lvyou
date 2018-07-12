@@ -8,11 +8,11 @@
     <div class="index_banner">
       <Swipe class="my-swipe"
              :loop="true"
-             :auto="0"><!-- swipe 设置自动滚动 -->
-        <Swipe-item v-for="(item,index  ) in getHomeBannerInfo.Slide" class="slide" :class="'slide'+JSON.stringify(index)">
+             :auto="5000"><!-- swipe 设置自动滚动 -->
+        <Swipe-item v-for="(item,index  ) in getHomeBannerInfo.slide" class="slide" :class="'slide'+JSON.stringify(index)">
           <router-link :to="item.url"><!--:to="item.url"-->
             <div class="common_banner">
-              <img :src="item.image" :alt="item.title">
+              <img :src="'api/'+item.image" :alt="item.title">
             </div>
           </router-link>
         </Swipe-item>
@@ -24,7 +24,7 @@
       </div>
       <Swipe class="my-swipe"
              :loop="true"
-             :auto="0"><!-- swipe 设置自动滚动 -->
+             :auto="5000"><!-- swipe 设置自动滚动 -->
         <Swipe-item v-for="(item,index ) in getHomeBannerInfo.shuf" class="slide" :class="'slide'+JSON.stringify(index)">
           <span class="index_banner_text_text">{{item.name}}</span>
         </Swipe-item>
@@ -56,27 +56,7 @@
     name: 'homepage',
     data() {
       return {
-        showMe: false, // 是否展示当前页面
-        search_word: '', // 搜索框搜索词
-        hot_words: '',
-        sexteen_slider: '',
-        isLoadingMore: false,
-        scrollText: '',
-        swipeInfo: [{
-          href: "/search/1",
-          imgSrc: image,
-          //
-          //imgSrc:"../images/banner.jpg",
-          desc: '滚动轮播文字广告1'
-        }, {
-          href: "/search/2",
-          imgSrc: image,
-          desc: '滚动轮播文字广告2'
-        }, {
-          href: "/search/3",
-          imgSrc: image,
-          desc: '滚动轮播文字广告3'
-        }]
+
       };
     },
     mounted() {
@@ -116,8 +96,8 @@
       width: 100%;
       height: 100%;
       img {
-        width: auto;
-        height: 100%;
+        width: 100%;
+        height: auto;
       }
     }
     .index_banner_text {

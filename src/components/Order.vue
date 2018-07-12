@@ -3,19 +3,19 @@
     <Backbar title="我的订单"></Backbar>
     <div class="top-space"></div>
     <el-tabs class="my-order-list" v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="全部" name="all">
-        <div class="el-tab-pane-con order_box">
-          <Orderitem></Orderitem>
+      <el-tab-pane label="全部" name="all" :getAllOrder="JSON.stringify(getAllOrder)">
+        <div class="el-tab-pane-con order_box" v-if="getAllOrder">
+          <Orderitem v-for="item in getAllOrder.rows" :data="item"></Orderitem>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="未付款" name="non-payment">
-        <div class="el-tab-pane-con order_box">
-          <Orderitem></Orderitem>
+      <el-tab-pane label="未付款" name="non-payment" :getNotpayOrder="JSON.stringify(getNotpayOrder)">
+        <div class="el-tab-pane-con order_box" v-if="getNotpayOrder">
+          <Orderitem v-for="item in getNotpayOrder.rows" :data="item"></Orderitem>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="退款" name="refund">
-        <div class="el-tab-pane-con order_box">
-          <Orderitem></Orderitem>
+      <el-tab-pane label="退款" name="refund" :getRefundOrder="JSON.stringify(getRefundOrder)">
+        <div class="el-tab-pane-con order_box" v-if="getRefundOrder">
+          <Orderitem v-for="item in getRefundOrder.rows" :data="item"></Orderitem>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -31,7 +31,8 @@
   import Fixednav from './small_components/Fixed_nav';
   import Fixedkefu from './small_components/Fixed_kefu';
   import Orderitem from './small_components/Order_item';
-  import {mapGetters} from 'vuex';
+  import One_product from './small_components/One_product';
+  import {mapGetters,mapActions} from 'vuex';
 
 
   export default {
@@ -44,29 +45,33 @@
     },
     computed: {
       ...mapGetters([
-      ]),
+        'getRefundOrder',
+        'getNotpayOrder',
+        'getAllOrder',
+      ])
+    },
+    methods: {
+      ...mapActions(['getRefundOrderEvt','getNotpayOrderEvt','getAllOrderEvt']),
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
 
     },
     mounted() {
       // 设置当前标记为主页
-      //this.$store.dispatch('setWhichpage', 'order');
-      // 模拟加载
-      this.$store.dispatch('setLoading', true);
+     /* this.$store.dispatch('setLoading', true);
       var time = Math.floor(Math.random() * 2000);
       console.log('模拟加载用时' + time);
       setTimeout(() => {
         this.$store.dispatch('setLoading', false);
-        this.showMe = true;
-      }, time);
-      // }
+      }, time);*/
+
+      this.getRefundOrderEvt();
+      this.getNotpayOrderEvt();
+      this.getAllOrderEvt();
 
       let keyword = this.$route.query.k
       this.activeName = keyword;
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
     },
     components: {
       Backbar,

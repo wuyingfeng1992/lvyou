@@ -1,14 +1,15 @@
 <template>
   <div class="associates-box">
-    <Backbar title="编辑联系人"></Backbar>
+    <Backbar :title="getTitle"></Backbar>
     <div class="top-space"></div>
     <!-- label-width="100px"-->
-    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" class="demo-ruleForm">
+    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" class="demo-ruleForm" >
+
       <el-form-item label="姓名" prop="name">
         <div class="v-md" slot="label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 :</div>
         <el-input class="v-right" type="text" v-model="ruleForm2.name" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="性别" prop="sex">
+      <!--<el-form-item label="性别" prop="sex">
         <div class="v-md" slot="label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 :</div>
         <el-select v-model="ruleForm2.sex" placeholder="请选择" class="v-right">
           <el-option
@@ -18,6 +19,14 @@
             :value="item.value">
           </el-option>
         </el-select>
+      </el-form-item>-->
+      <el-form-item label="身份证号" prop="idcard">
+        <div class="v-md" slot="label">身份证号 :</div>
+        <el-input class="v-right" type="text" v-model="ruleForm2.idcard" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="护照" prop="passport">
+        <div class="v-md" slot="label">护&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;照 :</div>
+        <el-input class="v-right" type="text" v-model="ruleForm2.passport" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="手机号码" prop="phone">
         <div class="v-md" slot="label">手机号码 :</div>
@@ -34,6 +43,7 @@
 <script>
   import Backbar from './small_components/Back_bar';
   import Fixedkefu from './small_components/Fixed_kefu';
+  import {editContactUser,insertContactUser} from '../axioser/request'
 
   export default {
     name: "associates",
@@ -42,35 +52,33 @@
       Fixedkefu,
     },
     data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('年龄不能为空'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
-          } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validateSex = (rule, value, callback) => {
+     /* var validateSex = (rule, value, callback) => {
+        debugger
         if (value === '') {
           callback(new Error('请选择性别'));
         } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
           callback();
         }
-      };
+      };*/
       var validateName = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入姓名'));
+        }else{
+          callback();
+        }
+      };
+      var validateIdcard = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入省份证号'));
+        }else{
+          callback();
+        }
+      };
+      var validatePassport = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入护照号'));
+        }else{
+          callback();
         }
       };
       var validatePhone = (rule, value, callback) => {
@@ -79,44 +87,111 @@
         } else {
           var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
           if (!reg.test(value)) {
-            callback(new Error('请输入正确手机号码'));
+            callback(new Error('请输入正确的手机号码'));
           } else {
-            return true;
+            callback();
           }
-
         }
       };
       return {
+        userData:'',
         ruleForm2: {
           phone: '',
           name: '',
-          sex: '',
+          idcard: '',
+          passport: '',
+         /* sex: '',
           sexOptions: [{
             value: 'male',
             label: '男'
           }, {
             value: 'female',
             label: '女'
-          }],
+          }],*/
         },
         rules2: {
           phone: [
             {validator: validatePhone, trigger: 'blur'}
           ],
-          sex: [
-            {validator: validateSex, trigger: 'blur'}
-          ],
           name: [
             {validator: validateName, trigger: 'blur'}
+          ],
+          idcard: [
+            {validator: validateIdcard, trigger: 'blur'}
+          ],
+          passport: [
+            {validator: validatePassport, trigger: 'blur'}
           ]
+          /* sex: [
+            {validator: validateSex, trigger: 'blur'}
+          ],*/
         },
       };
+    },
+    created: function(){
+      var data=this.$store.state.contactUser.tusers?this.$store.state.contactUser.tusers:this.$store.getters.getCurrentContactUser;
+      this.$store.commit("SET_CURRENT_CONTACT_USER", data);
+      var id=this.$route.params.id;
+      for(var i=0;i<data.length;i++){
+        if(data[i].tuid==id){
+          this.ruleForm2=data[i];
+          break;
+        }
+      }
+    },
+    computed: {
+      getTitle(){
+        if(this.$route.path.indexOf('/insert')==-1){
+          return '编辑联系人'
+        }else{
+          return '新增联系人'
+        }
+      }
     },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            var that = this;
+            var data=JSON.parse(JSON.stringify(this.ruleForm2));
+            console.log(data,this.$route.path,'ssssssssssssssssssssssssssssssss')
+            if(this.$route.path.indexOf('/insert')==-1){
+              //修改
+              editContactUser(data)
+                .then(({data}) => {
+                  console.log(data,'sssssgggggggggggggggggggggggggg拜拜拜拜拜拜拜拜')
+                  if (data.code===1) {
+                    this.$message({
+                      type: 'success',
+                      message: '修改成功'
+                    });
+                  } else {
+                    this.$message({
+                      type: 'info',
+                      message: data.msg||'修改失败'
+                    });
+                  }
+                })
+
+            }else{
+              //新增
+              insertContactUser(data)
+                .then(({data}) => {
+                  if (data.code===1) {
+                    this.$message({
+                      type: 'success',
+                      message: '新增成功'
+                    });
+                  } else {
+                    this.$message({
+                      type: 'info',
+                      message: data.msg||'新增失败'
+                    });
+                  }
+                })
+
+            }
+
           } else {
             console.log('error submit!!');
             return false;

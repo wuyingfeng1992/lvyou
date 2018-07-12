@@ -6,7 +6,7 @@
       <One_product></One_product>
       <One_product></One_product>
     </div>-->
-    <Productlist title="特价商品"></Productlist>
+    <Productlist title="特价商品" :data="getFeatureProduct.rows"></Productlist>
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
     <Fixednav></Fixednav>
@@ -18,6 +18,7 @@
   import Fixedkefu from './small_components/Fixed_kefu';
   import Fixednav from './small_components/Fixed_nav';
   import Productlist from './small_components/Product_list';
+  import {mapGetters,mapActions} from 'vuex';
 
 
   export default {
@@ -27,7 +28,20 @@
       Fixednav,
       Productlist,
       Fixedkefu,
-    }
+    },
+    mounted() {
+      this.getFeatureProductEvt();
+    },
+    computed: {
+      ...mapGetters([
+        'getFeatureProduct',
+      ])
+    },
+    methods: {
+      ...mapActions(['getFeatureProductEvt']),
+
+    },
+
   }
 </script>
 

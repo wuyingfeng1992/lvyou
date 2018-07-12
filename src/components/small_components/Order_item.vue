@@ -2,45 +2,51 @@
   <div class="order_box_one_wrap">
     <div class="order_box_one_top">
       <div class="order_box_one_goodsnum">
-        订单号：123456789
+        订单号：{{data.order_no}}
       </div>
       <div class="order_box_one_goodstext">
-        已确认
+       {{data.status_text}}
       </div>
     </div>
     <div class="order_one">
-      <router-link class="order_img" to="product/s0001">
-        <img src="../../images/dingdan.jpg" alt="">
+      <router-link class="order_img" :to="'product/'+data.order_id">
+        <img :src="'/api'+data.goods_image" :alt="data.goods_name">
       </router-link>
       <div class="order_info">
         <header class="order_info_t">
           <div class="order_title">
-            【跟团游】全程无自费泰国6天 5晚至尊安心游！双岛出海＋三 合一夜秀表演
+            {{data.goods_name}}
           </div>
         </header>
       </div>
       <footer class="order_info_b">
-        <span class="order_price">￥2798</span>
-        <span class="order_price_text">X1</span>
+        <span class="order_price">￥{{data.total_price}}</span>
+        <!--<span class="order_price_text">X1</span>-->
       </footer>
     </div>
     <div class="order_box_one_b">
-      共1件商品 合计：￥2798.00
+      共1件商品 合计：￥{{data.total_price}}
     </div>
     <div class="order_box_one_d">
-      <div class="order_box_one_btn1">
-        <router-link to="refund/s001">
+      <div class="order_box_one_btn1" v-if="data.status==64">
+        <router-link :to="'refund/'+data.order_id" >
           申请退款
         </router-link>
       </div>
-      <div class="order_box_one_btn">删除订单</div>
+      <div class="order_box_one_btn" @click="removeOrder(data.order_id)">删除订单</div>
     </div>
   </div>
 </template>
 
 <script>
     export default {
-        name: "order_item"
+        name: "order_item",
+      props:['data'],
+      methods:{
+        removeOrder(id){
+          console.log(id)
+        }
+      }
     }
 </script>
 

@@ -1,49 +1,45 @@
 <template>
-  <div class="product-box">
+  <div class="product-box" v-if="getProductDetail" :a="getProductDetail" :productId="getProductDetail.id">
     <div class="product-banner-wrap">
       <div class="product-back">
         <span class="back-icon" @click="back_one"></span>
       </div>
       <div class="product-banner">
-        <img src="../images/xqy.jpg" alt="">
+        <img :src="'/api'+getProductDetail.image" alt="">
       </div>
       <div class="product-banner-bottom">
-        <span class="product-desc">青海湖两日游自由行 纯玩</span>
+        <span class="product-desc">{{getProductDetail.title}}</span>
       </div>
     </div>
     <div class="product-price-d">
       <div class="product-price-d-item">
-        <span class="text1">促销价:</span>
+        <span class="text1">成人价:</span>
         <span class="text2">￥</span>
-        <span class="text3">1780元</span>
+        <span class="text3">{{getProductDetail.price.adult_price}}元</span>
       </div>
       <div class="product-price-d-item">
-        <span class="text1">会员价:</span>
+        <span class="text1">儿童价:</span>
         <span class="text2">￥</span>
-        <span class="text3">1780元</span>
+        <span class="text3">{{getProductDetail.price.child_price}}元</span>
       </div>
     </div>
-
     <div class="product-address">
       <div class="product-address-item noselect">
         <div class="name">
           出发地点
         </div>
         <div class="list">
-          <div class="selected list-item">南宁</div>
-          <div class="list-item">南宁</div>
-          <div class="list-item">南宁</div>
-          <div class="list-item">南宁</div>
+          <div class="list-item" v-for="(inedx,item) in getProductDetail.origin" :originId="item">
+            {{JSON.stringify(item)}}
+          </div>
         </div>
       </div>
-      <div class="product-address-item data">
+      <div class="product-address-item data noselect">
         <div class="name">
           出游日期
         </div>
-        <div class="list">
-          <div class="list-item" @click="dialogVisible  = true">6月11日</div>
-          <div class="list-item">6月11日</div>
-          <div class="list-item">6月11日</div>
+        <div class="list ">
+          <div class="list-item" @click="dialogVisible  = true">请选择出行日期</div>
         </div>
       </div>
     </div>
@@ -51,7 +47,7 @@
       :visible.sync="dialogVisible"
       width="90%"
     >
-      <full-calendar :events="fcEvents" lang='zh'
+      <full-calendar :events="getProductDetail.recentDate" lang='zh'
                      @changeMonth="changeMonth"
                      @eventClick="eventClick"
                      @dayClick="dayClick"
@@ -59,10 +55,10 @@
       ></full-calendar>
       <div class="product-price-d">
         <div class="product-price-d-item">
-          成人 <span class="price">￥1245</span>
+          成人 <span class="price" v-if="curData.adult_price">￥{{curData.adult_price}}</span>
         </div>
         <div class="product-price-d-item">
-          儿童 <span class="price">￥800</span>
+          儿童 <span class="price" v-if="curData.child_price">￥{{curData.child_price}}</span>
         </div>
       </div>
     </el-dialog>
@@ -80,6 +76,7 @@
 <script>
   import FixedButton from './small_components/Fixed_button';
   import Fixedkefu from './small_components/Fixed_kefu';
+  import {mapGetters, mapActions} from 'vuex';
 
   export default {
     name: 'product',
@@ -87,25 +84,50 @@
       return {
         btnText: '在线预订',
         dialogVisible: false,
+        id: '',
         fcEvents: [
           {
             title: '￥1245',
-            start: '2018-07-2',
-            end: '2018-07-2'
+            start: '2018-07-2'
           }
         ]
 
       };
     },
     mounted() {
+      var id = this.$route.params.id;
+      this.id = id;
+      this.getProductDetailEvt(id);
+    },
+    computed: {
+      ...mapGetters([
+        'getProductDetail',
+      ]),
+      curData: function () {
+        var date = new Date();
+        var year = date.getFullYear(); //获取年
+        var month = date.getMonth() + 1;//获取月
+        var day = date.getDate(); //获取当日
+        var time = year + "-" + month + "-" + day; //组合时间   alert("当前日期："+time);
+        var data = this.getDataByDay(time);
+        return data;
+      }
 
     },
-    computed: {},
     methods: {
-      /*onlineOrder() {
-        console.log('产品预订')
-        this.$router.push('/onlineOrder/s0001');
-      },*/
+      getDataByDay: function (date) {
+        var data = this.getProductDetail.recentDate;
+        var curData = {};
+        for (var i = 0; i < data.length; i++) {
+          var item = data[i];
+          if (item.start == date) {
+            curData = item;
+            break;
+          }
+        }
+        return curData;
+      },
+      ...mapActions(['getProductDetailEvt']),
       back_one() {
         this.$router.go(-1);
       },
@@ -113,14 +135,21 @@
         console.log('changeMonth')
       },
       eventClick() {
-        console.log('eventClick ')
+        console.log('eventClick ', 's谁谁谁谁谁谁水水水水')
       },
-      dayClick() {
-        console.log('dayClick ')
-        this.$router.push('/onlineOrder/s0001');
+      dayClick(day, jsEvent) {
+        var data = this.getProductDetail;
+        var date = new Date(day.toString());
+        day = date.getFullYear() + '-' + ((date.getMonth() + 1)<10? '0'+(date.getMonth() + 1):date.getMonth() + 1)+ '-' + date.getDate()
+        var dayData=this.getDataByDay(day);
+        data.dayDate=dayData;
+        debugger
+        data.currentDay=day;
+        this.$store.commit("SET_CURRENT_PRODUCT_INFO", data);
+        this.$router.push('/onlineOrder/' + this.id);
       },
       moreClick() {
-        console.log('moreClick  ')
+        console.log('moreClick')
       }
     },
     components: {
@@ -135,15 +164,14 @@
 
 <style lang="less">
   .product-box {
-    .product-price-d{
+    .product-price-d {
       display: flex;
       justify-content: center;
 
-      .product-price-d-item{
-        width: 30%;
+      .product-price-d-item {
         font-size: 0.34rem;
       }
-      .price{
+      .price {
         color: #ff4200;
       }
     }
@@ -151,7 +179,7 @@
       padding: 0;
 
     }
-    .el-dialog__headerbtn{
+    .el-dialog__headerbtn {
       width: 0.4rem;
       height: 0.4rem;
       font-size: 0.38rem;
@@ -182,34 +210,42 @@
         margin-top: 3px;
         font-size: 0.32rem;
       }
+      .event-box {
+        width: 100%;
+        position: relative;
+        left: -3px;
+      }
       .full-calendar-body .dates .dates-events .events-week .events-day .event-box .event-item {
         background: #03a4ea;
         color: #fff;
+        font-size: 0.26rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        width: 100%;
+        text-align: center;
+        left: -0.11rem;
+        position: absolute;
+        top: 0;
       }
       .full-calendar-body .dates .week-row .day-cell {
         padding: 0;
       }
-      .full-calendar-body .dates .dates-events .events-week .events-day .event-box .event-item{
-        font-size: 0.26rem;
-        height: 0.5rem;
-        line-height: 0.5rem;
-      }
-      .full-calendar-header .header-center .prev-month, .full-calendar-header .header-center .next-month{
+      .full-calendar-header .header-center .prev-month, .full-calendar-header .header-center .next-month {
         font-size: 0.38rem;
       }
-      .full-calendar-body .dates .week-row .day-cell{
+      .full-calendar-body .dates .week-row .day-cell {
         border-right: 1px solid #aaa;
         border-bottom: 1px solid #aaa;
       }
-      .full-calendar-body .dates .week-row{
+      .full-calendar-body .dates .week-row {
         border-left: 1px solid #aaa;
       }
-      .full-calendar-body .weeks{
+      .full-calendar-body .weeks {
         border-top: 1px solid #aaa;
         border-bottom: 1px solid #aaa;
         border-left: 1px solid #aaa;
       }
-      .full-calendar-body .weeks .week{
+      .full-calendar-body .weeks .week {
         border-right: 1px solid #aaa;
       }
       ul, p {
@@ -228,6 +264,7 @@
       .name {
         color: #1c1a16;
         margin-right: 0.3rem;
+        width: 20%;
       }
       .product-address-item {
         display: flex;

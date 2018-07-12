@@ -1,22 +1,13 @@
 <template>
-  <div v-if="showMe">
-    <Search_top></Search_top>
-    <div class="search-result">
+  <div>
+    <Search_top @searchEvent="searchEvent" :search_text="search_text"></Search_top>
+    <div class="search-result" v-show="recommendShow">
       <div class="search-result-item">
         <div class="header">
           <input type="text" class="header-input" placeholder="热门搜索">
         </div>
-        <div class="search-content">
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
+        <div class="search-content"  v-if="getSearchRecommandInfo">
+          <div class="city" v-for="item in getSearchRecommandInfo.hot" @click="searchEvent(item.key)">{{item.key}}</div>
         </div>
       </div>
       <div class="search-more">
@@ -27,86 +18,62 @@
         <div class="header">
           <input type="text" class="header-input" placeholder="历史搜索">
         </div>
-        <div class="search-content">
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
-          <div class="city">越南</div>
+        <div class="search-content"  v-if="getSearchRecommandInfo">
+          <div class="city" v-for="item in getSearchRecommandInfo.history" @click="searchEvent(item.key)">{{item.key}}</div>
         </div>
       </div>
+    </div>
+    <div class="list-product" v-show="!recommendShow">
+      <One_product v-for="item in getSearchInfo.rows" :data="item"></One_product>
     </div>
     <Fixedkefu></Fixedkefu>
   </div>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
   import OneBusiness from './small_components/One_business';
   import Search_top from './small_components/Search_top';
+  import One_product from './small_components/One_product';
   import Fixedkefu from './small_components/Fixed_kefu';
+  import {mapGetters,mapActions} from 'vuex';
 
   export default {
     name: 'search',
     data() {
       return {
-        showMe: false,
-        search_text: '', // 搜索框内容
-        search_res: [] // 搜索结果
+        search_text: '', // 搜索框内容,
+        recommendShow:true
       };
     },
     mounted() {
-      this.$store.dispatch('setLoading', true);
-      // 模拟加载
-      var time = Math.floor(Math.random() * 2000);
-      console.log('模拟加载用时' + time);
-      setTimeout(() => {
-        this.$store.dispatch('setLoading', false);
-        this.showMe = true;
-      }, time);
-      if (this.$route.path != '/index' && this.$route.path != '/recommend') {
-        this.search_method();
-      }
-
+      this.getSearchRecommandInfoEvt()
     },
     computed: {
       ...mapGetters([
-        'getProductCategory' // 商家简略信息
+        'getSearchInfo',
+        'getSearchRecommandInfo',
       ])
     },
     methods: {
-
-      search_method(e) {
-        if (this.$route.path != 'search') {
-          this.toSearchPage(e)
-          return;
+      ...mapActions(['getSearchInfoEvt','getSearchRecommandInfoEvt']),
+      searchEvent:function (key) {
+        console.log(key);
+        if(key){
+          this.recommendShow=false
+          this.search_text=key;
+          this.getSearchInfoEvt(key)
+        }else{
+          //debugger
+          this.recommendShow=true
         }
-        this.search_res = [];
-        var mainWord = this.$route.params.keyword;
-        if (this.search_text !== '' && this.search_text !== this.$route.params.keyword) {
-          mainWord = this.search_text;
-        }
-        this.search_text = mainWord;
-        for (var x in this.getProductCategory) {
-          if (this.getProductCategory[x].shop_name.includes(mainWord)) {
-            this.search_res.push(this.getProductCategory[x]);
-          }
-        }
+        //this.search_text=key;
       },
-      toSearchPage: function (e) {
-        let search_text = this.search_text ? this.search_text : ''
-        this.$emit('toSearchPage', e, search_text);
-      }
     },
     components: {
       OneBusiness,
       Search_top,
       Fixedkefu,
+      One_product,
     }
   };
 </script>

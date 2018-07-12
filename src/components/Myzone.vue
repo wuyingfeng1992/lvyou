@@ -3,17 +3,16 @@
     <Backbar title="个人中心"></Backbar>
     <div class="myzone_content">
       <!-- 头 -->
-      <div class="myzone_info">
+      <div class="myzone_info" v-if="getUserInfo">
         <div class="pic">
-          <div class="image-wrap">
-            <div class="huangguan"></div>
-            <img src="../images/xqy.jpg" alt="">
+          <div class="image-wrap" :userId="getUserInfo.id">
+            <div class="huangguan" v-if="getUserInfo.is_vip"></div>
+            <img :src="'/api'+getUserInfo.avatar" alt="">
           </div>
-
         </div>
 
         <div class="myzone_uid">
-          {{ uname }}
+          {{ getUserInfo.username }}
         </div>
       </div>
     </div>
@@ -50,6 +49,8 @@
       <div class="white-bg">
       </div>
     </div>
+    <!-- 撑开Fixednav挡住的位置 -->
+    <div class="space"></div>
     <Fixednav></Fixednav>
     <Fixedkefu></Fixedkefu>
   </div>
@@ -59,29 +60,26 @@
   import Fixedkefu from './small_components/Fixed_kefu';
   import Backbar from './small_components/Back_bar';
   import Fixednav from './small_components/Fixed_nav';
+  import {mapGetters,mapActions} from 'vuex';
 
   export default {
     name: 'myzone',
     data() {
       return {
-        uname: ''
       };
     },
     mounted() {
-      /* if (!this.isLogin) {
-         this.$router.replace('/login');
-       } else {*/
-      this.uname = this.$store.getters.getuname;
-      // 设置当前标记为我的
-     // this.$store.dispatch('setWhichpage', 'myzone');
-      // }
+      this.getUserInfoEvt();
     },
     computed: {
-      isLogin() {
-        return this.$store.getters.getLogin;
-      }
+      ...mapGetters([
+        'getUserInfo',
+      ])
     },
-    methods: {},
+    methods: {
+      ...mapActions(['getUserInfoEvt']),
+
+    },
     components: {
       Fixednav,
       Fixedkefu,

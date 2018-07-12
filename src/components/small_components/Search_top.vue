@@ -1,13 +1,13 @@
 <template>
-  <div v-if="showMe">
+  <div>
     <div class="re_search">
       <span class="re_search-icon" @click="back_one"></span>
       <div class="search_wrap">
         <span class="search_method_icon"></span>
-        <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字"
-               @keydown.enter="search_method" @click="search_enter">
+        <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字" @keyup="searchClear" @onreset="searchClear"
+               @keydown.enter="search_enter($event,search_text)" @click="search_method($event,search_text)">
       </div>
-      <div class="search_tip" @click="search_method">搜索</div>
+      <div class="search_tip" @click="search_enter($event,search_text)">搜索</div>
     </div>
 
   </div>
@@ -17,52 +17,52 @@
   import {mapGetters} from 'vuex';
   export default {
     name: 'search',
+
     data() {
       return {
-        showMe: false,
-        search_text: '', // 搜索框内容
-        search_res: [] // 搜索结果
+        search_text:'',
       };
     },
+    //props:['search_text'],
     mounted() {
-      this.$store.dispatch('setLoading', true);
-      // 模拟加载
-     /* var time = Math.floor(Math.random() * 2000);
-      console.log('模拟加载用时' + time);*/
-      this.$store.dispatch('setLoading', false);
-      this.showMe = true;
       if(this.$route.path!='/index'&&this.$route.path!='/category') {
         this.search_method();
       }
     },
     computed: {
-      ...mapGetters([
-        'getProductCategory' // 商家简略信息
-      ])
+
     },
     methods: {
-      search_method(e) {
-        if(this.$route.path!='search') {
+      search_method(e,searchText) {
+        if(this.$route.path.indexOf('/search/')==-1) {
           this.toSearchPage(e)
           return;
+        }else{
+          var _this=this;
+          setTimeout(function () {
+            //debugger
+            console.log(_this.search_text)
+            if(_this.search_text===''){
+              //debugger
+              _this.$emit('searchEvent',null)
+            }
+          },300)
         }
-       /* this.search_res = [];
-        var mainWord = this.$route.params.keyword;
-        if (this.search_text !== '' && this.search_text !== this.$route.params.keyword) {
-          mainWord = this.search_text;
-        }
-        this.search_text = mainWord;
-        for (var x in this.getProductCategory) {
-          if (this.getProductCategory[x].shop_name.includes(mainWord)) {
-            this.search_res.push(this.getProductCategory[x]);
-          }
-        }*/
       },
-      search_enter(e) {
-        if(this.$route.path!='search') {
+      search_enter(e,searchText) {
+
+        if(this.$route.path.indexOf('/search/')==-1) {
           this.toSearchPage(e)
           return;
         }
+        this.$emit('searchEvent',searchText)
+      },
+      searchClear(e) {
+        setTimeout(function () {
+          if(this.search_text===''){
+            this.$emit('searchEvent',null)
+          }
+        },100)
 
       },
       toSearchPage: function (e) {

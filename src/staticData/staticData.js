@@ -4,22 +4,22 @@ export var productCategory=[
     'name': '景区门票',
     'description': '景区门票',
     'subname': 'tourism entrance ticket',
-    'id': 's10001',
-    'path': '/s10001',
+    'id': 'tickets',
+    'path': '/category/tickets',
     'imgSrc':'lvyou1'
   },{
     'name': '酒店住宿',
     'description': '酒店住宿',
     'subname': 'Hotel accommodation',
-    'id': 's10002',
-    'path': '/s10002',
+    'id': 'hotel',
+    'path': '/category/hotel',
     'imgSrc':'lvyou2'
   },{
     'name': '越南游',
     'description': '越南游',
     'subname': 'Vietnam tourism',
-    'id': 's10003',
-    'path': '/s10003',
+    'id': 'vietnam',
+    'path': '/category/vietnam',
     'imgSrc':'lvyou3'
   }
 ]

@@ -17,6 +17,7 @@
     position: fixed;
     right: 0.5rem;
     bottom: 1.8rem;
+    z-index: 2000;
     a{
       width: .9rem;
       height: .9rem;

@@ -1,6 +1,6 @@
 <template>
   <!-- 列表单个商家 -->
-  <router-link to="/category">
+  <router-link :to="a.path">
     <section class="one_business clear">
       <div class="business_img">
         <!--在静态服务器的资源直接用 :src="a.imgSrc"-->

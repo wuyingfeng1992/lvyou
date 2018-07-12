@@ -4,5 +4,35 @@ export default {
   getProductCategory: (state) => state.productCategory,
   getHomeBannerInfo: (state) => state.homeBannerInfo,
   getProductCategoryType: (state) => state.productCategoryType,
-  getCurrentCategoryType: (state) => state.currentCategoryType,
+  getProductCategoryTypeList: (state) => state.productCategoryTypeList,
+  getProductList: (state) => state.productList,
+  getProductDetail: (state) => state.productDetail.goods,
+  getFeatureProduct: (state) => state.featureProduct,
+  getSearchInfo: (state) => state.searchInfo,
+  getSearchRecommandInfo: (state) => state.searchRecommandInfo,
+  getContactUser: (state) => state.contactUser,
+  getAllOrder: (state) => state.allOrder,
+  getNotpayOrder: (state) => state.notPayOrder,
+  getRefundOrder: (state) => state.refundOrder,
+  getCustomService: (state) => state.customService,
+  getRefundOrderInfo: (state) => state.refundOrderInfo,
+  getCustomServiceInfo: (state) => state.customServiceInfo,
+  getCurrentContactUser: (state) => {
+    let currentContactUser=window.localStorage.getItem('currentContactUser');
+    if(currentContactUser){
+      return JSON.parse(currentContactUser)
+    }else{
+      return {}
+    }
+  },
+  getCurrentCurrentProductInfo: (state) => {
+    debugger
+    let currentProductInfo=window.localStorage.getItem('currentProductInfo');
+    if(currentProductInfo){
+      return JSON.parse(currentProductInfo)
+    }else{
+      return {}
+    }
+  },
+  //getCurrentCategoryType: (state) => state.currentCategoryType,
 };

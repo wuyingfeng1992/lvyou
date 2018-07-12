@@ -4,29 +4,30 @@
       <router-link to="/associate/insert" class="button" slot="button">添加</router-link>
     </Backbar>
     <div class="top-space"></div>
-    <div class="list-associates">
-      <div class="some_bar">
-        <router-link to="/associate/id001">
-          <span class="v-md">黎明</span>
-          <span class="v-mc">18533264595</span>
+    <div class="list-associates" v-if="getContactUser">
+      <div class="some_bar" v-for="item in getContactUser.tusers">
+        <router-link :to="'/associate/'+item.tuid">
+          <span class="v-md">{{item.name}}</span>
+          <span class="v-mc">{{item.phone}}</span>
           <!--<span class="v-all">查看全部订单></span>-->
         </router-link>
 
       </div>
-      <div class="some_bar">
+      <!--<div class="some_bar">
         <router-link to="/associate/id002">
           <span class="v-md">黎明2</span>
           <span class="v-mc">18533264595</span>
-          <!--<span class="v-all">查看全部订单></span>-->
+          &lt;!&ndash;<span class="v-all">查看全部订单></span>&ndash;&gt;
         </router-link>
 
-      </div>
+      </div>-->
     </div>
     <Fixedkefu></Fixedkefu>
   </div>
 </template>
 
 <script>
+  import {mapGetters,mapActions} from 'vuex';
   import Backbar from './small_components/Back_bar';
   import Fixedkefu from './small_components/Fixed_kefu';
   export default {
@@ -34,7 +35,19 @@
     components: {
       Backbar,
       Fixedkefu,
-    }
+    },
+    mounted() {
+      this.getContactUserEvt();
+    },
+    computed: {
+      ...mapGetters([
+        'getContactUser',
+      ])
+    },
+    methods: {
+      ...mapActions(['getContactUserEvt']),
+
+    },
   }
 </script>
 

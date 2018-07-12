@@ -2,7 +2,7 @@
   <div class="product-box-online refund-box">
     <Backbar title="申请退款"></Backbar>
     <div class="top-space"></div>
-    <div class="product-address">
+    <div class="product-address" v-if="getRefundOrderInfo">
       <div class="product-address-item desc">
         <div class="product-desc">德天跨国瀑布景区门票</div>
       </div>
@@ -29,7 +29,7 @@
           退款金额
         </div>
         <div class="product-right">
-          <el-input v-model="money" placeholder="请输入金额"></el-input>
+          <el-input v-model="refund_price" placeholder="请输入金额"></el-input>
         </div>
       </div>
       <div class="product-address-item orderItem textarea">
@@ -41,7 +41,7 @@
             type="textarea"
             :rows="5"
             placeholder="请输入内容"
-            v-model="textarea">
+            v-model="reason">
           </el-input>
         </div>
       </div>
@@ -57,23 +57,65 @@
   import Fixedkefu from './small_components/Fixed_kefu';
   import FixedButton from './small_components/Fixed_button';
   import Backbar from './small_components/Back_bar';
-
-
+  import {mapGetters,mapActions} from 'vuex';
+  import {refundOrder} from '../axioser/request'
   export default {
     name: 'product',
     data() {
       return {
-        textarea:'',
-        money:'',
+        reason:'',
+        refund_price:'',
       };
     },
     mounted() {
-
+      var id=this.$route.params.id;
+      this.getRefundOrderInfoEvt(id);
     },
-    computed: {},
+    computed: {
+      ...mapGetters([
+        'getRefundOrderInfo',
+        //'getProductCategory'
+      ])
+    },
     methods: {
+    ...mapActions(['getRefundOrderInfoEvt']),
       submitForm() {
-        console.log('提交订单,submitForm')
+        if (this.reason=='' ) {
+          this.$message({
+            type: 'info',
+            message: '请输入退款理由'
+          });
+          return
+        }
+        if (this.refund_price=='' ) {
+          this.$message({
+            type: 'info',
+            message: '请输入退款金额'
+          });
+          return
+        }
+        debugger
+        var id=this.$route.params.id;
+        var params = {
+          order_id: id,
+          refund_price: this.refund_price,
+          reason: this.reason,
+        }
+        console.log(JSON.stringify(params))
+        refundOrder(params)
+          .then(({data}) => {
+            if (data.code === 1) {
+              this.$message({
+                type: 'success',
+                message: '新增成功'
+              });
+            } else {
+              this.$message({
+                type: 'info',
+                message: data.msg || '新增失败'
+              });
+            }
+          })
 
       },
       handleChange(value) {

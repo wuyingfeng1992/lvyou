@@ -1,5 +1,40 @@
 <template>
   <div class="order_box">
+    <router-link :to="'/product/'+data.id" class="order_one " :class="colum">
+      <div class="order_img">
+        <img :src="'api/'+data.image" alt="">
+      </div>
+      <div class="order_info ">
+        <header class="order_info_t">
+          <div class="order_title">
+            {{data.title}}
+          </div>
+        </header>
+        <div class="order_info_s" v-if="!colum">
+          <li class="order_info_s_item">
+            <span class="start">★</span>
+            <span class="text">【精选酒店】</span>
+            <span class="desc">全程升级入住四颗星酒店；</span>
+          </li>
+          <li class="order_info_s_item">
+            <span class="start">★</span>
+            <span class="text">【优良资质】</span>
+            <span class="desc">保证全程无购物；</span>
+          </li>
+          <li class="order_info_s_item">
+            <span class="start">★</span>
+            <span class="text">【贴心赠送】</span>
+            <span class="desc">价值50元旅游意外险；</span>
+          </li>
+        </div>
+        <footer class="order_info_b">
+          <span class="order_price">￥{{data.price}}</span>
+          <span class="order_price_text">起/人</span>
+        </footer>
+      </div>
+    </router-link>
+  </div>
+<!--  <div class="order_box">
     <router-link to="/product/s0001" class="order_one " :class="colum">
       <div class="order_img">
         <img src="../../images/dingdan.jpg" alt="">
@@ -34,13 +69,13 @@
         </footer>
       </div>
     </router-link>
-  </div>
+  </div>-->
 </template>
 
 <script>
     export default {
         name: "one_product",
-      props:['colum']
+      props:['colum','data']
     }
 </script>
 

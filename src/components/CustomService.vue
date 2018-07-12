@@ -24,23 +24,36 @@
 
     <div class="chatting-input">
       <textarea ref="textarea" v-model.trim="inputContent" placeholder="左上角还有智能机器人哦"></textarea>
-      <div class="emoji">
+     <!-- <div class="emoji">
         <i class="icon-emoji smile"></i>
       </div>
       <div class="emoji">
         <i class="icon-emoji add"></i>
-      </div>
-      <button>发送</button>
+      </div>-->
+      <button style="margin-left: 0.2rem;">发送</button>
     </div>
   </div>
 </template>
 <script>
   import Backbar from './small_components/Back_bar';
-
+  import {mapGetters, mapActions} from 'vuex'
+  import {setCustomServiceInfo} from '../axioser/request'
   export default {
     name: "customService",
     components: {
       Backbar,
+    },
+    mounted() {
+      this.getCustomServiceInfoEvt();
+    },
+    computed: {
+      ...mapGetters([
+        'getCustomServiceInfo',
+      ])
+    },
+    methods: {
+      ...mapActions(['getCustomServiceInfoEvt']),
+
     },
     data() {
       return {

@@ -47,7 +47,7 @@ export default {
   right:0;
   z-index: 999;
   border: 1px solid #dcdcdc;
-  z-index: 3000;
+  z-index: 1900;
   display: flex;
   .button{
     font-size: 0.36rem;

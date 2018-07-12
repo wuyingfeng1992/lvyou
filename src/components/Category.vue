@@ -7,20 +7,28 @@
     <div class="sub_banner">
       <img src="../images/subBanner.jpg">
     </div>
-    <el-tabs class="ban_tab_sel" v-model="currentCategoryType" type="card" @tab-click="handleClick">
+    <el-tabs class="ban_tab_sel" v-model="getCurrentCategoryType"  type="card" @tab-click="handleClick">
       <el-tab-pane v-for="item in getProductCategoryType.rows" class="ban_tab_sel_item" :label="item.name" :name="item.type" >
-        <div class="tab_wrap" slot="label" @click="multilShow">
+        <div class="tab_wrap" slot="label" @click="multilShow" :b="item.type">
           <span class="icon address"></span>
           <span class="text">{{item.name}}</span>
         </div>
-        <div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">
+        <div class="el-tab-pane-con-item"
+             :a="JSON.stringify(getProductCategoryTypeList.rows)"
+             v-for="item in getProductCategoryTypeList.rows"
+             :category_id="item.category_id"
+             v-if="!showItemListFlag&&getProductCategoryTypeList"
+             @click="showItemList(item.category_id)" style="width: calc((100% - 10px)/3);">
+          {{item.nickname}}
+        </div>
+        <!--<div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">
           越南
         </div>
         <div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList"  style="width: calc((100% - 10px)/3);">
           南宁
-        </div>
-        <div class="list" v-if="showItemListFlag">
-          <One_product colum="colum"></One_product>
+        </div>-->
+        <div class="product_list" v-if="showItemListFlag">
+          <One_product v-for="item in getProductList.rows" :data="item" colum="colum"></One_product>
         </div>
       </el-tab-pane>
       <!--<el-tab-pane class="ban_tab_sel_item" label="目的地" name="first" >-->
@@ -71,28 +79,48 @@
         search_word: '', // 搜索框搜索词
         isLoadingMore: false,
         showItemListFlag: false,
-       // currentCategoryType: '',
+        currentCategoryType: '',
       };
     },
     mounted() {
       this.getProductCategoryTypeEvt();
-
     },
+   /* created: function(){
+        var key=this.$route.params.key;
+        if(key){
+          this.currentCategoryType=key;
+        }else{
+          this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
+        }
+    },*/
     computed: {
       ...mapGetters([
         'getProductCategoryType',
-        'getCurrentCategoryType'
+        'getProductCategoryTypeList',
+        'getProductList',
       ]),
       ...mapState([
         'productCategoryType',
-        'currentCategoryType',
       ]),
-     /* getCurrentCategoryType(){
-        console.log(this.productCategoryType)
-        debugger
-        this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
-        return this.currentCategoryType
-      }*/
+
+      getCurrentCategoryType:{
+
+        get(){
+          var key=this.$route.params.key;
+          if(key){
+            this.currentCategoryType=key;
+          }else{
+            this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
+          }
+          return this.currentCategoryType
+        },
+        set(val){
+          if(val&&val!=='0'){
+            this.currentCategoryType = val;
+            this.getProductCategoryTypeListEvt(val.toString());
+          }
+        }
+      }
     },
     methods: {
       handleClick(tab, event) {
@@ -101,13 +129,17 @@
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
       },
-      showItemList() {
+      showItemList(categoryId) {
         this.showItemListFlag=!this.showItemListFlag;
+        this.getProductListEvt({categoryId,offset:0})
       },
       multilShow() {
         this.showItemListFlag=false;
       },
-      ...mapActions(['getProductCategoryTypeEvt']),
+      ...mapActions(['getProductCategoryTypeEvt'
+        ,'getProductCategoryTypeListEvt'
+        ,'getProductListEvt'
+      ]),
       // 加载更多
       loadMore() {
         // 大于十五条不加载
@@ -145,6 +177,9 @@
 <style lang="less">
   body {
     background: #fff !important;
+    .product_list{
+      width: 100%;
+    }
   }
 </style>
 <style lang="less">
