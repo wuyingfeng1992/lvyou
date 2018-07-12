@@ -18,9 +18,10 @@ export default {
   currentProductInfo:{},
   allOrder:{},
   refundOrder:{},
-  notPayOder:{},
+  notPayOrder:{},
   customService:{},
   refundOrderInfo:{},
   customServiceInfo:{},
+  customServiceHistory:{},
   //currentCategoryType:'',
 };

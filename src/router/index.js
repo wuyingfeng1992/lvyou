@@ -24,6 +24,11 @@ export default new Router({
       component: Category
     },
     {
+      path: '/category/:id',
+      name: 'Category',
+      component:Category
+    },
+    {
       path: '/myzone',
       name: 'myzone',
       component: Myzone

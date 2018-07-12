@@ -17,6 +17,8 @@ export default {
   getCustomService: (state) => state.customService,
   getRefundOrderInfo: (state) => state.refundOrderInfo,
   getCustomServiceInfo: (state) => state.customServiceInfo,
+  getCustomServiceHistory: (state) => state.customServiceHistory,
+  getUserInfo: (state) => state.userInfo,
   getCurrentContactUser: (state) => {
     let currentContactUser=window.localStorage.getItem('currentContactUser');
     if(currentContactUser){
@@ -26,7 +28,7 @@ export default {
     }
   },
   getCurrentCurrentProductInfo: (state) => {
-    debugger
+
     let currentProductInfo=window.localStorage.getItem('currentProductInfo');
     if(currentProductInfo){
       return JSON.parse(currentProductInfo)

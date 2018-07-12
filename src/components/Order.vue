@@ -111,6 +111,7 @@
       }
       font-size: 0.30rem;
       color: #ff4000;
+      margin-left: auto;
     }
     .el-tab-pane-con {
 

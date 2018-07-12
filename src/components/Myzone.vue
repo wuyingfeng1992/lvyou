@@ -7,7 +7,7 @@
         <div class="pic">
           <div class="image-wrap" :userId="getUserInfo.id">
             <div class="huangguan" v-if="getUserInfo.is_vip"></div>
-            <img :src="'/api'+getUserInfo.avatar" alt="">
+            <img :src="'/proxyapi'+getUserInfo.avatar" alt="">
           </div>
         </div>
 

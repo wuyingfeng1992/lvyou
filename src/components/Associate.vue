@@ -177,6 +177,8 @@
               //新增
               insertContactUser(data)
                 .then(({data}) => {
+                  console.log('add',data)
+                  debugger
                   if (data.code===1) {
                     this.$message({
                       type: 'success',

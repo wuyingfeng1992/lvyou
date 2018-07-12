@@ -106,9 +106,10 @@
       getCurrentCategoryType:{
 
         get(){
-          var key=this.$route.params.key;
+          var key=this.$route.params.id;
           if(key){
             this.currentCategoryType=key;
+            this.getProductCategoryTypeListEvt(key);
           }else{
             this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
           }

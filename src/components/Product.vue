@@ -5,7 +5,7 @@
         <span class="back-icon" @click="back_one"></span>
       </div>
       <div class="product-banner">
-        <img :src="'/api'+getProductDetail.image" alt="">
+        <img :src="'/proxyapi'+getProductDetail.image" alt="">
       </div>
       <div class="product-banner-bottom">
         <span class="product-desc">{{getProductDetail.title}}</span>
@@ -28,9 +28,9 @@
         <div class="name">
           出发地点
         </div>
-        <div class="list">
+        <div class="list" :a="JSON.stringify(getProductDetail.origin)">
           <div class="list-item" v-for="(inedx,item) in getProductDetail.origin" :originId="item">
-            {{JSON.stringify(item)}}
+            {{inedx}}
           </div>
         </div>
       </div>
@@ -143,7 +143,6 @@
         day = date.getFullYear() + '-' + ((date.getMonth() + 1)<10? '0'+(date.getMonth() + 1):date.getMonth() + 1)+ '-' + date.getDate()
         var dayData=this.getDataByDay(day);
         data.dayDate=dayData;
-        debugger
         data.currentDay=day;
         this.$store.commit("SET_CURRENT_PRODUCT_INFO", data);
         this.$router.push('/onlineOrder/' + this.id);

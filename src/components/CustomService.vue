@@ -3,34 +3,27 @@
     <Backbar title="光之蓝客服"></Backbar>
     <div class="top-space"></div>
     <!--@click.stop.prevent="isShowEmoji=false" ref="chattingContent"-->
-    <div class="chatting-content">
+    <div class="chatting-content" v-if="getCustomServiceHistory">
 
-      <div class="chatting-content-item no-reverse">
+      <div class="chatting-content-item " v-for="item in getCustomServiceHistory.msgs"
+           :class="{'no-reverse':!item.is_my,'reverse':item.is_my}">
         <div class="chatting-content-avatar"></div>
         <div class="chatting-content-text">
           <div class="arrow"></div>
-          你你你你你你你你你你你 家就急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急
+          {{item.msg}}
         </div>
       </div>
-      <div class="chatting-content-item reverse">
-        <div class="chatting-content-avatar"></div>
-        <div class="chatting-content-text">
-          <div class="arrow"></div>
-          你你你你你你你你你你你 家就急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急急
-        </div>
-      </div>
-
     </div>
-
+    <div class="fiexH"></div>
     <div class="chatting-input">
-      <textarea ref="textarea" v-model.trim="inputContent" placeholder="左上角还有智能机器人哦"></textarea>
-     <!-- <div class="emoji">
-        <i class="icon-emoji smile"></i>
-      </div>
-      <div class="emoji">
-        <i class="icon-emoji add"></i>
-      </div>-->
-      <button style="margin-left: 0.2rem;">发送</button>
+      <textarea ref="textarea" v-model.trim="inputContent" placeholder="请输入咨询内容"></textarea>
+      <!-- <div class="emoji">
+         <i class="icon-emoji smile"></i>
+       </div>
+       <div class="emoji">
+         <i class="icon-emoji add"></i>
+       </div>-->
+      <button style="margin-left: 0.2rem;" @click="sendMessage">发送</button>
     </div>
   </div>
 </template>
@@ -38,21 +31,55 @@
   import Backbar from './small_components/Back_bar';
   import {mapGetters, mapActions} from 'vuex'
   import {setCustomServiceInfo} from '../axioser/request'
+var timer;
   export default {
     name: "customService",
     components: {
       Backbar,
     },
     mounted() {
-      this.getCustomServiceInfoEvt();
+      //this.getCustomServiceInfoEvt();
+      this.getCustomServiceHistoryEvt();
+      var _this=this;
+      timer=setInterval(function () {
+        _this.getCustomServiceHistoryEvt();
+      //  _this.getCustomServiceInfoEvt();
+      },5000)
+    },
+    destroyed(){
+      clearInterval(timer);
     },
     computed: {
       ...mapGetters([
+        'getCustomServiceHistory',
         'getCustomServiceInfo',
       ])
     },
     methods: {
-      ...mapActions(['getCustomServiceInfoEvt']),
+      ...mapActions([
+        //'getCustomServiceInfoEvt',
+        'getCustomServiceHistoryEvt',
+        'getCustomServiceInfoEvt',
+      ]),
+      sendMessage() {
+        if (this.inputContent.trim() !== '') {
+          var params={msg:this.inputContent.trim()}
+          var _this=this;
+            setCustomServiceInfo(params)
+            .then(({data}) => {
+              console.log(data);
+              if (data.code === 1) {
+                _this.inputContent='';
+                this.getCustomServiceHistoryEvt();
+              } else {
+                this.$message({
+                  type: 'info',
+                  message: data.msg || '提交失败'
+                });
+              }
+            })
+        }
+      }
 
     },
     data() {
@@ -74,8 +101,7 @@
         isShowEmoji: false,
         isRedAI: false,
       }
-    },
-    methods: {}
+    }
   }
 </script>
 
@@ -85,7 +111,9 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-
+    .fiexH{
+      height: 1.8rem;
+    }
     .chatting-content-item {
       font-size: 0.36rem;
       display: flex;
@@ -96,7 +124,7 @@
         .chatting-content-avatar {
           margin-left: 0.5rem;
         }
-        .arrow{
+        .arrow {
           position: absolute;
           right: -0.6rem;
           top: 50%;
@@ -125,8 +153,8 @@
         flex: none;
 
       }
-      &.no-reverse{
-        .arrow{
+      &.no-reverse {
+        .arrow {
           position: absolute;
           left: -0.6rem;
           top: 50%;
@@ -182,15 +210,15 @@
           background-size: contain;
           background-position: center;
           background-size: 100% auto;
-          &.first-child{
+          &.first-child {
             margin-right: 0.2rem;
           }
-          &.add{
+          &.add {
 
-            background-image: url('../images/icon/ic-add.png') ;
+            background-image: url('../images/icon/ic-add.png');
           }
-          &.smile{
-            background-image: url('../images/icon/smile.png') ;
+          &.smile {
+            background-image: url('../images/icon/smile.png');
           }
 
         }

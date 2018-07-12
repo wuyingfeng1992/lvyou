@@ -141,6 +141,7 @@
       .order_info_t {
         text-align: left;
         .order_title {
+          padding-bottom: 0.3rem;
           text-align: left;
           font-weight: bold;
           font-size: 0.39rem;

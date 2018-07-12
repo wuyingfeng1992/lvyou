@@ -10,7 +10,7 @@
     </div>
     <div class="order_one">
       <router-link class="order_img" :to="'product/'+data.order_id">
-        <img :src="'/api'+data.goods_image" :alt="data.goods_name">
+        <img :src="'/proxyapi'+data.goods_image" :alt="data.goods_name">
       </router-link>
       <div class="order_info">
         <header class="order_info_t">

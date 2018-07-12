@@ -25,9 +25,9 @@
     },
     //props:['search_text'],
     mounted() {
-      if(this.$route.path!='/index'&&this.$route.path!='/category') {
+      /*if(this.$route.path!='/index'||this.$route.path.indexOf('/category')!==-1) {
         this.search_method();
-      }
+      }*/
     },
     computed: {
 

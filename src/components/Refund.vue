@@ -2,9 +2,9 @@
   <div class="product-box-online refund-box">
     <Backbar title="申请退款"></Backbar>
     <div class="top-space"></div>
-    <div class="product-address" v-if="getRefundOrderInfo">
+    <div class="product-address" v-if="getRefundOrderInfo.refund">
       <div class="product-address-item desc">
-        <div class="product-desc">德天跨国瀑布景区门票</div>
+        <div class="product-desc">{{getRefundOrderInfo.refund.goods_name}}</div>
       </div>
 
       <div class="product-address-item orderItem">
@@ -12,7 +12,7 @@
           订单编号
         </div>
         <div class="product-right">
-          12345678
+          {{getRefundOrderInfo.refund.order_no}}
         </div>
       </div>
 
@@ -21,7 +21,7 @@
           订单金额
         </div>
         <div class="product-right red">
-          ￥123
+          ￥{{getRefundOrderInfo.refund.total_price}}
         </div>
       </div>
       <div class="product-address-item orderItem">
@@ -68,7 +68,7 @@
       };
     },
     mounted() {
-      var id=this.$route.params.id;
+      var id=parseInt(this.$route.params.id);
       this.getRefundOrderInfoEvt(id);
     },
     computed: {
@@ -97,22 +97,23 @@
         debugger
         var id=this.$route.params.id;
         var params = {
-          order_id: id,
-          refund_price: this.refund_price,
+          order_id: parseInt(id),
+          refund_price:parseFloat( this.refund_price),
           reason: this.reason,
         }
         console.log(JSON.stringify(params))
         refundOrder(params)
           .then(({data}) => {
             if (data.code === 1) {
-              this.$message({
+              /*this.$message({
                 type: 'success',
-                message: '新增成功'
-              });
+                message: '提交成功'
+              });*/
+              window.location.href='/product/'+id;
             } else {
               this.$message({
                 type: 'info',
-                message: data.msg || '新增失败'
+                message: data.msg || '提交失败'
               });
             }
           })

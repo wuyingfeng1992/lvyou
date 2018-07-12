@@ -1,4 +1,6 @@
-import {getHomeBannerInfoEvt,getProductCategoryType,
+import {
+  getHomeBannerInfoEvt,
+  getProductCategoryType,
   getProductCategoryTypeList,
   getProductDetail,
   getFeatureProduct,
@@ -12,7 +14,9 @@ import {getHomeBannerInfoEvt,getProductCategoryType,
   getCustomService,
   getRefundOrderInfo,
   getCustomServiceInfo,
-  getProductList} from "../axioser/request";
+  getCustomServiceHistory,
+  getProductList
+} from "../axioser/request";
 export default {
   // 改变是否正在加载状态
   setLoading ({commit}, platform) {
@@ -130,6 +134,13 @@ export default {
     console.log(res.data)
     var data = res.data
     commit('GET_CUSTOM_SERVICE_INFO', data)
+  },
+  //获取客服历史消息消息
+  async getCustomServiceHistoryEvt({commit, state},preload) {
+    let res = await getCustomServiceHistory(preload)
+    console.log(res.data)
+    var data = res.data
+    commit('GET_CUSTOM_SERVICE_HISTORY', data)
   }
 };
 

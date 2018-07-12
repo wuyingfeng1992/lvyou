@@ -63,15 +63,19 @@ export const getRefundOrder=(params)=>{
 
 export const getCustomService=(params)=>{
   var offset=''
-  return axios.get(`/mall/msg/confirm`)
+  return axios.get(`/api/msg/confirm`)
+}
+export const getCustomServiceHistory=(params)=>{
+  var offset=''
+  return axios.get(`/api/msg/history`)
 }
 export const getCustomServiceInfo=(params)=>{
   var offset=''
-  return axios.get(`/mall/msg/accept`)
+  return axios.get(`/api/msg/accept`)
 }
 export const setCustomServiceInfo=(params)=>{
   var offset=''
-  return axios.post(`/mall/msg/send`,params)
+  return axios.post(`/api/msg/send`,params)
 }
 
 export const getRefundOrderInfo=(params)=>{
@@ -81,4 +85,7 @@ export const getRefundOrderInfo=(params)=>{
 
 export const refundOrder=(params)=>{
   return axios.post(`/mall/refund/apply/order_id/${params.order_id}`,params)
+}
+export const deleteOrder=(params)=>{
+  return axios.post(`/mall/order/del`,params)
 }

@@ -37,7 +37,7 @@ export default {
     state.allOrder = preload
   },
   GET_NOTPAY_ORDER(state, preload) {
-    state.notPayOder = preload
+    state.notPayOrder = preload
   },
   GET_REFUND_ORDER(state, preload) {
     state.refundOrder = preload
@@ -55,6 +55,9 @@ export default {
   },
   GET_REFUND_ORDER_INFO(state, preload) {
     state.refundOrderInfo = preload
+  },
+  GET_CUSTOM_SERVICE_HISTORY(state, preload) {
+    state.customServiceHistory = preload
   },
  /* CURRENT_CATEGORY_TYPE(state, preload) {
     state.currentCategoryType = preload

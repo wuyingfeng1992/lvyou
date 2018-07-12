@@ -158,7 +158,6 @@
       };
     },
     created: function () {
-      debugger
       var data = this.$store.getters.getCurrentCurrentProductInfo;
       var id = this.$route.params.id;
       this.data = data;
@@ -235,7 +234,6 @@
           });
           return
         }
-        debugger
 
         var price_id = this.data.dayDate.id;
         if (!price_id) {
@@ -248,7 +246,7 @@
 
         var params = {
           goods_id: this.data.id,
-          addr_id: this.addSel,
+          addr: this.addSel,
           tusers: tusers,
           policys: this.num1 / 10,
           price_id: price_id,
@@ -258,15 +256,17 @@
         console.log(JSON.stringify(params))
         submitShopBuy(params)
           .then(({data}) => {
+            console.log(data,'dd')
             if (data.code === 1) {
-              this.$message({
+              window.location.href=data.url
+              /*this.$message({
                 type: 'success',
-                message: '新增成功'
-              });
+                message: '订单提交成功'
+              });*/
             } else {
               this.$message({
                 type: 'info',
-                message: data.msg || '新增失败'
+                message: data.msg || '订单提交失败'
               });
             }
           })

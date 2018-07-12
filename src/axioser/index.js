@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 //axios.defaults.baseURL = 'http://www.gxgzjt.com'
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = '/proxyapi'
 
 //多页面公用不了所以这里处理登录逻辑
 var instance =axios.create({
