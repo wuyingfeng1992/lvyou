@@ -21,7 +21,7 @@ export const getProductDetail=(params)=>{
   return axios.get(`/mall/product/details/goods_id/${goods_id}`)
 }
 export const getFeatureProduct=(params)=>{
-  var offset='';
+  var offset=params.offet;
   return axios.get(`/mall/product/feature/offset/${offset}`)
 }
 export const getSearchInfo=(params)=>{
@@ -77,12 +77,10 @@ export const setCustomServiceInfo=(params)=>{
   var offset=''
   return axios.post(`/api/msg/send`,params)
 }
-
 export const getRefundOrderInfo=(params)=>{
   var refund_id=params
   return axios.get(`/mall/refund/details/refund_id/${refund_id}`)
 }
-
 export const refundOrder=(params)=>{
   return axios.post(`/mall/refund/apply/order_id/${params.order_id}`,params)
 }

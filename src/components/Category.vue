@@ -50,7 +50,9 @@
   import One_product from './small_components/One_product';
   import {mapGetters,mapActions,mapState} from 'vuex';
   import {proxyapi} from '../staticData/proxyapi';
+  import {getProductList} from '../axioser/request'
   var first=true;
+  var sw;
   export default {
     name: 'homepage',
     data() {
@@ -65,6 +67,8 @@
     },
     mounted() {
       this.getProductCategoryTypeEvt();
+
+
     },
     /* created: function(){
          var key=this.$route.params.key;
@@ -85,7 +89,6 @@
       ]),
 
       getCurrentCategoryType:{
-
         get(){
           var key=this.$route.params.id;
           if(key){
