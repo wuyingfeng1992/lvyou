@@ -21,7 +21,8 @@ export const getProductDetail=(params)=>{
   return axios.get(`/mall/product/details/goods_id/${goods_id}`)
 }
 export const getFeatureProduct=(params)=>{
-  var offset=params.offet;
+  var offset=0;
+  //var offset=params.offet;
   return axios.get(`/mall/product/feature/offset/${offset}`)
 }
 export const getSearchInfo=(params)=>{
@@ -29,7 +30,6 @@ export const getSearchInfo=(params)=>{
   var key=params;
   return axios.get(`/mall/search/get/?key=${key}&offset=${offset}`)
 }
-
 export const getSearchRecommandInfo=(params)=>{
   return axios.get(`/mall/search/info`)
 }

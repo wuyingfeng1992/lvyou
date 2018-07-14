@@ -1,6 +1,6 @@
 <template>
   <div class="customService-box chatting">
-    <Backbar title="光之蓝客服"></Backbar>
+    <Backbar title="广之南客服"></Backbar>
     <div class="top-space"></div>
     <!--@click.stop.prevent="isShowEmoji=false" ref="chattingContent"-->
     <div class="chatting-content" v-if="getCustomServiceListInfo">
@@ -8,7 +8,7 @@
       <div class="chatting-content-item " v-for="item in getCustomServiceListInfo"
            :class="{'no-reverse':!item.is_my,'reverse':item.is_my}">
         <div class="chatting-content-avatar" v-if="getUserInfo"
-             :style="item.is_my?'background-image:url('+proxyapi+getUserInfo.avatar+')':''">
+             :style="item.is_my?'background-image:url('+getAvatar+')':''">
         </div>
         <div class="chatting-content-text">
           <div class="arrow"></div>
@@ -49,7 +49,7 @@
       timer = setInterval(function () {
         // _this.getCustomServiceHistoryEvt();
         _this.getCustomServiceInfoEvt();
-      }, 1000)
+      }, 5000)
     },
     destroyed() {
       clearInterval(timer);
@@ -60,7 +60,15 @@
         // 'getCustomServiceInfo',
         'getUserInfo',
         'getCustomServiceListInfo',
-      ])
+      ]),
+      getAvatar(){
+        if(!this.getUserInfo.user) return null;
+        var avatar=this.getUserInfo.user.avatar;
+        if(avatar.indexOf('http://')==-1){
+          avatar=this.proxyapi+avatar;
+        }
+        return avatar
+      }
     },
     methods: {
       ...mapActions([
@@ -75,12 +83,11 @@
           var _this = this;
           setCustomServiceInfo(params)
             .then(({data}) => {
-              console.log(data);
               if (data.code === 1) {
-                _this.inputContent = '';
                 //this.getCustomServiceHistoryEvt();
                 params.is_my=1;
-                this.$store.commit("SET_CUSTOM_SERVER_LIST_INFO", {data:[data],type:'add'});
+                _this.inputContent = '';
+                this.$store.commit("SET_CUSTOM_SERVER_LIST_INFO", {data:[params],type:'add'});
               } else {
                 this.$message({
                   type: 'info',

@@ -69,9 +69,14 @@
       };
       var validateIdcard = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入省份证号'));
-        }else{
-          callback();
+          callback(new Error('请输入身份证号'));
+        } else {
+          var reg = /^\d{15}|\d{}18$/;
+          if (!reg.test(value)) {
+            callback(new Error('请输入正确的身份证号码'));
+          } else {
+            callback();
+          }
         }
       };
       var validatePassport = (rule, value, callback) => {
@@ -165,6 +170,7 @@
                       type: 'success',
                       message: '修改成功'
                     });
+                    this.$router.push('/associates/')
                   } else {
                     this.$message({
                       type: 'info',
@@ -177,13 +183,12 @@
               //新增
               insertContactUser(data)
                 .then(({data}) => {
-                  console.log('add',data)
-                  debugger
                   if (data.code===1) {
                     this.$message({
                       type: 'success',
                       message: '新增成功'
                     });
+                    this.$router.push('/associates/')
                   } else {
                     this.$message({
                       type: 'info',

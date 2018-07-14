@@ -51,6 +51,9 @@
           <div class="list-item" @click="dialogVisible  = true">请选择出行日期</div>
         </div>
       </div>
+      <div  v-html="getProductDetail.content">
+
+      </div>
     </div>
     <el-dialog
       :visible.sync="dialogVisible"
@@ -177,6 +180,16 @@
 
 <style lang="less">
   .product-box {
+    table{
+      width: 100% !important;
+      text-align: left;
+      p,span{
+        text-align: left !important;
+        font-size: 0.29rem !important;
+        line-height: 0.52rem !important;
+      }
+
+    }
     .product-price-d {
       display: flex;
       justify-content: center;
@@ -287,8 +300,9 @@
         display: flex;
         line-height: 0.96rem;
         height: 0.96rem;
-        &:first-child {
-          border-bottom: 1px solid #dcdcdc;
+        border-bottom: 1px solid #dcdcdc;
+        &:last-child {
+          border-bottom:none;
         }
         .list {
           display: flex;

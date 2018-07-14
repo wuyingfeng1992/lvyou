@@ -66,6 +66,9 @@ export default {
     var {data,type}=preload;
     state.customServiceListInfo = state.customServiceListInfo.concat(data);
   },
+  GET_CUSTOM_SERVICE_AVTAR(state, preload) {
+    state.customerServiceAavatar =preload;
+  },
  /* CURRENT_CATEGORY_TYPE(state, preload) {
     state.currentCategoryType = preload
   },*/

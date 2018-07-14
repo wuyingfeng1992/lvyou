@@ -28,6 +28,7 @@ export default {
     console.log(res.data)
     var data = res.data
     commit('GET_HOME_BANNER_INFO', data)
+    commit('GET_CUSTOM_SERVICE_AVTAR', data.customer_service_avatar)
   },
   //获取category的数据
   async getProductCategoryTypeEvt({commit, state}) {

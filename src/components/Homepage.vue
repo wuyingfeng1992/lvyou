@@ -48,9 +48,9 @@
   import OneBusiness from './small_components/One_business';
   import Fixednav from './small_components/Fixed_nav';
   import {mapGetters,mapActions} from 'vuex';
+  import {proxyapi} from '../staticData/proxyapi';
   import Search_top from './small_components/Search_top';
   import Fixedkefu from './small_components/Fixed_kefu';
-  import {proxyapi} from '../staticData/proxyapi';
   export default {
     name: 'homepage',
     data() {
@@ -60,6 +60,7 @@
       };
     },
     mounted() {
+      if(this.getHomeBannerInfo) return;
       this.getHomeBannerInfoEvt();
     },
     computed: {

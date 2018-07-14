@@ -24,5 +24,6 @@ export default {
   customServiceInfo:{},
   customServiceHistory:{},
   customServiceListInfo:[],
+  customerServiceAavatar:null,
   //currentCategoryType:'',
 };

@@ -1,14 +1,37 @@
 <template>
   <div class="custom-service">
     <router-link to="/customService">
-      <div class="icon"></div>
+      <div class="icon" :style="'background-image:url('+getAvatar+')'"></div>
     </router-link>
   </div>
 </template>
 
 <script>
+  import {mapGetters,mapActions} from 'vuex';
+  import {proxyapi} from '../../staticData/proxyapi';
   export default {
-    name: "custom-service"
+    name: "custom-service",
+    mounted() {
+      if(this.getCustomerServiceAavatar) return;
+      this.getHomeBannerInfoEvt();
+    },
+    computed: {
+      ...mapGetters([
+        'getCustomerServiceAavatar',
+      ]),
+      getAvatar(){
+
+        if(!this.getCustomerServiceAavatar) return null;
+        var avatar=this.getCustomerServiceAavatar
+        if(avatar.indexOf('http://')==-1){
+          avatar=this.proxyapi+avatar;
+        }
+        return avatar
+      }
+    },
+    methods: {
+      ...mapActions(['getHomeBannerInfoEvt']),
+    },
   }
 </script>
 

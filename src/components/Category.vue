@@ -70,14 +70,6 @@
 
 
     },
-    /* created: function(){
-         var key=this.$route.params.key;
-         if(key){
-           this.currentCategoryType=key;
-         }else{
-           this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
-         }
-     },*/
     computed: {
       ...mapGetters([
         'getProductCategoryType',
@@ -87,13 +79,11 @@
       ...mapState([
         'productCategoryType',
       ]),
-
       getCurrentCategoryType:{
         get(){
           var key=this.$route.params.id;
           if(key){
             this.currentCategoryType=key;
-            console.log('1')
             if(first){
               first=false;
               this.getProductCategoryTypeListEvt(key);
@@ -109,7 +99,6 @@
         },
         set(val){
           if(val&&val!=='0'){
-            console.log('2')
             this.currentCategoryType = val;
             this.getProductCategoryTypeListEvt(val);
             var _this=this;
@@ -123,18 +112,12 @@
       }
     },
     methods: {
-      /*  handleClick(tab, event) {
-          console.log(tab, event);
-          console.log(categoryId)
-
-        },*/
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
       },
       showItemList(categoryId) {
         this.showItemListFlag=!this.showItemListFlag;
         this.getProductListEvt({categoryId,offset:0})
-
       },
       multilShow() {
         this.showItemListFlag=false;

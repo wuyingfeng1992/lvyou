@@ -1,5 +1,5 @@
 <template>
-  <div class="product-box-online" v-if="data" :data="JSON.stringify(data)">
+  <div class="product-box-online" v-if="data">
     <Backbar title="提交订单"></Backbar>
     <div class="top-space"></div>
     <div class="product-address">
@@ -24,7 +24,7 @@
         <div class="list">
           <div class="list-item noselect selected">
             <div class="text1" v-if="data.currentDay">
-              今天{{data.currentDay.split('-')[1]+'-'+data.currentDay.split('-')[2]}}
+              {{data.currentDay.split('-')[1]+'-'+data.currentDay.split('-')[2]}}
             </div>
             <div class="text2" v-if="data.price">￥{{data.price.adult_price}}</div>
           </div>
@@ -94,7 +94,7 @@
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
     <!-- 固定导航栏 -->
-    <FixedButton :btnText="btnText" @orderSubmit="orderSubmit"></FixedButton>
+    <FixedButton :btnText="btnText" :allmoney="allmoney" @orderSubmit="orderSubmit"></FixedButton>
     <Fixedkefu></Fixedkefu>
 
 
@@ -139,7 +139,34 @@
   import Backbar from './small_components/Back_bar';
   import {mapGetters, mapActions} from 'vuex'
   import {submitShopBuy} from '../axioser/request'
-
+  var getAge=function (identityCard) {
+    var len = (identityCard + "").length;
+    if (len == 0) {
+      return 0;
+    } else {
+      if ((len != 15) && (len != 18))//身份证号码只能为15位或18位其它不合法
+      {
+        return 0;
+      }
+    }
+    var strBirthday = "";
+    if (len == 18)//处理18位的身份证号码从号码中得到生日和性别代码
+    {
+      strBirthday = identityCard.substr(6, 4) + "/" + identityCard.substr(10, 2) + "/" + identityCard.substr(12, 2);
+    }
+    if (len == 15) {
+      strBirthday = "19" + identityCard.substr(6, 2) + "/" + identityCard.substr(8, 2) + "/" + identityCard.substr(10, 2);
+    }
+    //时间字符串里，必须是“/”
+    var birthDate = new Date(strBirthday);
+    var nowDateTime = new Date();
+    var age = nowDateTime.getFullYear() - birthDate.getFullYear();
+    //再考虑月、天的因素;.getMonth()获取的是从0开始的，这里进行比较，不需要加1
+    if (nowDateTime.getMonth() < birthDate.getMonth() || (nowDateTime.getMonth() == birthDate.getMonth() && nowDateTime.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
   export default {
     name: 'product',
     data() {
@@ -166,19 +193,20 @@
       this.getContactUserEvt();
     },
     computed: {
+
       getMaxNum() {
-        this.maxNum = 0;
+        var maxnum=0
         if (!this.getContactUser.tusers) return
         for (var i = 0; i < this.getContactUser.tusers.length; i++) {
           var item = this.getContactUser.tusers[i];
           // debugger
           if (item.check) {
-            this.maxNum++;
+            maxnum++;
           }
         }
-        var num = this.maxNum ;
-        this.num1 = num
-        return num
+        this.maxNum=maxnum ;
+        this.num1 = maxnum
+        return maxnum
       },
 
       getAddDressSel() {
@@ -187,7 +215,31 @@
       },
       ...mapGetters([
         'getContactUser',
-      ])
+      ]),
+      allmoney(){
+
+        if(!this.getContactUser.tusers) return 0;
+        var policyPrice=this.num1*this.singlePrice;
+        var allmoney=policyPrice;
+        var childAge=this.data.child_age;
+        var adult_price=this.data.price.adult_price;
+        var child_price=this.data.price.child_price;
+        for (var i = 0; i < this.getContactUser.tusers.length; i++) {
+
+          var item = this.getContactUser.tusers[i];
+          if(!item.check) continue
+          var idcard=item.idcard;
+          var age=getAge(idcard);
+          if(age<=childAge){
+            allmoney+=parseFloat(child_price)
+          }else{
+            allmoney+=parseFloat(adult_price)
+          }
+        }
+        console.log(allmoney)
+        return allmoney;
+
+      }
 
     },
     methods: {
@@ -253,7 +305,6 @@
           buyer_phone: this.buyer_phone,
           buyer_name:this.buyer_name,
         }
-        console.log(JSON.stringify(params))
         submitShopBuy(params)
           .then(({data}) => {
             console.log(data,'dd')
@@ -273,7 +324,7 @@
 
       },
       handleChange(value) {
-        console.log(value);
+        console.log(value,'不不不')
       },
       removeContactSel(id) {
         for (var i = 0; i < this.getContactUser.tusers.length; i++) {

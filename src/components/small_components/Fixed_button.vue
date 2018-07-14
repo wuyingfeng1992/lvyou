@@ -3,12 +3,12 @@
 
   <nav class="fixed_button">
 
-    <div class="fixed_button_item left" v-if="calcMoney!==false">
+    <div class="fixed_button_item left" >
       <span class="text1">在线支付:</span>
       <span class="text2">￥</span>
-      <span class="text3">1780元</span>
+      <span class="text3">{{calMoney}}元</span>
     </div>
-    <div class="fixed_button_item right" :class="calcMoney===false?'w100':''" @click="productSubmit">
+    <div class="fixed_button_item right" :class="calMoney===false?'w100':''" @click="productSubmit">
       {{btnText}}
     </div>
   </nav>
@@ -18,15 +18,30 @@
   export default {
     name: 'fixed_nav',
     data() {
-      return {};
+      return {
+        allMoney:0
+      };
     },
-    props:['btnText','calcMoney'],
+    props:['btnText','allmoney'],
+
     mounted() {
       setInterval(() => {
         // console.log(this.returnPageNow);
       }, 2000);
     },
     computed: {
+      calMoney:{
+        //return this.search_text_1;
+        get(){
+          this.allMoney=this.allmoney;
+          console.log(this.allMoney)
+          return this.allMoney;
+        },
+        set(val){
+          console.log(this.allMoney)
+          this.allMoney=val;
+        }
+      },
       returnPageNow() {
         return this.$store.getters.getwhichpage;
       }

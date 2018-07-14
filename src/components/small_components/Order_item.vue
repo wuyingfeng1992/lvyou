@@ -33,10 +33,12 @@
           申请退款
         </router-link>
       </div>
-      <div class="order_box_one_btn1" v-if="data.status_text=='未付款'">
-        <router-link :to="'order/'+data.order_id" >
-          立即付款
-        </router-link>
+      <div class="order_box_one_btn1" v-if="data.status==4">
+        <div class="order_box_one_btn1" v-if="data.status=='4'">
+          <a :href="pay(data.order_id)" >
+            立即付款
+          </a>
+        </div>
       </div>
 
       <!--<div class="order_box_one_btn" @click="removeOrder(data.order_id)">删除订单</div>-->
@@ -57,6 +59,9 @@
       methods:{
         removeOrder(id){
           console.log(id)
+        },
+        pay:function(order_id){
+          return '/mall/pay/wx/order_id/'+order_id
         }
       }
     }

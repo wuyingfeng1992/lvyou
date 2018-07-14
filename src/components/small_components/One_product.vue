@@ -10,23 +10,13 @@
             {{data.title}}
           </div>
         </header>
-       <!-- <div class="order_info_s" v-if="!colum">
+        <div class="order_info_s" v-if="!colum"  v-for="(value, key) in data.features">
           <li class="order_info_s_item">
             <span class="start">★</span>
-            <span class="text">【精选酒店】</span>
-            <span class="desc">全程升级入住四颗星酒店；</span>
+            <span class="text">【{{ key }}】</span>
+            <span class="desc">{{ value }}</span>
           </li>
-          <li class="order_info_s_item">
-            <span class="start">★</span>
-            <span class="text">【优良资质】</span>
-            <span class="desc">保证全程无购物；</span>
-          </li>
-          <li class="order_info_s_item">
-            <span class="start">★</span>
-            <span class="text">【贴心赠送】</span>
-            <span class="desc">价值50元旅游意外险；</span>
-          </li>
-        </div>-->
+        </div>
         <footer class="order_info_b">
           <span class="order_price">￥{{data.price}}</span>
           <span class="order_price_text">起/人</span>
@@ -34,55 +24,19 @@
       </div>
     </router-link>
   </div>
-<!--  <div class="order_box">
-    <router-link to="/product/s0001" class="order_one " :class="colum">
-      <div class="order_img">
-        <img src="../../images/dingdan.jpg" alt="">
-      </div>
-      <div class="order_info ">
-        <header class="order_info_t">
-          <div class="order_title">
-            【跟团游】全程无自费泰国6天 5晚至尊安心游！双岛出海＋三 合一夜秀表演
-          </div>
-
-        </header>
-        <div class="order_info_s" v-if="!colum">
-          <li class="order_info_s_item">
-            <span class="start">★</span>
-            <span class="text">【精选酒店】</span>
-            <span class="desc">全程升级入住四颗星酒店；</span>
-          </li>
-          <li class="order_info_s_item">
-            <span class="start">★</span>
-            <span class="text">【优良资质】</span>
-            <span class="desc">保证全程无购物；</span>
-          </li>
-          <li class="order_info_s_item">
-            <span class="start">★</span>
-            <span class="text">【贴心赠送】</span>
-            <span class="desc">价值50元旅游意外险；</span>
-          </li>
-        </div>
-        <footer class="order_info_b">
-          <span class="order_price">￥2798</span>
-          <span class="order_price_text">起/人</span>
-        </footer>
-      </div>
-    </router-link>
-  </div>-->
 </template>
 
 <script>
   import {proxyapi} from '../../staticData/proxyapi';
-    export default {
-        name: "one_product",
-      props:['colum','data'],
-      data(){
-          return{
-            proxyapi
-          }
+  export default {
+    name: "one_product",
+    props:['colum','data'],
+    data(){
+      return{
+        proxyapi
       }
     }
+  }
 </script>
 
 <style lang="less">
@@ -118,7 +72,7 @@
       justify-content: center;
       img {
         width: 100%;
-        height: auto;
+        height: 2.8rem;
       }
     }
     .order_info_s_item {
