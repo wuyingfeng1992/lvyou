@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search_top @searchEvent="searchEvent" :search_text="search_text"></Search_top>
+    <Search_top @searchEvent="searchEvent" :search_text_1="search_text"></Search_top>
     <div class="search-result" v-show="recommendShow">
       <div class="search-result-item">
         <div class="header">
@@ -10,10 +10,10 @@
           <div class="city" v-for="item in getSearchRecommandInfo.hot" @click="searchEvent(item.key)">{{item.key}}</div>
         </div>
       </div>
-      <div class="search-more">
+     <!-- <div class="search-more">
         <div class="icon"></div>
         <div class="text">更对热门目的地</div>
-      </div>
+      </div>-->
       <div class="search-result-item">
         <div class="header">
           <input type="text" class="header-input" placeholder="历史搜索">
@@ -45,6 +45,7 @@
         recommendShow:true
       };
     },
+
     mounted() {
       this.getSearchRecommandInfoEvt()
     },

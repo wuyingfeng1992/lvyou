@@ -1,18 +1,20 @@
 <template>
   <div class="myzone_index">
     <!--<Backbar title="个人中心"></Backbar>-->
-    <div class="myzone_content">
+    <div class="myzone_content"  :a="JSON.stringify(getUserInfo)">
       <!-- 头 -->
-      <div class="myzone_info" v-if="getUserInfo">
+      <div class="myzone_info" v-if="getUserInfo.user">
         <div class="pic">
-          <div class="image-wrap" :userId="getUserInfo.id">
-            <div class="huangguan" v-if="getUserInfo.is_vip"></div>
-            <img :src="proxyapi+getUserInfo.avatar" alt="">
+          <div class="image-wrap" >
+            <!---->
+            <div class="huangguan" v-if="getUserInfo.user.is_vip==1"></div>
+            <img :src="getUserInfo.user.avatar.indexOf('http://')!==-1?getUserInfo.user.avatar:proxyapi+getUserInfo.user.avatar"
+                 :alt="getUserInfo.user.nickname">
           </div>
         </div>
 
         <div class="myzone_uid">
-          {{ getUserInfo.username }}
+          {{ getUserInfo.user.nickname }}
         </div>
       </div>
     </div>

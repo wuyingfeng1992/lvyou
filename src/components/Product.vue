@@ -21,12 +21,12 @@
       </div>
     </div>
     <div class="product-price-d">
-      <div class="product-price-d-item" v-if="getProductDetail.price">
+      <div class="product-price-d-item">
         <span class="text1">成人价:</span>
         <span class="text2">￥</span>
         <span class="text3">{{getProductDetail.price.adult_price}}元</span>
       </div>
-      <div class="product-price-d-item" v-if="getProductDetail.price">
+      <div class="product-price-d-item">
         <span class="text1">儿童价:</span>
         <span class="text2">￥</span>
         <span class="text3">{{getProductDetail.price.child_price}}元</span>
@@ -62,7 +62,7 @@
                      @dayClick="dayClick"
                      @moreClick="moreClick"
       ></full-calendar>
-      <div class="product-price-d" v-if="curData">
+      <div class="product-price-d">
         <div class="product-price-d-item">
           成人 <span class="price" v-if="curData.adult_price">￥{{curData.adult_price}}</span>
         </div>
@@ -129,7 +129,7 @@
     methods: {
       getDataByDay: function (date) {
         var data = this.getProductDetail.recentDate;
-        var curData;
+        var curData = {};
         for (var i = 0; i < data.length; i++) {
           var item = data[i];
           if (item.start == date) {
@@ -154,13 +154,6 @@
         var date = new Date(day.toString());
         day = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate()
         var dayData = this.getDataByDay(day);
-        if(!dayData){
-          this.$message({
-            type: 'info',
-            message: '没有这一天的数据信息，请重新选择出行日期。'
-          });
-          return
-        }
         data.dayDate = dayData;
         data.currentDay = day;
         this.$store.commit("SET_CURRENT_PRODUCT_INFO", data);

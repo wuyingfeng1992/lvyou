@@ -2,7 +2,7 @@
   <div class="order_box">
     <router-link :to="'/product/'+data.id" class="order_one " :class="colum">
       <div class="order_img">
-        <img :src="'api/'+data.image" alt="">
+        <img :src="proxyapi+data.image" alt="">
       </div>
       <div class="order_info ">
         <header class="order_info_t">
@@ -10,7 +10,7 @@
             {{data.title}}
           </div>
         </header>
-        <div class="order_info_s" v-if="!colum">
+       <!-- <div class="order_info_s" v-if="!colum">
           <li class="order_info_s_item">
             <span class="start">★</span>
             <span class="text">【精选酒店】</span>
@@ -26,7 +26,7 @@
             <span class="text">【贴心赠送】</span>
             <span class="desc">价值50元旅游意外险；</span>
           </li>
-        </div>
+        </div>-->
         <footer class="order_info_b">
           <span class="order_price">￥{{data.price}}</span>
           <span class="order_price_text">起/人</span>
@@ -73,9 +73,15 @@
 </template>
 
 <script>
+  import {proxyapi} from '../../staticData/proxyapi';
     export default {
         name: "one_product",
-      props:['colum','data']
+      props:['colum','data'],
+      data(){
+          return{
+            proxyapi
+          }
+      }
     }
 </script>
 

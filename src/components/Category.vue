@@ -3,57 +3,36 @@
     <div class="index_header">
       <Search_top @toSearchPage="toSearchPage"></Search_top>
     </div>
-
     <div class="sub_banner">
-      <img src="../images/subBanner.jpg">
+      <Swipe class="my-swipe"
+             :loop="true"
+             :auto="5000"><!-- swipe 设置自动滚动 -->
+        <Swipe-item v-for="(item,index  ) in getProductCategoryType.slide" class="slide" :class="'slide'+JSON.stringify(index)">
+          <router-link :to="item.url"><!--:to="item.url"-->
+            <div class="common_banner">
+              <img :src="proxyapi+item.image" :alt="item.title">
+            </div>
+          </router-link>
+        </Swipe-item>
+      </Swipe>
     </div>
     <!--@tab-click="handleClick"--> <!--  -->
     <el-tabs class="ban_tab_sel" v-model="getCurrentCategoryType"  type="card" >
-      <el-tab-pane v-for="item in getProductCategoryType.rows"  class="ban_tab_sel_item" :label="item.name" :name="item.type" >
-        <div class="tab_wrap" slot="label">
-          <span class="icon address"></span>
+      <el-tab-pane v-for="item in getProductCategoryType.type"  class="ban_tab_sel_item" :label="item.name" :name="item.type" >
+        <div class="tab_wrap" slot="label" >
+          <span class="icon address" :showItemListFlag='showItemListFlag+" "'></span>
           <span class="text">{{item.name}}</span>
-        </div>
+        </div >
         <div class="el-tab-pane-con-item"
              v-for="item in getProductCategoryTypeList.rows"
              v-if="!showItemListFlag&&getProductCategoryTypeList"
              @click="showItemList(item.category_id)" style="width: calc((100% - 10px)/3);">
           {{item.nickname}}
         </div>
-        <!--<div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">
-          越南
-        </div>
-        <div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList"  style="width: calc((100% - 10px)/3);">
-          南宁
-        </div>-->
         <div class="product_list" v-if="showItemListFlag">
           <One_product v-for="item in getProductList.rows" :data="item" colum="colum"></One_product>
         </div>
       </el-tab-pane>
-      <!--<el-tab-pane class="ban_tab_sel_item" label="目的地" name="first" >-->
-        <!--<div class="tab_wrap" slot="label" @click="multilShow">-->
-          <!--<span class="icon address"></span>-->
-          <!--<span class="text">目的地</span>-->
-        <!--</div>-->
-        <!--<div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList" style="width: calc((100% - 10px)/3);">-->
-          <!--越南-->
-        <!--</div>-->
-        <!--<div class="el-tab-pane-con-item" v-if="!showItemListFlag" @click="showItemList"  style="width: calc((100% - 10px)/3);">-->
-          <!--南宁-->
-        <!--</div>-->
-        <!--<div class="list" v-if="showItemListFlag">-->
-          <!--<One_product colum="colum"></One_product>-->
-        <!--</div>-->
-      <!--</el-tab-pane>-->
-      <!--<el-tab-pane class="ban_tab_sel_item" label="特价产品">-->
-        <!--<div class="tab_wrap" slot="label">-->
-          <!--<span class="icon specialOffer"></span>-->
-          <!--<span class="text">专区</span>-->
-        <!--</div>-->
-        <!--<div class="el-tab-pane-con ">-->
-          <!--<One_product colum="colum"></One_product>-->
-        <!--</div>-->
-      <!--</el-tab-pane>-->
     </el-tabs>
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
@@ -64,16 +43,19 @@
 </template>
 
 <script>
+  import {Swipe, SwipeItem} from 'vue-swipe';
   import Fixedkefu from './small_components/Fixed_kefu';
   import Fixednav from './small_components/Fixed_nav';
   import Search_top from './small_components/Search_top';
   import One_product from './small_components/One_product';
   import {mapGetters,mapActions,mapState} from 'vuex';
-var first=true;
+  import {proxyapi} from '../staticData/proxyapi';
+  var first=true;
   export default {
     name: 'homepage',
     data() {
       return {
+        proxyapi,
         showMe: false, // 是否展示当前页面
         search_word: '', // 搜索框搜索词
         isLoadingMore: false,
@@ -84,14 +66,14 @@ var first=true;
     mounted() {
       this.getProductCategoryTypeEvt();
     },
-   /* created: function(){
-        var key=this.$route.params.key;
-        if(key){
-          this.currentCategoryType=key;
-        }else{
-          this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
-        }
-    },*/
+    /* created: function(){
+         var key=this.$route.params.key;
+         if(key){
+           this.currentCategoryType=key;
+         }else{
+           this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
+         }
+     },*/
     computed: {
       ...mapGetters([
         'getProductCategoryType',
@@ -110,11 +92,15 @@ var first=true;
             this.currentCategoryType=key;
             console.log('1')
             if(first){
-             first=false;
+              first=false;
               this.getProductCategoryTypeListEvt(key);
             }
           }else{
-            this.currentCategoryType=this.productCategoryType&&this.productCategoryType.rows?this.productCategoryType.rows[0].type:'';
+            this.currentCategoryType=this.productCategoryType&&this.productCategoryType.type?this.productCategoryType.type[0].type:'';
+            if(first){
+              first=false;
+              this.getProductCategoryTypeListEvt(this.currentCategoryType);
+            }
           }
           return this.currentCategoryType
         },
@@ -123,17 +109,22 @@ var first=true;
             console.log('2')
             this.currentCategoryType = val;
             this.getProductCategoryTypeListEvt(val);
+            var _this=this;
+            setTimeout(function () {
+              _this.showItemListFlag=false;
+            },300)
+
             //this.getProductCategoryTypeListEvt(val.toString());
           }
         }
       }
     },
     methods: {
-    /*  handleClick(tab, event) {
-        console.log(tab, event);
-        console.log(categoryId)
+      /*  handleClick(tab, event) {
+          console.log(tab, event);
+          console.log(categoryId)
 
-      },*/
+        },*/
       toSearchPage(e, search_text) {
         this.$router.push('/search/' + search_text);
       },
@@ -142,7 +133,7 @@ var first=true;
         this.getProductListEvt({categoryId,offset:0})
 
       },
-     multilShow() {
+      multilShow() {
         this.showItemListFlag=false;
       },
       ...mapActions(['getProductCategoryTypeEvt'
@@ -180,6 +171,8 @@ var first=true;
       Search_top,
       One_product,
       Fixedkefu,
+      Swipe,
+      SwipeItem,
     }
   };
 </script>
@@ -199,9 +192,9 @@ var first=true;
     div.el-tabs__header {
       border-bottom: none;
     }
-   .ban_tab_sel_item{
+    .ban_tab_sel_item{
       display: flex;
-     text-align: center;
+      text-align: center;
     }
 
     .el-tabs__content {
@@ -209,11 +202,11 @@ var first=true;
       margin-top: 1px;
       padding-left: 2px;
     }
-   /* .el-tab-pane-con {
-      display: flex;
-      width: 100%;
-      flex-wrap: wrap;
-    }*/
+    /* .el-tab-pane-con {
+       display: flex;
+       width: 100%;
+       flex-wrap: wrap;
+     }*/
     .el-tab-pane-con-item {
       display: flex;
       width: 100%;
@@ -312,5 +305,59 @@ var first=true;
       }
     }
   }
+  .mint-swipe.my-swipe{
+    width: auto;
+  }
+  .mint-swipe-items-wrap > div{
+    width: auto;
+    position: relative;
+  }
+  .mint-swipe-indicator {
+    width: 0.15rem;
+    height: 0.15rem;
+    background: #fff;
+    margin: 0 2px;
+  }
+  /* slider插件css + 改写*/
+  .mint-swipe, .mint-swipe-items-wrap {
+    overflow: hidden;
+    position: relative;
+    height: 100%
+  }
 
+  .mint-swipe-items-wrap > div {
+    position: absolute;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    width: 100%;
+    height: 100%;
+    display: none
+  }
+
+  .mint-swipe-items-wrap > div.is-active {
+    display: block;
+    -webkit-transform: none;
+    transform: none
+  }
+
+  .mint-swipe-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+  }
+
+  .mint-swipe-indicator {
+    width: .1rem;
+    height: .1rem;
+    display: inline-block;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 3px
+  }
+
+  .mint-swipe-indicator.is-active {
+    background: @baseBlue
+  }
 </style>

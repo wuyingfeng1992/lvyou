@@ -4,7 +4,7 @@
       <span class="re_search-icon" @click="back_one"></span>
       <div class="search_wrap">
         <span class="search_method_icon"></span>
-        <input type="search" v-model="search_text" class="v-md"  placeholder="输入关键字" @keyup="searchClear" @onreset="searchClear"
+        <input type="search" :search_text_actial="search_text_actial" v-model="search_text_actial" class="v-md"  placeholder="输入关键字" @keyup="searchClear" @onreset="searchClear"
                @keydown.enter="search_enter($event,search_text)" @click="search_method($event,search_text)">
       </div>
       <div class="search_tip" @click="search_enter($event,search_text)">搜索</div>
@@ -17,19 +17,39 @@
   import {mapGetters} from 'vuex';
   export default {
     name: 'search',
-
     data() {
       return {
         search_text:'',
       };
     },
+    props:['search_text_1'],
     //props:['search_text'],
     mounted() {
       /*if(this.$route.path!='/index'||this.$route.path.indexOf('/category')!==-1) {
         this.search_method();
       }*/
     },
-    computed: {
+    computed:{
+      search_text_actial:{
+        //return this.search_text_1;
+        get(){
+          this.search_text=this.search_text_1;
+          return this.search_text_1;
+        },
+        set(val){
+          this.search_text=val;
+        }
+      }
+
+
+    },
+    created() {
+      this.search_text=this.search_text_1;
+    },
+    watch: {
+      search_text_actial: function (val) {
+        this.search_text = val;
+      }
 
     },
     methods: {
