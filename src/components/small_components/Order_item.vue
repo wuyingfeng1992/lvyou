@@ -2,7 +2,10 @@
   <div class="order_box_one_wrap">
     <div class="order_box_one_top">
       <div class="order_box_one_goodsnum">
-        订单号：{{data.order_no}}
+        订单号：
+        <router-link  :to="'orderDetail/'+data.order_id">
+          {{data.order_no}}
+        </router-link>
       </div>
       <div class="order_box_one_goodstext">
        {{data.status_text}}
@@ -15,7 +18,9 @@
       <div class="order_info">
         <header class="order_info_t">
           <div class="order_title">
-            {{data.goods_name}}
+            <router-link  :to="'orderDetail/'+data.order_id">
+              {{data.goods_name}}
+            </router-link>
           </div>
         </header>
       </div>
@@ -34,11 +39,9 @@
         </router-link>
       </div>
       <div class="order_box_one_btn1" v-if="data.status==4">
-        <div class="order_box_one_btn1" v-if="data.status=='4'">
           <a :href="pay(data.order_id)" >
             立即付款
           </a>
-        </div>
       </div>
 
       <!--<div class="order_box_one_btn" @click="removeOrder(data.order_id)">删除订单</div>-->
