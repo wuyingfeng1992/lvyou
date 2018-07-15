@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Homepage from 'components/Homepage';
+import OrderDetail from 'components/OrderDetail';
 import Category from 'components/Category';
 import Myzone from 'components/Myzone';
 import Order from 'components/Order';
@@ -56,6 +57,11 @@ export default new Router({
       path: '/index',
       name: 'homepage',
       component: Homepage
+    },
+    {
+      path: '/orderDetail/:id',
+      name: 'OrderDetail',
+      component: OrderDetail
     },
     {
       path: '/product/:id',

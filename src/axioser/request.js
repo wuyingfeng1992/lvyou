@@ -87,3 +87,8 @@ export const refundOrder=(params)=>{
 export const deleteOrder=(params)=>{
   return axios.post(`/mall/order/del`,params)
 }
+
+export const getOrderDetail=(params)=>{
+  var order_id=params.orderId
+  return axios.get(`/mall/order/details/order_id/${order_id}`)
+}

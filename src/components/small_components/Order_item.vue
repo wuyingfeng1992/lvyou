@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="order_one">
-      <router-link class="order_img" :to="'product/'+data.order_id">
+      <router-link class="order_img" :to="'orderDetail/'+data.order_id">
         <img :src="proxyapi+data.goods_image" :alt="data.goods_name">
       </router-link>
       <div class="order_info">

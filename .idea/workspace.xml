@@ -14,11 +14,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="request.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/axioser/request.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Category.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Category.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="119" column="53" lean-forward="false" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+            <state relative-caret-position="145">
+              <caret line="83" column="9" lean-forward="false" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="40" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#1801#1844#0" expanded="true" />
@@ -27,68 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Search_top.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/small_components/Search_top.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="41" column="7" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="41" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Order.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Order.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2166">
-              <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-              <caret line="119" column="5" lean-forward="false" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
-              <folding>
-                <marker date="1531524889134" expanded="true" signature="2361:2367" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vuex/actions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#395#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OnlineOrder.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/OnlineOrder.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="219" column="0" lean-forward="false" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
-              <folding>
-                <element signature="e#9685#9944#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Fixed_button.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/small_components/Fixed_button.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Associate.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Associate.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="81" column="45" lean-forward="false" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+            <state relative-caret-position="157">
+              <caret line="161" column="29" lean-forward="false" selection-start-line="161" selection-start-column="29" selection-end-line="161" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -97,32 +50,76 @@
       <file leaf-file-name="proxyapi.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/staticData/proxyapi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+            <state relative-caret-position="57">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/axioser/index.js">
+      <file leaf-file-name="Order.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Order.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-57">
+              <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="33" />
+              <folding>
+                <marker date="1531524889134" expanded="true" signature="2361:2367" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Order_item.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/small_components/Order_item.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+              <caret line="48" column="8" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Product.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Product.vue">
+      <file leaf-file-name="OrderDetail.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/OrderDetail.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="204" column="17" lean-forward="false" selection-start-line="204" selection-start-column="17" selection-end-line="204" selection-end-column="17" />
+            <state relative-caret-position="-214">
+              <caret line="102" column="32" lean-forward="true" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="32" />
               <folding>
-                <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="e#2866#2924#0" expanded="true" />
+                <element signature="e#4175#4225#0" expanded="true" />
+                <marker date="1531636434562" expanded="true" signature="5418:5430" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="61" column="25" lean-forward="false" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/axioser/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="staticData.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/staticData/staticData.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -138,9 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getUserInfo</find>
-      <find>getCustomServiceListInfo</find>
-      <find>showItemList</find>
       <find>handleClick</find>
       <find>product-ba</find>
       <find>getProductListEvt</find>
@@ -167,7 +161,10 @@
       <find>allmoney</find>
       <find>product-bao-checkBox</find>
       <find>num1</find>
+      <find>headerTable</find>
       <find>debugger</find>
+      <find>table-content</find>
+      <find>Y</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -203,7 +200,6 @@
         <option value="$PROJECT_DIR$/src/axios/index.js" />
         <option value="$PROJECT_DIR$/src/axioser/homeBanner.js" />
         <option value="$PROJECT_DIR$/node_modules/axios/lib/axios.js" />
-        <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/Order.vue" />
         <option value="$PROJECT_DIR$/src/components/Refund.vue" />
         <option value="$PROJECT_DIR$/src/components/small_components/Product_list.vue" />
@@ -215,9 +211,7 @@
         <option value="$PROJECT_DIR$/config/index.js" />
         <option value="$PROJECT_DIR$/build/utils.js" />
         <option value="$PROJECT_DIR$/src/components/SpecialOffer.vue" />
-        <option value="$PROJECT_DIR$/src/axioser/request.js" />
         <option value="$PROJECT_DIR$/src/components/small_components/One_product.vue" />
-        <option value="$PROJECT_DIR$/src/components/small_components/Order_item.vue" />
         <option value="$PROJECT_DIR$/src/vuex/getters.js" />
         <option value="$PROJECT_DIR$/src/vuex/state.js" />
         <option value="$PROJECT_DIR$/src/components/Homepage.vue" />
@@ -232,8 +226,13 @@
         <option value="$PROJECT_DIR$/src/components/small_components/Fixed_button.vue" />
         <option value="$PROJECT_DIR$/src/components/OnlineOrder.vue" />
         <option value="$PROJECT_DIR$/src/components/Associate.vue" />
-        <option value="$PROJECT_DIR$/src/staticData/proxyapi.js" />
+        <option value="$PROJECT_DIR$/src/components/Orders.vue" />
+        <option value="$PROJECT_DIR$/src/router/index.js" />
+        <option value="$PROJECT_DIR$/src/components/small_components/Order_item.vue" />
+        <option value="$PROJECT_DIR$/src/axioser/request.js" />
         <option value="$PROJECT_DIR$/src/axioser/index.js" />
+        <option value="$PROJECT_DIR$/src/staticData/proxyapi.js" />
+        <option value="$PROJECT_DIR$/src/components/OrderDetail.vue" />
       </list>
     </option>
   </component>
@@ -249,8 +248,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="39" />
-    <option name="y" value="59" />
+    <option name="x" value="318" />
+    <option name="y" value="71" />
     <option name="width" value="1380" />
     <option name="height" value="665" />
   </component>
@@ -303,19 +302,6 @@
               <item name="lvyou" type="b2602c69:ProjectViewProjectNode" />
               <item name="lvyou" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lvyou" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lvyou" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="small_components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lvyou" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lvyou" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -355,6 +341,7 @@
       <recent name="F:\node\eleme\src\images\slider-pic" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\node\lvyou\src\components" />
       <recent name="F:\node\lvyou\src" />
     </key>
   </component>
@@ -388,15 +375,15 @@
       <workItem from="1530373410684" duration="74000" />
       <workItem from="1530538854956" duration="5636000" />
       <workItem from="1531211976888" duration="20719000" />
-      <workItem from="1531396835026" duration="39220000" />
+      <workItem from="1531396835026" duration="47809000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83905000" />
+    <option name="totallyTimeSpent" value="92494000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="39" y="59" width="1380" height="665" extended-state="0" />
+    <frame x="318" y="71" width="1380" height="665" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -460,19 +447,11 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/falsedata/falsedata.js" />
-    <entry file="file://$PROJECT_DIR$/.git/config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -560,16 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="46" column="26" lean-forward="false" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#22#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Refund.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -623,14 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/staticData/staticData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1748">
-          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -665,14 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/small_components/Order_item.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/small_components/One_product.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -686,16 +639,6 @@
         <state relative-caret-position="95">
           <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/axioser/request.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -783,18 +726,7 @@
         <state relative-caret-position="227">
           <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
           <folding>
-            <element signature="e#0#395#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Order.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2166">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-          <caret line="119" column="5" lean-forward="false" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
-          <folding>
-            <marker date="1531524889134" expanded="true" signature="2361:2367" ph="{...}" />
+            <element signature="e#0#395#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -806,17 +738,6 @@
           <folding>
             <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="e#2866#2924#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Category.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="119" column="53" lean-forward="false" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1801#1844#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -847,27 +768,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Orders.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="226" column="20" lean-forward="false" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="61" column="25" lean-forward="false" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Order.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57">
+          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="33" />
+          <folding>
+            <marker date="1531524889134" expanded="true" signature="2361:2367" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/small_components/Order_item.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="48" column="8" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/axioser/request.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Associate.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="81" column="45" lean-forward="false" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+        <state relative-caret-position="157">
+          <caret line="161" column="29" lean-forward="false" selection-start-line="161" selection-start-column="29" selection-end-line="161" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Category.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="83" column="9" lean-forward="false" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="40" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1801#1844#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/axioser/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/staticData/staticData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/staticData/proxyapi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+        <state relative-caret-position="57">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/axioser/index.js">
+    <entry file="file://$PROJECT_DIR$/src/components/OrderDetail.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="-214">
+          <caret line="102" column="32" lean-forward="true" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="32" />
+          <folding>
+            <element signature="e#4175#4225#0" expanded="true" />
+            <marker date="1531636434562" expanded="true" signature="5418:5430" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
