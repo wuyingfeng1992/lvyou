@@ -1,8 +1,11 @@
 <template>
   <div class="custom-service">
-    <router-link to="/customService">
+   <!-- <router-link to="/customService">
       <div class="icon" :style="'background-image:url('+getAvatar+')'"></div>
-    </router-link>
+    </router-link>-->
+    <a href="/mall/chat/user">
+      <div class="icon" :style="'background-image:url('+getAvatar+')'"></div>
+    </a>
   </div>
 </template>
 
