@@ -3,6 +3,7 @@
    <!-- <router-link to="/customService">
       <div class="icon" :style="'background-image:url('+getAvatar+')'"></div>
     </router-link>-->
+    <!--http://www.gxgzjt.com/-->
     <a href="/mall/chat/user">
       <div class="icon" :style="'background-image:url('+getAvatar+')'"></div>
     </a>
