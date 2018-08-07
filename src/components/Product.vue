@@ -77,7 +77,6 @@
 
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
-    <div class="event-item">ddddddd</div>
 
     <!-- 固定导航栏 -->
     <FixedButton :btnText="btnText" @orderSubmit="dialogVisible  = true" :calcMoney="false"></FixedButton>
@@ -122,22 +121,36 @@
       ]),
       curData: function () {
         var date = new Date();
-        var year = date.getFullYear(); //获取年
-        var month = date.getMonth() + 1;//获取月
-        var day = date.getDate(); //获取当日
-        var time = year + "-" + month + "-" + day; //组合时间   alert("当前日期："+time);
+        var time=this.getDate(date)
         var data = this.getDataByDay(time);
         return data;
       }
 
     },
     methods: {
-      getDataByDay: function (date) {
+      getDate(date){
+        var year = date.getFullYear(); //获取年
+        var month = '0'+(date.getMonth() + 1);//获取月
+        var month2 = (date.getMonth() + 1);//获取月
+        var day = '0'+date.getDate(); //获取当日
+        var day2 = date.getDate(); //获取当日
+        var time = year + "-" + month + "-" + day; //组合时间   alert("当前日期："+time);
+        var time2 = year + "-" + day2 + "-" + day2; //组合时间   alert("当前日期："+time);
+        var time3 = year + "-" + day + "-" + day2; //组合时间   alert("当前日期："+time);
+        var time4 = year + "-" + day2 + "-" + day; //组合时间   alert("当前日期："+time);
+        return{
+          time,
+          time2,
+          time3,
+          time4,
+        }
+      },
+      getDataByDay: function (time) {
         var data = this.getProductDetail.recentDate;
         var curData = {};
         for (var i = 0; i < data.length; i++) {
           var item = data[i];
-          if (item.start == date) {
+          if (item.start == time.date||item.start ==  time.date2||item.start ==  time.date3||item.start ==  time.date4) {
             curData = item;
             break;
           }
@@ -154,15 +167,22 @@
       },
       eventClick(day, jsEvent) {
         console.log('eventClick ', 's谁谁谁谁谁谁水水水水')
-        this.dayClick(day, jsEvent)
+        this.dayClick(day.start, jsEvent)
       },
       dayClick(day, jsEvent) {
-       // this.eventClick(day, jsEvent)
         var data = this.getProductDetail;
         var date = new Date(day.toString());
+        var time=this.getDate(date)
         day = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate()
-        var dayData = this.getDataByDay(day);
+        var dayData = this.getDataByDay(time);
         data.dayDate = dayData;
+        if(JSON.stringify(dayData)=="{}"){
+          this.$message({
+            type: 'fail',
+            message: '该日期暂不开放!'
+          });
+          return;
+        }
         data.currentDay = day;
         this.$store.commit("SET_CURRENT_PRODUCT_INFO", data);
         this.$router.push('/onlineOrder/' + this.id);
@@ -185,6 +205,9 @@
 
 <style lang="less">
   .product-box {
+    .el-message__content{
+      font-size: 0.42rem;
+    }
     table{
       width: 100% !important;
       text-align: left;

@@ -181,6 +181,7 @@
     .ban_tab_sel_item{
       display: flex;
       text-align: center;
+      flex-wrap: wrap;
     }
 
     .el-tabs__content {
@@ -200,7 +201,6 @@
       flex: none;
     }
     .el-tab-pane-con-item {
-
       font-size: 0.36rem;
       color: #585858;
       margin-bottom: 2px;
