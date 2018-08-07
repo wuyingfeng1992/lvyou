@@ -3,12 +3,12 @@
 
   <nav class="fixed_button">
 
-    <div class="fixed_button_item left" >
+    <div class="fixed_button_item left" v-if="calcMoney" >
       <span class="text1">在线支付:</span>
       <span class="text2">￥</span>
       <span class="text3">{{calMoney}}元</span>
     </div>
-    <div class="fixed_button_item right" :class="calMoney===false?'w100':''" @click="productSubmit">
+    <div class="fixed_button_item right" :class="calcMoney===false||calcMoney==='false'?'w100':''" @click="productSubmit">
       {{btnText}}
     </div>
   </nav>
@@ -22,7 +22,7 @@
         allMoney:0
       };
     },
-    props:['btnText','allmoney'],
+    props:['btnText','allmoney','calcMoney'],
 
     mounted() {
       setInterval(() => {

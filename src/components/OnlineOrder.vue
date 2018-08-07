@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-    <div class="product-address">
+    <div class="product-address" v-if="parseInt(data.policy)!==0">
       <div class="product-address-item">
         <div class="name">
           出行保险
@@ -80,7 +80,7 @@
           <span>保</span>
         </div>
         <div class="product-bao2">
-          ￥{{singlePrice}}/人x1份
+          ￥{{data.policy}}/人x1份
         </div>
         <div class="product-bao-desc">
           （意外事故10万，社保内医疗1万）
@@ -94,7 +94,7 @@
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
     <!-- 固定导航栏 -->
-    <FixedButton :btnText="btnText" :allmoney="allmoney" @orderSubmit="orderSubmit"></FixedButton>
+    <FixedButton :btnText="btnText" calcMoney="true" :allmoney="allmoney" @orderSubmit="orderSubmit"></FixedButton>
     <Fixedkefu></Fixedkefu>
 
 
@@ -223,7 +223,7 @@
       allmoney(){
 
         if(!this.getContactUser.tusers) return 0;
-        var policyPrice=this.num1*this.singlePrice;
+        var policyPrice=this.num1*parseFloat(this.data.policy);
         var allmoney=policyPrice;
         var childAge=this.data.child_age;
         var adult_price=this.data.price.adult_price;
@@ -256,6 +256,7 @@
         this.addSel = val;
       },
       orderSubmit() {
+        debugger
         if (!this.addSel ) {
           this.$message({
             type: 'info',
@@ -307,7 +308,7 @@
           goods_id: this.data.id,
           addr: this.addSel,
           tusers: tusers,
-          policys: this.num1 / 10,
+          policys: this.num1,
           price_id: price_id,
           buyer_phone: this.buyer_phone,
           buyer_name:this.buyer_name,
@@ -629,8 +630,8 @@
           cursor: pointer;
         }
         &.desc {
-          height: 1.1rem;
-          line-height: 1.1rem;
+          line-height: 0.6rem;
+          padding: 0.2rem 0;
         }
         &:first-child {
           border-bottom: 1px solid #dcdcdc;

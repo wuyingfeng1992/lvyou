@@ -135,9 +135,9 @@
         var day = '0'+date.getDate(); //获取当日
         var day2 = date.getDate(); //获取当日
         var time = year + "-" + month + "-" + day; //组合时间   alert("当前日期："+time);
-        var time2 = year + "-" + day2 + "-" + day2; //组合时间   alert("当前日期："+time);
-        var time3 = year + "-" + day + "-" + day2; //组合时间   alert("当前日期："+time);
-        var time4 = year + "-" + day2 + "-" + day; //组合时间   alert("当前日期："+time);
+        var time2 = year + "-" + month2 + "-" + day2; //组合时间   alert("当前日期："+time);
+        var time3 = year + "-" + month + "-" + day2; //组合时间   alert("当前日期："+time);
+        var time4 = year + "-" + month2 + "-" + day; //组合时间   alert("当前日期："+time);
         return{
           time,
           time2,
@@ -150,7 +150,7 @@
         var curData = {};
         for (var i = 0; i < data.length; i++) {
           var item = data[i];
-          if (item.start == time.date||item.start ==  time.date2||item.start ==  time.date3||item.start ==  time.date4) {
+          if (item.start == time.time||item.start ==  time.time2||item.start ==  time.time3||item.start ==  time.time4) {
             curData = item;
             break;
           }
@@ -279,9 +279,9 @@
         font-size: 0.26rem;
         height: 0.5rem;
         line-height: 0.5rem;
-        width: 100%;
+        width: 105%;
         text-align: center;
-        left: -0.11rem;
+        left: -0.15rem;
         position: absolute;
         top: 0;
       }
