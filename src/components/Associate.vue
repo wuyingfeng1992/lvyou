@@ -53,11 +53,11 @@
     },
     data() {
      /* var validateSex = (rule, value, callback) => {
-        debugger
+
         if (value === '') {
           callback(new Error('请选择性别'));
         } else {
-          callback();
+          callback();R
         }
       };*/
       var validateName = (rule, value, callback) => {
@@ -135,6 +135,7 @@
     },
     created: function(){
       var data=this.$store.state.contactUser.tusers?this.$store.state.contactUser.tusers:this.$store.getters.getCurrentContactUser;
+
       this.$store.commit("SET_CURRENT_CONTACT_USER", data);
       var id=this.$route.params.id;
       for(var i=0;i<data.length;i++){

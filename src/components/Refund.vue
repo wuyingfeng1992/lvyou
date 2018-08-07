@@ -94,7 +94,6 @@
           });
           return
         }
-        debugger
         var id=this.$route.params.id;
         var params = {
           order_id: parseInt(id),

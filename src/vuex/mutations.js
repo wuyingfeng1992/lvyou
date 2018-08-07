@@ -47,7 +47,7 @@ export default {
     window.localStorage.setItem('currentContactUser',JSON.stringify(preload))
   },
   SET_CURRENT_PRODUCT_INFO(state, preload) {
-    state.currentProductInfo = preload
+    state.currentProductInfo = preload||window.localStorage.getItem('currentProductInfo')
     window.localStorage.setItem('currentProductInfo',JSON.stringify(preload))
   },
   GET_CUSTOM_SERVICE_INFO(state, preload) {

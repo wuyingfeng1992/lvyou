@@ -29,14 +29,7 @@ export default {
       return {}
     }
   },
-  getCurrentCurrentProductInfo: (state) => {
+  getCurrentCurrentProductInfo: (state) => state.currentProductInfo,
 
-    let currentProductInfo=window.localStorage.getItem('currentProductInfo');
-    if(currentProductInfo){
-      return JSON.parse(currentProductInfo)
-    }else{
-      return {}
-    }
-  },
   //getCurrentCategoryType: (state) => state.currentCategoryType,
 };

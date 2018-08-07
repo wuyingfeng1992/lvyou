@@ -197,6 +197,7 @@
       display: flex;
       width: 100%;
       flex-wrap: wrap;
+      flex: none;
     }
     .el-tab-pane-con-item {
 

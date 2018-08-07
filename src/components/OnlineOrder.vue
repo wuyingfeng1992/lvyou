@@ -175,7 +175,7 @@
         associalShow: false,
         num1: 0,
         dialogVisible: false,
-        data: '',
+       /* data: '',*/
         addSel: '',
         maxNum: 0,
         checked1: '',
@@ -187,12 +187,16 @@
     created: function () {
       var data = this.$store.getters.getCurrentCurrentProductInfo;
       var id = this.$route.params.id;
-      this.data = data;
+      if(!data.child_age) data=JSON.parse(window.localStorage.getItem('currentProductInfo'))
+     this.data = data
     },
     mounted() {
       this.getContactUserEvt();
     },
     computed: {
+     /* ...mapGetters({
+        data: 'getCurrentCurrentProductInfo'
+      }),*/
 
       getMaxNum() {
         var maxnum=0
@@ -240,6 +244,9 @@
         return allmoney;
 
       }
+
+    },
+    beforeDestroy: function () {
 
     },
     methods: {
@@ -346,7 +353,17 @@
 </script>
 
 <style lang="less">
+  .product-address{
+    img{
+      width: 100% !important;
+      display: inline-block;
+    }
+  }
+
   .product-box-online {
+    .el-message.el-message--info{
+      font-size: 0.42rem;
+    }
     width: 100%;
     .phone{
       display: flex;
@@ -455,8 +472,10 @@
 
         }
       }
+
       .product-address-item {
         display: flex;
+
         /*  flex-direction: column;*/
         &.address {
           display: flex;

@@ -77,6 +77,8 @@
 
     <!-- 撑开Fixednav挡住的位置 -->
     <div class="space"></div>
+    <div class="event-item">ddddddd</div>
+
     <!-- 固定导航栏 -->
     <FixedButton :btnText="btnText" @orderSubmit="dialogVisible  = true" :calcMoney="false"></FixedButton>
     <Fixedkefu></Fixedkefu>
@@ -148,11 +150,14 @@
       },
       changeMonth() {
         console.log('changeMonth')
+
       },
-      eventClick() {
+      eventClick(day, jsEvent) {
         console.log('eventClick ', 's谁谁谁谁谁谁水水水水')
+        this.dayClick(day, jsEvent)
       },
       dayClick(day, jsEvent) {
+       // this.eventClick(day, jsEvent)
         var data = this.getProductDetail;
         var date = new Date(day.toString());
         day = date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate()
