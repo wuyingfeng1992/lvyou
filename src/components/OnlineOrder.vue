@@ -126,7 +126,11 @@
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
+        <router-link to="/associates">
+      <span class="toAssociatesButton">常用联系人</span>
+    </router-link>
     <el-button @click="dialogVisible = false">取 消</el-button>
+
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
     </el-dialog>
@@ -364,6 +368,16 @@
   .product-box-online {
     .el-message.el-message--info{
       font-size: 0.42rem;
+    }
+    .toAssociatesButton{
+      color: #696969;
+      display: inline-block;
+      font-size: 0.32rem;
+      padding: 0.2rem 0.3rem;
+      border-radius: 4px;
+      line-height: 1;
+      box-sizing: border-box;
+      border: 1px solid #dcdfe6;
     }
     width: 100%;
     .phone{
